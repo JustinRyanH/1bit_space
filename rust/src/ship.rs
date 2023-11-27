@@ -1,4 +1,4 @@
-use godot::engine::{CharacterBody2D, ICharacterBody2D};
+use godot::engine::{CharacterBody2D, GpuParticles2D, ICharacterBody2D};
 use godot::prelude::*;
 
 #[derive(GodotClass)]
@@ -9,6 +9,7 @@ struct Ship {
     #[export]
     angular_speed: f64,
 
+    engine_particles: Option<Gd<GpuParticles2D>>,
     #[base]
     base: Base<CharacterBody2D>,
 }
@@ -19,7 +20,15 @@ impl ICharacterBody2D for Ship {
         Self {
             linear_speed: 150.0,
             angular_speed: 5.0,
+            engine_particles: None,
             base,
+        }
+    }
+
+    fn ready(&mut self) {
+        self.engine_particles = self.base.try_get_node_as::<GpuParticles2D>("RearEngineParticles");
+        if let Some(ref mut particles) = self.engine_particles {
+            particles.set_emitting(false);
         }
     }
 
@@ -48,6 +57,13 @@ impl Ship {
             let velocity_direction = Vector2::UP.rotated(self.base.get_rotation());
             let new_velocity = base_velocity + (velocity_direction * movement_axis * (delta * self.linear_speed) as f32);
             self.base.set_velocity(new_velocity);
+            if let Some(mut particles) = self.engine_particles.clone() {
+                particles.set_emitting(true);
+            }
+        } else {
+            if let Some(mut particles) = self.engine_particles.clone() {
+                particles.set_emitting(false);
+            }
         }
         self.base.move_and_slide();
     }
