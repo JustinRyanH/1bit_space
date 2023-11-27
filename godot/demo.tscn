@@ -42,7 +42,7 @@ turbulence_influence_over_life = SubResource("CurveTexture_ofceg")
 [node name="Demo" type="Node2D"]
 
 [node name="Ship" type="Ship" parent="."]
-angular_speed = 5.0
+linear_speed = 100.0
 
 [node name="RearEngineParticles" type="GPUParticles2D" parent="Ship"]
 amount = 32
