@@ -5,6 +5,7 @@ use godot::prelude::*;
 #[class(base=CharacterBody2D)]
 struct Ship {
     speed: f64,
+    #[export]
     angular_speed: f64,
 
     #[base]
@@ -16,8 +17,17 @@ impl ICharacterBody2D for Ship {
     fn init(base: Base<Self::Base>) -> Self {
         Self {
             speed: 400.0,
-            angular_speed: 100.0,
+            angular_speed: 5.0,
             base,
         }
+    }
+
+    fn physics_process(&mut self, delta: f64) {
+        let input = Input::singleton();
+        let mut base = self.base.clone();
+        let rotate_axis = input.get_axis("Rotate Left".into(), "Rotate Right".into());
+
+        let base_rotation = base.get_rotation();
+        base.set_rotation(base_rotation + (rotate_axis * (delta * self.angular_speed) as f32));
     }
 }
