@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=3 uid="uid://hfurbog3gnq0"]
+
+[ext_resource type="Texture2D" uid="uid://csfcx6wlimyg5" path="res://assets/base_ship.png" id="1_yb4hi"]
+
+[sub_resource type="Gradient" id="Gradient_jcesq"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_1qro4"]
+gradient = SubResource("Gradient_jcesq")
+
+[sub_resource type="Curve" id="Curve_xxrlu"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.483444, 0.54805), -2.60345, -2.60345, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_jm601"]
+curve = SubResource("Curve_xxrlu")
+
+[sub_resource type="Curve" id="Curve_kl2r8"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.285276, 0.3816), 2.78708, 2.78708, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ofceg"]
+curve = SubResource("Curve_kl2r8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pixb3"]
+particle_flag_disable_z = true
+direction = Vector3(2.08165e-12, 1, 2.08165e-12)
+spread = 15.0
+initial_velocity_min = 300.0
+initial_velocity_max = 350.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+scale_min = 3.0
+scale_max = 5.0
+scale_curve = SubResource("CurveTexture_jm601")
+color_ramp = SubResource("GradientTexture1D_1qro4")
+turbulence_enabled = true
+turbulence_noise_strength = 2.6
+turbulence_influence_min = 0.175
+turbulence_influence_max = 0.38
+turbulence_influence_over_life = SubResource("CurveTexture_ofceg")
+
+[node name="Demo" type="Node2D"]
+
+[node name="Ship" type="Ship" parent="."]
+
+[node name="RearEngineParticles" type="GPUParticles2D" parent="Ship"]
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_pixb3")
+
+[node name="Sprite2D" type="Sprite2D" parent="Ship"]
+texture = ExtResource("1_yb4hi")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ship"]
+polygon = PackedVector2Array(24, 24, 0, -25, -24, 25, -1, 12)
+
+[node name="Camera2D" type="Camera2D" parent="."]
