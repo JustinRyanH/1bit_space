@@ -27,9 +27,7 @@ impl ICharacterBody2D for Ship {
 
     fn ready(&mut self) {
         self.engine_particles = self.base.try_get_node_as::<GpuParticles2D>("RearEngineParticles");
-        if let Some(ref mut particles) = self.engine_particles {
-            particles.set_emitting(false);
-        }
+        self.toggle_engine(false);
     }
 
     fn physics_process(&mut self, delta: f64) {
@@ -57,14 +55,15 @@ impl Ship {
             let velocity_direction = Vector2::UP.rotated(self.base.get_rotation());
             let new_velocity = base_velocity + (velocity_direction * movement_axis * (delta * self.linear_speed) as f32);
             self.base.set_velocity(new_velocity);
-            if let Some(mut particles) = self.engine_particles.clone() {
-                particles.set_emitting(true);
-            }
+            self.toggle_engine(true);
         } else {
-            if let Some(mut particles) = self.engine_particles.clone() {
-                particles.set_emitting(false);
-            }
+            self.toggle_engine(false);
         }
         self.base.move_and_slide();
+    }
+
+    fn toggle_engine(&mut self, value: bool) {
+        let Some(mut particles) = self.engine_particles.clone() else { return; };
+        particles.set_emitting(value);
     }
 }
