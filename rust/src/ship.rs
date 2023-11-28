@@ -7,9 +7,7 @@ use crate::prelude::*;
 #[derive(GodotClass)]
 #[class(base=Node)]
 struct ShipMovement {
-    #[export]
     rotation_direction: f64,
-    #[export]
     forward_throttle: f64,
 
     #[export]
