@@ -66,13 +66,11 @@ impl INode for ShipMovement {
 
     fn process(&mut self, delta: f64) {
         let Some(mut actor) = self.actor.clone() else { return; };
-        let movement_attributes = self.movement_attributes.bind();
-        let turn_speed = movement_attributes.get_turn_speed();
-        let rotation = actor.get_rotation();
 
-        actor.set_rotation(rotation + (self.rotation_direction * delta * turn_speed) as f32);
+        self.rotate_ship(delta, &mut actor);
     }
 }
+
 
 #[godot_api]
 impl ShipMovement {
@@ -82,6 +80,14 @@ impl ShipMovement {
 
     pub fn set_throttle(&mut self, throttle: f64) {
         self.forward_throttle = throttle;
+    }
+
+    fn rotate_ship(&mut self, delta: f64, actor: &mut Gd<Node2D>) {
+        let movement_attributes = self.movement_attributes.bind();
+        let turn_speed = movement_attributes.get_turn_speed();
+        let rotation = actor.get_rotation();
+
+        actor.set_rotation(rotation + (self.rotation_direction * delta * turn_speed) as f32);
     }
 }
 
