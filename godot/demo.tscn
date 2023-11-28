@@ -55,7 +55,8 @@ texture = ExtResource("1_yb4hi")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ship"]
 polygon = PackedVector2Array(24, 24, 0, -25, -24, 25, -1, 12)
 
-[node name="World" type="World" parent="."]
+[node name="World" type="World" parent="." node_paths=PackedStringArray("camera")]
+camera = NodePath("Camera2D")
 script = ExtResource("2_vvd6d")
 
 [node name="Camera2D" type="Camera2D" parent="World"]

@@ -16,6 +16,15 @@ impl WorldExtends {
         }
         return x_position;
     }
+
+    pub fn get_y_wrap(&self, y_position: f32) -> f32 {
+        if y_position < self.start.y {
+            return self.end.y;
+        } else if y_position > self.end.y  {
+            return self.start.y;
+        }
+        return y_position;
+    }
 }
 
 #[derive(GodotClass)]
@@ -23,6 +32,7 @@ impl WorldExtends {
 struct World {
     area: Option<Gd<Area2D>>,
     area_polygon: Option<Gd<CollisionPolygon2D>>,
+    #[export]
     camera: Option<Gd<Camera2D>>,
 
     #[base]
@@ -56,7 +66,8 @@ impl World {
         let Some(world_extends) = self.get_world_extends() else { return; };
         let body_position = body.get_position();
         let new_x = world_extends.get_x_wrap(body_position.x);
-        body.set_position(Vector2::new(new_x, body_position.y));
+        let new_y = world_extends.get_y_wrap(body_position.y);
+        body.set_position(Vector2::new(new_x, new_y));
         godot_print!("Body Exist: {:?}", body);
     }
 
