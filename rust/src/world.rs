@@ -34,6 +34,11 @@ impl INode2D for World {
 
 #[godot_api]
 impl World {
+    #[func]
+    fn on_body_exit(&mut self, body: Gd<Node2D>) {
+        godot_print!("Body Exist: {:?}", body);
+    }
+
     fn resize_area_to_camera_view(&mut self) {
         let Some(mut area_polygon) = self.area_polygon.clone() else { return; };
         let Some(camera2d) = self.camera.clone() else { return; };

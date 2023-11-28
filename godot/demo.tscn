@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://hfurbog3gnq0"]
+[gd_scene load_steps=10 format=3 uid="uid://hfurbog3gnq0"]
 
 [ext_resource type="Texture2D" uid="uid://csfcx6wlimyg5" path="res://assets/base_ship.png" id="1_yb4hi"]
+[ext_resource type="Script" path="res://World.gd" id="2_vvd6d"]
 
 [sub_resource type="Gradient" id="Gradient_jcesq"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -54,6 +55,7 @@ texture = ExtResource("1_yb4hi")
 polygon = PackedVector2Array(24, 24, 0, -25, -24, 25, -1, 12)
 
 [node name="World" type="World" parent="."]
+script = ExtResource("2_vvd6d")
 
 [node name="Camera2D" type="Camera2D" parent="World"]
 
@@ -61,3 +63,5 @@ polygon = PackedVector2Array(24, 24, 0, -25, -24, 25, -1, 12)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Area2D"]
 polygon = PackedVector2Array(-546, -236, 307, -209, 293, 189, -462, 200)
+
+[connection signal="body_exited" from="World/Area2D" to="World" method="on_body_exit"]
