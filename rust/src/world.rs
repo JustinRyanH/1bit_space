@@ -32,6 +32,7 @@ impl INode2D for World {
     }
 }
 
+#[godot_api]
 impl World {
     fn resize_area_to_camera_view(&mut self) {
         let Some(mut area_polygon) = self.area_polygon.clone() else { return; };
