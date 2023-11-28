@@ -1,11 +1,11 @@
-use godot::bind::{godot_api, GodotClass};
-use godot::obj::{Base, Gd};
 use godot::engine::{INode, Input, Node};
-use crate::ship::movement::ShipMovement;
+use godot::prelude::*;
+
+use crate::prelude::*;
 
 #[derive(GodotClass)]
 #[class(base=Node)]
-struct PlayerShipInput {
+pub struct PlayerShipInput {
     #[export]
     ship_movement: Option<Gd<ShipMovement>>,
 

@@ -1,8 +1,7 @@
-use godot::bind::{godot_api, GodotClass};
 use godot::engine::{CharacterBody2D, INode, Node};
-use godot::obj::{Base, Gd, UserClass};
-use godot::builtin::Vector2;
-use crate::movement_attributes::MovementAttributes;
+use godot::prelude::*;
+
+use crate::prelude::*;
 
 #[derive(GodotClass)]
 #[class(base=Node)]

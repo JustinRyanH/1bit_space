@@ -6,6 +6,7 @@ mod ship;
 
 pub mod prelude {
     pub(crate) use crate::movement_attributes::*;
+    pub(crate) use crate::ship::*;
 }
 
 struct OneBitSpace;

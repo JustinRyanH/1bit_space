@@ -1,10 +1,9 @@
-use godot::bind::{godot_api, GodotClass};
 use godot::engine::{CharacterBody2D, GpuParticles2D, ICharacterBody2D, Input, NodeExt};
-use godot::obj::{Base, Gd};
+use godot::prelude::*;
 
 #[derive(GodotClass)]
 #[class(base=CharacterBody2D)]
-struct Ship {
+pub struct Ship {
     #[export]
     linear_speed: f64,
     #[export]
@@ -41,7 +40,7 @@ impl ICharacterBody2D for Ship {
 
 #[godot_api]
 impl Ship {
-    fn move_ship(&mut self, delta: f64) {
+    fn move_ship(&mut self, _delta: f64) {
         let input = Input::singleton();
         let movement_axis = input.get_action_strength("Accelerate".into());
         if movement_axis > 0.0 {
