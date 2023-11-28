@@ -1,6 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://dkafili1pv4w7"]
 
 [ext_resource type="Texture2D" uid="uid://csfcx6wlimyg5" path="res://assets/base_ship.png" id="1_r04a7"]
+[ext_resource type="MovementAttributes" uid="uid://d1ow2cp65pw78" path="res://resources/player_ship_movement.tres" id="2_biula"]
 
 [sub_resource type="Curve" id="Curve_fjayb"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.625828, 0.27247), 0.0, 0.0, 0, 0, Vector2(1, 0.026286), -3.21803, 0.0, 0, 0]
@@ -40,8 +41,6 @@ turbulence_influence_min = 0.175
 turbulence_influence_max = 0.38
 turbulence_influence_over_life = SubResource("CurveTexture_ofceg")
 
-[sub_resource type="MovementAttributes" id="MovementAttributes_5jyym"]
-
 [node name="Ship" type="Ship"]
 
 [node name="RearEngineParticles" type="GPUParticles2D" parent="."]
@@ -56,4 +55,7 @@ polygon = PackedVector2Array(24, 24, 0, -25, -24, 25, -1, 12)
 
 [node name="ShipMovement" type="ShipMovement" parent="." node_paths=PackedStringArray("actor")]
 actor = NodePath("..")
-movement_attributes = SubResource("MovementAttributes_5jyym")
+movement_attributes = ExtResource("2_biula")
+
+[node name="PlayerShipInput" type="PlayerShipInput" parent="." node_paths=PackedStringArray("ship_movement")]
+ship_movement = NodePath("../ShipMovement")

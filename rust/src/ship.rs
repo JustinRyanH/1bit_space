@@ -1,8 +1,36 @@
-use godot::engine::{CharacterBody2D, GpuParticles2D, ICharacterBody2D, INode};
+use godot::engine::{CharacterBody2D, GpuParticles2D, ICharacterBody2D, INode, InputEvent};
 use godot::prelude::*;
 
 use crate::prelude::*;
 
+
+#[derive(GodotClass)]
+#[class(base=Node)]
+struct PlayerShipInput {
+    #[export]
+    ship_movement: Option<Gd<ShipMovement>>,
+
+    #[base]
+    base: Base<Node>,
+}
+
+#[godot_api]
+impl INode for PlayerShipInput {
+    fn init(base: Base<Self::Base>) -> Self {
+        Self {
+            base,
+            ship_movement: None,
+        }
+    }
+
+    fn process(&mut self, delta: f64) {
+        let Some(mut movement) = self.ship_movement.clone() else { return; };
+        let mut movement = movement.bind_mut();
+        let input = Input::singleton();
+        let rotate_axis = input.get_axis("Rotate Left".into(), "Rotate Right".into());
+        movement.set_rotation_direction(rotate_axis as f64);
+    }
+}
 
 #[derive(GodotClass)]
 #[class(base=Node)]
@@ -34,9 +62,10 @@ impl INode for ShipMovement {
     fn process(&mut self, delta: f64) {
         let Some(mut actor) = self.actor.clone() else { return; };
         let movement_attributes = self.movement_attributes.bind();
-        let angular_speed = movement_attributes.get_turn_speed();
+        let turn_speed = movement_attributes.get_turn_speed();
         let rotation = actor.get_rotation();
-        actor.set_rotation(rotation + (self.rotation_direction * delta * angular_speed) as f32);
+
+        actor.set_rotation(rotation + (self.rotation_direction * delta * turn_speed) as f32);
     }
 }
 
@@ -81,22 +110,12 @@ impl ICharacterBody2D for Ship {
     }
 
     fn physics_process(&mut self, delta: f64) {
-        self.rotate_ship(delta);
         self.move_ship(delta);
     }
 }
 
 #[godot_api]
 impl Ship {
-    fn rotate_ship(&mut self, delta: f64) {
-        let input = Input::singleton();
-        let mut base = self.base.clone();
-        let rotate_axis = input.get_axis("Rotate Left".into(), "Rotate Right".into());
-
-        let base_rotation = base.get_rotation();
-        base.set_rotation(base_rotation + (rotate_axis * (delta * self.angular_speed) as f32));
-    }
-
     fn move_ship(&mut self, delta: f64) {
         let input = Input::singleton();
         let movement_axis = input.get_action_strength("Accelerate".into());

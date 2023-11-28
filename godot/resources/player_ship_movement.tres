@@ -1,3 +1,4 @@
 [gd_resource type="MovementAttributes" format=3 uid="uid://d1ow2cp65pw78"]
 
 [resource]
+turn_speed = 6.0
