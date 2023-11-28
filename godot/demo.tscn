@@ -16,7 +16,6 @@ script = ExtResource("2_vvd6d")
 [node name="Area2D" type="Area2D" parent="World"]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Area2D"]
-visible = false
 polygon = PackedVector2Array(-546, -236, 307, -209, 293, 189, -462, 200)
 
 [connection signal="body_exited" from="World/Area2D" to="World" method="on_body_exit"]

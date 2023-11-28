@@ -4,13 +4,6 @@ use godot::prelude::*;
 #[derive(GodotClass)]
 #[class(base=CharacterBody2D)]
 pub struct Ship {
-    #[export]
-    linear_speed: f64,
-    #[export]
-    angular_speed: f64,
-    #[export]
-    max_speed: f32,
-
     engine_particles: Option<Gd<GpuParticles2D>>,
     #[base]
     base: Base<CharacterBody2D>,
@@ -20,9 +13,6 @@ pub struct Ship {
 impl ICharacterBody2D for Ship {
     fn init(base: Base<Self::Base>) -> Self {
         Self {
-            linear_speed: 150.0,
-            angular_speed: 5.0,
-            max_speed: 500.0,
             engine_particles: None,
             base,
         }
