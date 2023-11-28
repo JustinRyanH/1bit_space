@@ -1,5 +1,46 @@
-use godot::engine::{CharacterBody2D, GpuParticles2D, ICharacterBody2D};
+use godot::engine::{CharacterBody2D, GpuParticles2D, ICharacterBody2D, INode};
 use godot::prelude::*;
+
+use crate::prelude::*;
+
+
+#[derive(GodotClass)]
+#[class(base=Node)]
+struct ShipMovement {
+    #[export]
+    rotation_direction: f64,
+    #[export]
+    forward_throttle: f64,
+
+    #[export]
+    actor: Option<Gd<Node2D>>,
+    #[export]
+    movement_attributes: Gd<MovementAttributes>,
+
+    #[base]
+    base: Base<Node>,
+}
+
+#[godot_api]
+impl INode for ShipMovement {
+    fn init(base: Base<Self::Base>) -> Self {
+        Self {
+            base,
+            rotation_direction: 0.0,
+            forward_throttle: 0.0,
+            actor: None,
+            movement_attributes: MovementAttributes::new_gd(),
+        }
+    }
+
+    fn process(&mut self, delta: f64) {
+        let Some(mut actor) = self.actor.clone() else { return; };
+        let movement_attributes = self.movement_attributes.bind();
+        let angular_speed = movement_attributes.get_turn_speed();
+        let rotation = actor.get_rotation();
+        actor.set_rotation(rotation + (self.rotation_direction * delta * angular_speed) as f32);
+    }
+}
 
 #[derive(GodotClass)]
 #[class(base=CharacterBody2D)]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dkafili1pv4w7"]
+[gd_scene load_steps=10 format=3 uid="uid://dkafili1pv4w7"]
 
 [ext_resource type="Texture2D" uid="uid://csfcx6wlimyg5" path="res://assets/base_ship.png" id="1_r04a7"]
 
@@ -40,6 +40,8 @@ turbulence_influence_min = 0.175
 turbulence_influence_max = 0.38
 turbulence_influence_over_life = SubResource("CurveTexture_ofceg")
 
+[sub_resource type="MovementAttributes" id="MovementAttributes_5jyym"]
+
 [node name="Ship" type="Ship"]
 
 [node name="RearEngineParticles" type="GPUParticles2D" parent="."]
@@ -51,3 +53,7 @@ texture = ExtResource("1_r04a7")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(24, 24, 0, -25, -24, 25, -1, 12)
+
+[node name="ShipMovement" type="ShipMovement" parent="." node_paths=PackedStringArray("actor")]
+actor = NodePath("..")
+movement_attributes = SubResource("MovementAttributes_5jyym")
