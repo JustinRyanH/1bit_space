@@ -8,6 +8,8 @@ pub struct MovementAttributes {
     impulse: f64,
     #[export]
     turn_speed: f64,
+    #[export]
+    max_speed: f64,
 
     #[base]
     base: Base<Resource>,
@@ -19,6 +21,7 @@ impl IResource for MovementAttributes {
         Self {
             impulse: 30.0,
             turn_speed: 2.0,
+            max_speed: 500.0,
             base
         }
     }

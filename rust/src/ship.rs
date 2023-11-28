@@ -1,4 +1,4 @@
-use godot::engine::{CharacterBody2D, GpuParticles2D, ICharacterBody2D, INode, InputEvent};
+use godot::engine::{CharacterBody2D, GpuParticles2D, ICharacterBody2D, INode};
 use godot::prelude::*;
 
 use crate::prelude::*;
@@ -44,7 +44,7 @@ struct ShipMovement {
     forward_throttle: f64,
 
     #[export]
-    actor: Option<Gd<Node2D>>,
+    actor: Option<Gd<CharacterBody2D>>,
     #[export]
     movement_attributes: Gd<MovementAttributes>,
 
@@ -68,6 +68,18 @@ impl INode for ShipMovement {
         let Some(mut actor) = self.actor.clone() else { return; };
 
         self.rotate_ship(delta, &mut actor);
+
+        let movement_attributes = self.movement_attributes.bind();
+        let max_velocity = movement_attributes.get_max_speed() as f32;
+        let impulse = movement_attributes.get_impulse();
+
+        let base_velocity = actor.get_velocity();
+        let velocity_direction = Vector2::UP.rotated(actor.get_rotation());
+
+        let new_velocity = base_velocity + (velocity_direction * (self.forward_throttle * delta * impulse) as f32);
+        let new_velocity = new_velocity.limit_length(max_velocity.into());
+
+        actor.set_velocity(new_velocity);
     }
 }
 
@@ -82,7 +94,7 @@ impl ShipMovement {
         self.forward_throttle = throttle;
     }
 
-    fn rotate_ship(&mut self, delta: f64, actor: &mut Gd<Node2D>) {
+    fn rotate_ship(&mut self, delta: f64, actor: &mut Gd<CharacterBody2D>) {
         let movement_attributes = self.movement_attributes.bind();
         let turn_speed = movement_attributes.get_turn_speed();
         let rotation = actor.get_rotation();
@@ -134,13 +146,7 @@ impl Ship {
     fn move_ship(&mut self, delta: f64) {
         let input = Input::singleton();
         let movement_axis = input.get_action_strength("Accelerate".into());
-        let base_velocity = self.base.get_velocity();
         if movement_axis > 0.0 {
-            let velocity_direction = Vector2::UP.rotated(self.base.get_rotation());
-            let new_velocity = base_velocity + (velocity_direction * movement_axis * (delta * self.linear_speed) as f32);
-            let new_velocity = new_velocity.limit_length(self.max_speed.into());
-
-            self.base.set_velocity(new_velocity);
             self.toggle_engine(true);
         } else {
             self.toggle_engine(false);
