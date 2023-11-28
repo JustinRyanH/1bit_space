@@ -1,6 +1,12 @@
 use godot::engine::{Area2D, CollisionPolygon2D};
 use godot::prelude::*;
 
+
+struct WorldExtends {
+    start: Vector2,
+    end: Vector2,
+}
+
 #[derive(GodotClass)]
 #[class(base=Node2D)]
 struct World {
@@ -40,8 +46,15 @@ impl World {
     }
 
     fn resize_area_to_camera_view(&mut self) {
+        let Some(WorldExtends { start, end }) = self.get_world_extends() else { return; };
         let Some(mut area_polygon) = self.area_polygon.clone() else { return; };
-        let Some(camera2d) = self.camera.clone() else { return; };
+
+        let extends = [start, Vector2::new(start.x, end.y), end, Vector2::new(end.x, start.y)];
+        area_polygon.set_polygon(PackedVector2Array::from(&extends));
+    }
+
+    fn get_world_extends(&mut self) -> Option<WorldExtends> {
+        let Some(camera2d) = self.camera.clone() else { return None; };
 
         let transform = camera2d.get_canvas_transform();
         let camera_size = camera2d.get_viewport_rect().size;
@@ -49,7 +62,7 @@ impl World {
         let transform_invert = transform.affine_inverse();
         let start = transform_invert * Vector2::new(0., 0.);
         let end = transform_invert * camera_size;
-        let extends = [start, Vector2::new(start.x, end.y), end, Vector2::new(end.x, start.y)];
-        area_polygon.set_polygon(PackedVector2Array::from(&extends));
+
+        return Some(WorldExtends { start, end });
     }
 }
