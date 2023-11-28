@@ -23,12 +23,17 @@ impl INode for PlayerShipInput {
         }
     }
 
-    fn process(&mut self, delta: f64) {
+    fn process(&mut self, _delta: f64) {
+        let input = Input::singleton();
+
         let Some(mut movement) = self.ship_movement.clone() else { return; };
         let mut movement = movement.bind_mut();
-        let input = Input::singleton();
+
+        let acceleration = input.get_action_strength("Accelerate".into());
         let rotate_axis = input.get_axis("Rotate Left".into(), "Rotate Right".into());
+
         movement.set_rotation_direction(rotate_axis as f64);
+        movement.set_throttle(acceleration as f64);
     }
 }
 
@@ -73,6 +78,10 @@ impl INode for ShipMovement {
 impl ShipMovement {
     pub fn set_rotation_direction(&mut self, direction: f64) {
         self.rotation_direction = direction;
+    }
+
+    pub fn set_throttle(&mut self, throttle: f64) {
+        self.forward_throttle = throttle;
     }
 }
 
