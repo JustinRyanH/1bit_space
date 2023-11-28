@@ -8,6 +8,8 @@ struct Ship {
     linear_speed: f64,
     #[export]
     angular_speed: f64,
+    #[export]
+    max_speed: f32,
 
     engine_particles: Option<Gd<GpuParticles2D>>,
     #[base]
@@ -20,6 +22,7 @@ impl ICharacterBody2D for Ship {
         Self {
             linear_speed: 150.0,
             angular_speed: 5.0,
+            max_speed: 500.0,
             engine_particles: None,
             base,
         }
@@ -54,6 +57,7 @@ impl Ship {
         if movement_axis > 0.0 {
             let velocity_direction = Vector2::UP.rotated(self.base.get_rotation());
             let new_velocity = base_velocity + (velocity_direction * movement_axis * (delta * self.linear_speed) as f32);
+            let new_velocity = new_velocity.limit_length(self.max_speed.into());
             self.base.set_velocity(new_velocity);
             self.toggle_engine(true);
         } else {
