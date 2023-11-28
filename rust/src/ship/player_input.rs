@@ -32,6 +32,6 @@ impl INode for PlayerShipInput {
         let rotate_axis = input.get_axis("Rotate Left".into(), "Rotate Right".into());
 
         movement.set_rotation_direction(rotate_axis as f64);
-        movement.set_throttle(acceleration as f64);
+        movement.set_forward_throttle(acceleration as f64);
     }
 }

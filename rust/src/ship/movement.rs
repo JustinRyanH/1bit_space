@@ -6,7 +6,9 @@ use crate::prelude::*;
 #[derive(GodotClass)]
 #[class(base=Node)]
 pub struct ShipMovement {
+    #[export]
     rotation_direction: f64,
+    #[export]
     forward_throttle: f64,
 
     #[export]
@@ -52,14 +54,6 @@ impl INode for ShipMovement {
 
 #[godot_api]
 impl ShipMovement {
-    pub fn set_rotation_direction(&mut self, direction: f64) {
-        self.rotation_direction = direction;
-    }
-
-    pub fn set_throttle(&mut self, throttle: f64) {
-        self.forward_throttle = throttle;
-    }
-
     fn rotate_ship(&mut self, delta: f64, actor: &mut Gd<CharacterBody2D>) {
         let movement_attributes = self.movement_attributes.bind();
         let turn_speed = movement_attributes.get_turn_speed();
