@@ -20,6 +20,13 @@ struct ShipMovement {
 }
 
 #[godot_api]
+impl ShipMovement {
+    pub fn set_rotation_direction(&mut self, direction: f64) {
+        self.rotation_direction = direction;
+    }
+}
+
+#[godot_api]
 impl INode for ShipMovement {
     fn init(base: Base<Self::Base>) -> Self {
         Self {
