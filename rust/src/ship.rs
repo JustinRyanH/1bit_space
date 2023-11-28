@@ -20,13 +20,6 @@ struct ShipMovement {
 }
 
 #[godot_api]
-impl ShipMovement {
-    pub fn set_rotation_direction(&mut self, direction: f64) {
-        self.rotation_direction = direction;
-    }
-}
-
-#[godot_api]
 impl INode for ShipMovement {
     fn init(base: Base<Self::Base>) -> Self {
         Self {
@@ -46,6 +39,14 @@ impl INode for ShipMovement {
         actor.set_rotation(rotation + (self.rotation_direction * delta * angular_speed) as f32);
     }
 }
+
+#[godot_api]
+impl ShipMovement {
+    pub fn set_rotation_direction(&mut self, direction: f64) {
+        self.rotation_direction = direction;
+    }
+}
+
 
 #[derive(GodotClass)]
 #[class(base=CharacterBody2D)]
