@@ -7,6 +7,17 @@ struct WorldExtends {
     end: Vector2,
 }
 
+impl WorldExtends {
+    pub fn get_x_wrap(&self, x_position: f32) -> f32 {
+        if x_position < self.start.x {
+            return self.end.x;
+        } else if x_position > self.end.x  {
+            return self.start.x;
+        }
+        return x_position;
+    }
+}
+
 #[derive(GodotClass)]
 #[class(base=Node2D)]
 struct World {
@@ -42,13 +53,10 @@ impl INode2D for World {
 impl World {
     #[func]
     fn on_body_exit(&mut self, mut body: Gd<Node2D>) {
-        let Some(WorldExtends { start, end }) = self.get_world_extends() else { return; };
+        let Some(world_extends) = self.get_world_extends() else { return; };
         let body_position = body.get_position();
-        if body_position.x < start.x {
-            body.set_position(Vector2::new(end.x, body_position.y));
-        } else if body_position.x > end.x {
-            body.set_position(Vector2::new(start.x, body_position.y));
-        }
+        let new_x = world_extends.get_x_wrap(body_position.x);
+        body.set_position(Vector2::new(new_x, body_position.y));
         godot_print!("Body Exist: {:?}", body);
     }
 
