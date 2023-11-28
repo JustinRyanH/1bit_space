@@ -1,6 +1,7 @@
 use godot::prelude::*;
 
 mod ship;
+mod world;
 
 struct OneBitSpace;
 

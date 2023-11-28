@@ -58,6 +58,7 @@ impl Ship {
             let velocity_direction = Vector2::UP.rotated(self.base.get_rotation());
             let new_velocity = base_velocity + (velocity_direction * movement_axis * (delta * self.linear_speed) as f32);
             let new_velocity = new_velocity.limit_length(self.max_speed.into());
+
             self.base.set_velocity(new_velocity);
             self.toggle_engine(true);
         } else {

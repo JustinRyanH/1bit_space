@@ -42,7 +42,6 @@ turbulence_influence_over_life = SubResource("CurveTexture_ofceg")
 [node name="Demo" type="Node2D"]
 
 [node name="Ship" type="Ship" parent="."]
-linear_speed = 150.0
 
 [node name="RearEngineParticles" type="GPUParticles2D" parent="Ship"]
 amount = 32
@@ -54,4 +53,11 @@ texture = ExtResource("1_yb4hi")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ship"]
 polygon = PackedVector2Array(24, 24, 0, -25, -24, 25, -1, 12)
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="World" type="World" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="World"]
+
+[node name="Area2D" type="Area2D" parent="World"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/Area2D"]
+polygon = PackedVector2Array(-546, -236, 307, -209, 293, 189, -462, 200)
