@@ -1,8 +1,8 @@
 use godot::prelude::*;
 
-mod ship;
 mod world;
 mod movement_attributes;
+mod ship;
 
 pub mod prelude {
     pub(crate) use crate::movement_attributes::*;
