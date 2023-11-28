@@ -1,0 +1,53 @@
+[gd_scene load_steps=9 format=3 uid="uid://dkafili1pv4w7"]
+
+[ext_resource type="Texture2D" uid="uid://csfcx6wlimyg5" path="res://assets/base_ship.png" id="1_r04a7"]
+
+[sub_resource type="Curve" id="Curve_fjayb"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.625828, 0.27247), 0.0, 0.0, 0, 0, Vector2(1, 0.026286), -3.21803, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_tw6xd"]
+curve = SubResource("Curve_fjayb")
+
+[sub_resource type="Curve" id="Curve_xxrlu"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.483444, 0.54805), -2.60345, -2.60345, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_jm601"]
+curve = SubResource("Curve_xxrlu")
+
+[sub_resource type="Curve" id="Curve_kl2r8"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.285276, 0.3816), 2.78708, 2.78708, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ofceg"]
+curve = SubResource("Curve_kl2r8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pixb3"]
+particle_flag_disable_z = true
+direction = Vector3(2.08165e-12, 1, 2.08165e-12)
+spread = 25.0
+initial_velocity_min = 500.0
+initial_velocity_max = 750.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+scale_min = 8.0
+scale_max = 12.0
+scale_curve = SubResource("CurveTexture_jm601")
+alpha_curve = SubResource("CurveTexture_tw6xd")
+turbulence_enabled = true
+turbulence_noise_strength = 2.6
+turbulence_influence_min = 0.175
+turbulence_influence_max = 0.38
+turbulence_influence_over_life = SubResource("CurveTexture_ofceg")
+
+[node name="Ship" type="Ship"]
+
+[node name="RearEngineParticles" type="GPUParticles2D" parent="."]
+amount = 90
+process_material = SubResource("ParticleProcessMaterial_pixb3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_r04a7")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(24, 24, 0, -25, -24, 25, -1, 12)
