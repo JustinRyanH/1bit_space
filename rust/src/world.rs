@@ -41,7 +41,14 @@ impl INode2D for World {
 #[godot_api]
 impl World {
     #[func]
-    fn on_body_exit(&mut self, body: Gd<Node2D>) {
+    fn on_body_exit(&mut self, mut body: Gd<Node2D>) {
+        let Some(WorldExtends { start, end }) = self.get_world_extends() else { return; };
+        let body_position = body.get_position();
+        if body_position.x < start.x {
+            body.set_position(Vector2::new(end.x, body_position.y));
+        } else if body_position.x > end.x {
+            body.set_position(Vector2::new(start.x, body_position.y));
+        }
         godot_print!("Body Exist: {:?}", body);
     }
 
@@ -53,7 +60,7 @@ impl World {
         area_polygon.set_polygon(PackedVector2Array::from(&extends));
     }
 
-    fn get_world_extends(&mut self) -> Option<WorldExtends> {
+    fn get_world_extends(&self) -> Option<WorldExtends> {
         let Some(camera2d) = self.camera.clone() else { return None; };
 
         let transform = camera2d.get_canvas_transform();
