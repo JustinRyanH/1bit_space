@@ -36,18 +36,7 @@ impl INode for ShipMovement {
         let Some(mut actor) = self.actor.clone() else { return; };
 
         self.rotate_ship(delta, &mut actor);
-
-        let movement_attributes = self.movement_attributes.bind();
-        let max_velocity = movement_attributes.get_max_speed() as f32;
-        let impulse = movement_attributes.get_impulse();
-
-        let base_velocity = actor.get_velocity();
-        let velocity_direction = Vector2::UP.rotated(actor.get_rotation());
-
-        let new_velocity = base_velocity + (velocity_direction * (self.forward_throttle * delta * impulse) as f32);
-        let new_velocity = new_velocity.limit_length(max_velocity.into());
-
-        actor.set_velocity(new_velocity);
+        self.move_ship_forward(delta, &mut actor);
     }
 }
 
@@ -60,5 +49,19 @@ impl ShipMovement {
         let rotation = actor.get_rotation();
 
         actor.set_rotation(rotation + (self.rotation_direction * delta * turn_speed) as f32);
+    }
+
+    fn move_ship_forward(&mut self, delta: f64, actor: &mut Gd<CharacterBody2D>) {
+        let movement_attributes = self.movement_attributes.bind();
+        let max_velocity = movement_attributes.get_max_speed() as f32;
+        let impulse = movement_attributes.get_impulse();
+
+        let base_velocity = actor.get_velocity();
+        let velocity_direction = Vector2::UP.rotated(actor.get_rotation());
+
+        let new_velocity = base_velocity + (velocity_direction * (self.forward_throttle * delta * impulse) as f32);
+        let new_velocity = new_velocity.limit_length(max_velocity.into());
+
+        actor.set_velocity(new_velocity);
     }
 }
