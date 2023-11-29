@@ -53,7 +53,8 @@ impl ShipMovement {
         let turn_speed = movement_attributes.get_turn_speed();
         let rotation = actor.get_rotation();
 
-        actor.set_rotation(rotation + (self.rotation_direction * delta * turn_speed) as f32);
+        let new_rotation = rotation + (self.rotation_direction * delta * turn_speed) as f32;
+        actor.set_rotation(new_rotation);
     }
 
     fn move_ship_forward(&mut self, delta: f64) {
