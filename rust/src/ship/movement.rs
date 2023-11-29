@@ -59,14 +59,9 @@ impl ShipMovement {
     fn move_ship_forward(&mut self, delta: f64) {
         let Some(mut actor) = self.actor.clone() else { return; };
 
-        let movement_attributes = self.movement_attributes.bind();
-        let max_velocity = movement_attributes.get_max_speed() as f32;
-        let impulse = movement_attributes.get_impulse();
-
+        let movement_state = self.movement_attributes.bind().get_movement_state();
         let throttle_data = actor.bind().get_throttle_data();
-        let new_velocity = throttle_data.get_new_velocity(delta * impulse);
-        let new_velocity = new_velocity.limit_length(max_velocity.into());
-
+        let new_velocity = throttle_data.get_new_velocity(delta, &movement_state);
 
         actor.set_velocity(new_velocity);
     }
