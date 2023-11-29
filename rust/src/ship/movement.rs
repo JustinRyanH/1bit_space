@@ -7,7 +7,7 @@ use crate::prelude::*;
 #[class(base=Node)]
 pub struct ShipMovementSystem {
     #[export]
-    actor: Option<Gd<Ship>>,
+    ship: Option<Gd<Ship>>,
     #[export]
     movement_attributes: Gd<MovementAttributes>,
 
@@ -20,7 +20,7 @@ impl INode for ShipMovementSystem {
     fn init(base: Base<Self::Base>) -> Self {
         Self {
             base,
-            actor: None,
+            ship: None,
             movement_attributes: MovementAttributes::new_gd(),
         }
     }
@@ -31,8 +31,8 @@ impl INode for ShipMovementSystem {
     }
 
     fn physics_process(&mut self, _delta: f64) {
-        let Some(mut actor) = self.actor.clone() else { return; };
-        actor.move_and_slide();
+        let Some(mut ship) = self.ship.clone() else { return; };
+        ship.move_and_slide();
     }
 }
 
@@ -40,22 +40,22 @@ impl INode for ShipMovementSystem {
 #[godot_api]
 impl ShipMovementSystem {
     fn rotate_ship(&mut self, delta: f64) {
-        let Some(mut actor) = self.actor.clone() else { return; };
-        let throttle_data = actor.bind().get_throttle_data();
+        let Some(mut ship) = self.ship.clone() else { return; };
+        let throttle_data = ship.bind().get_throttle_data();
         let movement_state = self.movement_attributes.bind().get_movement_state();
 
         let new_rotation = throttle_data.get_new_rotation(delta, &movement_state);
 
-        actor.set_rotation(new_rotation);
+        ship.set_rotation(new_rotation);
     }
 
     fn move_ship_forward(&mut self, delta: f64) {
-        let Some(mut actor) = self.actor.clone() else { return; };
+        let Some(mut ship) = self.ship.clone() else { return; };
 
         let movement_state = self.movement_attributes.bind().get_movement_state();
-        let throttle_data = actor.bind().get_throttle_data();
+        let throttle_data = ship.bind().get_throttle_data();
         let new_velocity = throttle_data.get_new_velocity(delta, &movement_state);
 
-        actor.set_velocity(new_velocity);
+        ship.set_velocity(new_velocity);
     }
 }
