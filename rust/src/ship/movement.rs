@@ -7,9 +7,6 @@ use crate::prelude::*;
 #[class(base=Node)]
 pub struct ShipMovement {
     #[export]
-    rotation_direction: f64,
-
-    #[export]
     actor: Option<Gd<Ship>>,
     #[export]
     movement_attributes: Gd<MovementAttributes>,
@@ -23,7 +20,6 @@ impl INode for ShipMovement {
     fn init(base: Base<Self::Base>) -> Self {
         Self {
             base,
-            rotation_direction: 0.0,
             actor: None,
             movement_attributes: MovementAttributes::new_gd(),
         }

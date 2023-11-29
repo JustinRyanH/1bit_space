@@ -32,19 +32,12 @@ impl INode for PlayerShipInput {
         let acceleration = input.get_action_strength("Accelerate".into());
         let rotate_axis = input.get_axis("Rotate Left".into(), "Rotate Right".into());
 
-        self.update_movement(acceleration, rotate_axis);
         self.update_ship(acceleration, rotate_axis);
     }
 }
 
 #[godot_api]
 impl PlayerShipInput {
-    fn update_movement(&mut self, _acceleration: f32, rotate_axis: f32) {
-        let Some(mut movement) = self.ship_movement.clone() else { return;  };
-        let mut movement = movement.bind_mut();
-        movement.set_rotation_direction(rotate_axis as f64);
-    }
-
     fn update_ship(&mut self, acceleration: f32, rotate_axis: f32) {
         let Some(mut ship) = self.ship.clone() else { return; };
         let mut ship = ship.bind_mut();
