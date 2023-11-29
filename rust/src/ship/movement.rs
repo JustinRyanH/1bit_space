@@ -9,8 +9,6 @@ pub struct ShipMovement {
     #[export]
     rotation_direction: f64,
     #[export]
-    forward_throttle: f64,
-    #[export]
     engine_particles: Option<Gd<GpuParticles2D>>,
 
     #[export]
@@ -28,7 +26,6 @@ impl INode for ShipMovement {
         Self {
             base,
             rotation_direction: 0.0,
-            forward_throttle: 0.0,
             actor: None,
             engine_particles: None,
             movement_attributes: MovementAttributes::new_gd(),
@@ -77,10 +74,11 @@ impl ShipMovement {
     }
 
     fn toggle_engine(&mut self) {
+        let Some(ship) = self.actor.clone() else { return; };
         let Some(mut engine_particles) = self.engine_particles.clone() else {
             godot_error!("No Engine for Ship: {:?}", self.actor);
             return;
         };
-        engine_particles.set_emitting(self.forward_throttle > 0.0);
+        engine_particles.set_emitting(ship.bind().get_forward_throttle() > 0.0);
     }
 }
