@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://hfurbog3gnq0"]
+[gd_scene load_steps=5 format=3 uid="uid://hfurbog3gnq0"]
 
+[ext_resource type="Script" path="res://BulletController.gd" id="2_g4nri"]
 [ext_resource type="PackedScene" uid="uid://dkafili1pv4w7" path="res://ship.tscn" id="2_p5u5s"]
 [ext_resource type="Script" path="res://World.gd" id="2_vvd6d"]
+[ext_resource type="Resource" uid="uid://bfp8ydvxix41l" path="res://resources/bullet_bus.tres" id="3_pvltr"]
 
 [node name="Demo" type="Node2D"]
 
@@ -19,6 +21,8 @@ visible = false
 polygon = PackedVector2Array(-227, -140, 307, -209, 293, 189, -462, 200)
 
 [node name="BulletController" type="Node2D" parent="."]
+script = ExtResource("2_g4nri")
+spawn_bus = ExtResource("3_pvltr")
 
 [node name="Ships" type="Node2D" parent="."]
 
