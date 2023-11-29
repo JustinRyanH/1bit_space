@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://BulletController.gd" id="2_g4nri"]
 [ext_resource type="PackedScene" uid="uid://dkafili1pv4w7" path="res://ship.tscn" id="2_p5u5s"]
 [ext_resource type="Script" path="res://World.gd" id="2_vvd6d"]
-[ext_resource type="Resource" uid="uid://bfp8ydvxix41l" path="res://resources/bullet_bus.tres" id="3_pvltr"]
+[ext_resource type="Resource" uid="uid://docggmrj8j1k" path="res://resources/bullet_spawn_bus.tres" id="3_pvltr"]
 
 [node name="Demo" type="Node2D"]
 

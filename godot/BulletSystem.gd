@@ -7,4 +7,4 @@ extends Node
 
 func _process(delta):
 	if Input.is_action_just_pressed("Fire"):
-		bullet_spawn_bus.emit_signal("spawn_bullet", bullet_scene, gun_location.global_position, actor.rotation)
+		bullet_spawn_bus.emit_signal("spawn_bullet", "res://bullet.tscn", gun_location.global_position, actor.rotation)
