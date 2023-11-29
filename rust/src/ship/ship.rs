@@ -6,13 +6,17 @@ pub struct ThrottleData {
     pub current_velocity: Vector2,
     pub current_direction: Vector2,
     pub throttle: f64,
+    pub rotation_direction: f64,
 }
 
 impl ThrottleData {
     pub fn get_new_velocity(&self, dt: f64, movement_state: &MovementState) -> Vector2 {
         let impulse = movement_state.impulse * dt;
+        let move_speed = movement_state.max_speed as f32;
+
         let new_velocity_unlimited = self.current_velocity + (self.current_direction * (self.throttle * impulse) as f32);
-        return new_velocity_unlimited.limit_length((movement_state.max_speed as f32).into());
+
+        new_velocity_unlimited.limit_length(move_speed.into())
     }
 }
 
@@ -48,6 +52,7 @@ impl Ship {
             current_velocity,
             current_direction,
             throttle: self.forward_throttle,
+            rotation_direction: self.rotation_direction,
         }
     }
 }
