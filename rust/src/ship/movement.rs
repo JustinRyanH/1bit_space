@@ -1,4 +1,4 @@
-use godot::engine::{CharacterBody2D, GpuParticles2D, INode, Node};
+use godot::engine::{GpuParticles2D, INode, Node};
 use godot::prelude::*;
 
 use crate::prelude::*;
@@ -65,11 +65,12 @@ impl ShipMovement {
         let movement_attributes = self.movement_attributes.bind();
         let max_velocity = movement_attributes.get_max_speed() as f32;
         let impulse = movement_attributes.get_impulse();
+        let throttle = actor.bind().get_forward_throttle();
 
         let base_velocity = actor.get_velocity();
         let velocity_direction = Vector2::UP.rotated(actor.get_rotation());
 
-        let new_velocity = base_velocity + (velocity_direction * (self.forward_throttle * delta * impulse) as f32);
+        let new_velocity = base_velocity + (velocity_direction * (throttle * delta * impulse) as f32);
         let new_velocity = new_velocity.limit_length(max_velocity.into());
 
         actor.set_velocity(new_velocity);
