@@ -62,10 +62,12 @@ impl ShipMovement {
         let movement_attributes = self.movement_attributes.bind();
         let max_velocity = movement_attributes.get_max_speed() as f32;
         let impulse = movement_attributes.get_impulse();
-        let throttle = actor.bind().get_forward_throttle();
 
-        let base_velocity = actor.get_velocity();
-        let velocity_direction = Vector2::UP.rotated(actor.get_rotation());
+        let throttle_data = actor.bind().get_throttle_data();
+
+        let base_velocity = throttle_data.current_velocity;
+        let throttle = throttle_data.throttle;
+        let velocity_direction = throttle_data.current_direction;
 
         let new_velocity = base_velocity + (velocity_direction * (throttle * delta * impulse) as f32);
         let new_velocity = new_velocity.limit_length(max_velocity.into());

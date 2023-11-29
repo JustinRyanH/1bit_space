@@ -1,6 +1,12 @@
 use godot::engine::{CharacterBody2D, ICharacterBody2D};
 use godot::prelude::*;
 
+pub struct ThrottleData {
+    pub current_velocity: Vector2,
+    pub current_direction: Vector2,
+    pub throttle: f64,
+}
+
 #[derive(GodotClass)]
 #[class(base=CharacterBody2D)]
 pub struct Ship {
@@ -24,4 +30,15 @@ impl ICharacterBody2D for Ship {
 }
 
 #[godot_api]
-impl Ship { }
+impl Ship {
+    pub fn get_throttle_data(&self) -> ThrottleData {
+        let current_velocity = self.base.get_velocity();
+        let current_direction = Vector2::UP.rotated(self.base.get_rotation());
+
+        ThrottleData {
+            current_velocity,
+            current_direction,
+            throttle: self.forward_throttle,
+        }
+    }
+}
