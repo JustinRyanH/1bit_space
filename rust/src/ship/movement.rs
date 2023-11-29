@@ -49,11 +49,11 @@ impl INode for ShipMovement {
 impl ShipMovement {
     fn rotate_ship(&mut self, delta: f64) {
         let Some(mut actor) = self.actor.clone() else { return; };
-        let movement_attributes = self.movement_attributes.bind();
-        let turn_speed = movement_attributes.get_turn_speed();
-        let rotation = actor.get_rotation();
+        let throttle_data = actor.bind().get_throttle_data();
+        let movement_state = self.movement_attributes.bind().get_movement_state();
 
-        let new_rotation = rotation + (self.rotation_direction * delta * turn_speed) as f32;
+        let new_rotation = throttle_data.get_new_rotation(delta, &movement_state);
+
         actor.set_rotation(new_rotation);
     }
 

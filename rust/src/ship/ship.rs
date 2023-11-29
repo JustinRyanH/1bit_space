@@ -7,6 +7,7 @@ pub struct ThrottleData {
     pub current_direction: Vector2,
     pub throttle: f64,
     pub rotation_direction: f64,
+    pub current_rotation: f64,
 }
 
 impl ThrottleData {
@@ -17,6 +18,10 @@ impl ThrottleData {
         let new_velocity_unlimited = self.current_velocity + (self.current_direction * (self.throttle * impulse) as f32);
 
         new_velocity_unlimited.limit_length(move_speed.into())
+    }
+
+    pub fn get_new_rotation(&self, dt: f64, movement_state: &MovementState) -> f32 {
+        (self.current_rotation + self.rotation_direction * dt * movement_state.turn_speed) as f32
     }
 }
 
@@ -53,6 +58,7 @@ impl Ship {
             current_direction,
             throttle: self.forward_throttle,
             rotation_direction: self.rotation_direction,
+            current_rotation: self.base.get_rotation() as f64,
         }
     }
 }
