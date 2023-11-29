@@ -5,7 +5,7 @@ use crate::prelude::*;
 
 #[derive(GodotClass)]
 #[class(base=Node)]
-pub struct PlayerShipInput {
+pub struct PlayerShipInputService {
     #[export]
     ship_movement: Option<Gd<ShipMovement>>,
     #[export]
@@ -16,7 +16,7 @@ pub struct PlayerShipInput {
 }
 
 #[godot_api]
-impl INode for PlayerShipInput {
+impl INode for PlayerShipInputService {
     fn init(base: Base<Self::Base>) -> Self {
         Self {
             base,
@@ -37,7 +37,7 @@ impl INode for PlayerShipInput {
 }
 
 #[godot_api]
-impl PlayerShipInput {
+impl PlayerShipInputService {
     fn update_ship(&mut self, acceleration: f32, rotate_axis: f32) {
         let Some(mut ship) = self.ship.clone() else { return; };
         let mut ship = ship.bind_mut();
