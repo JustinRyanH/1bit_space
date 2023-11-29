@@ -14,7 +14,7 @@ pub struct ShipMovement {
     engine_particles: Option<Gd<GpuParticles2D>>,
 
     #[export]
-    actor: Option<Gd<CharacterBody2D>>,
+    actor: Option<Gd<Ship>>,
     #[export]
     movement_attributes: Gd<MovementAttributes>,
 
