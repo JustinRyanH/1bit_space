@@ -58,6 +58,12 @@ polygon = PackedVector2Array(24, 24, 0, -25, -24, 25, -1, 12)
 [node name="GunLocation" type="Marker2D" parent="."]
 position = Vector2(0, -24)
 
+[node name="ShipProjectileSystem" type="ShipProjectileSystem" parent="." node_paths=PackedStringArray("ship", "start_location")]
+projectile_message_bus = ExtResource("3_1tbd1")
+ship = NodePath("..")
+start_location = NodePath("../GunLocation")
+projectile_scene = ExtResource("4_1m5sb")
+
 [node name="ShipMovementSystem" type="ShipMovementSystem" parent="." node_paths=PackedStringArray("actor")]
 actor = NodePath("..")
 movement_attributes = ExtResource("2_biula")
@@ -69,9 +75,3 @@ ship = NodePath("..")
 [node name="PlayerShipInputSystem" type="PlayerShipInputSystem" parent="." node_paths=PackedStringArray("ship_movement", "ship")]
 ship_movement = NodePath("../ShipMovementSystem")
 ship = NodePath("..")
-
-[node name="ShipProjectileSystem" type="ShipProjectileSystem" parent="." node_paths=PackedStringArray("ship", "start_location")]
-projectile_message_bus = ExtResource("3_1tbd1")
-ship = NodePath("..")
-start_location = NodePath("../GunLocation")
-projectile_scene = ExtResource("4_1m5sb")
