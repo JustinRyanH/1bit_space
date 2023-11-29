@@ -1,6 +1,7 @@
 pub mod ship;
 pub mod movement;
 pub mod player_input;
+mod ship_vfx;
 
 
 pub use movement::*;
