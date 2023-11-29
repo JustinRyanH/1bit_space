@@ -68,7 +68,6 @@ impl World {
         let new_x = world_extends.get_x_wrap(body_position.x);
         let new_y = world_extends.get_y_wrap(body_position.y);
         body.set_position(Vector2::new(new_x, new_y));
-        godot_print!("Body Exist: {:?}", body);
     }
 
     fn resize_area_to_camera_view(&mut self) {
