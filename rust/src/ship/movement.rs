@@ -1,4 +1,4 @@
-use godot::engine::{GpuParticles2D, INode, Node};
+use godot::engine::{INode, Node};
 use godot::prelude::*;
 
 use crate::prelude::*;
@@ -8,8 +8,6 @@ use crate::prelude::*;
 pub struct ShipMovement {
     #[export]
     rotation_direction: f64,
-    #[export]
-    engine_particles: Option<Gd<GpuParticles2D>>,
 
     #[export]
     actor: Option<Gd<Ship>>,
@@ -27,7 +25,6 @@ impl INode for ShipMovement {
             base,
             rotation_direction: 0.0,
             actor: None,
-            engine_particles: None,
             movement_attributes: MovementAttributes::new_gd(),
         }
     }
@@ -35,7 +32,6 @@ impl INode for ShipMovement {
     fn process(&mut self, delta: f64) {
         self.rotate_ship(delta);
         self.move_ship_forward(delta);
-        self.toggle_engine();
     }
 
     fn physics_process(&mut self, _delta: f64) {
@@ -65,14 +61,5 @@ impl ShipMovement {
         let new_velocity = throttle_data.get_new_velocity(delta, &movement_state);
 
         actor.set_velocity(new_velocity);
-    }
-
-    fn toggle_engine(&mut self) {
-        let Some(ship) = self.actor.clone() else { return; };
-        let Some(mut engine_particles) = self.engine_particles.clone() else {
-            godot_error!("No Engine for Ship: {:?}", self.actor);
-            return;
-        };
-        engine_particles.set_emitting(ship.bind().get_forward_throttle() > 0.0);
     }
 }
