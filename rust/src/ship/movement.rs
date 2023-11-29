@@ -64,13 +64,9 @@ impl ShipMovement {
         let impulse = movement_attributes.get_impulse();
 
         let throttle_data = actor.bind().get_throttle_data();
-
-        let base_velocity = throttle_data.current_velocity;
-        let throttle = throttle_data.throttle;
-        let velocity_direction = throttle_data.current_direction;
-
-        let new_velocity = base_velocity + (velocity_direction * (throttle * delta * impulse) as f32);
+        let new_velocity = throttle_data.get_new_velocity(delta * impulse);
         let new_velocity = new_velocity.limit_length(max_velocity.into());
+
 
         actor.set_velocity(new_velocity);
     }

@@ -7,6 +7,12 @@ pub struct ThrottleData {
     pub throttle: f64,
 }
 
+impl ThrottleData {
+    pub fn get_new_velocity(&self, impulse: f64) -> Vector2 {
+        return self.current_velocity + (self.current_direction * (self.throttle * impulse) as f32);
+    }
+}
+
 #[derive(GodotClass)]
 #[class(base=CharacterBody2D)]
 pub struct Ship {
