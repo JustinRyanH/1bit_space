@@ -74,4 +74,4 @@ movement_attributes = ExtResource("2_biula")
 rear_engine = NodePath("../RearEngineParticles")
 ship = NodePath("..")
 
-[node name="PlayerShipInputService" type="PlayerShipInputService" parent="."]
+[node name="PlayerShipInputSystem" type="PlayerShipInputSystem" parent="."]
