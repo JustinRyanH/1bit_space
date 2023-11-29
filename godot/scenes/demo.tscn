@@ -1,9 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://hfurbog3gnq0"]
 
 [ext_resource type="Script" path="res://World.gd" id="1_p5fd6"]
+[ext_resource type="ProjectileMessageBus" uid="uid://dujxxtg7cjt8d" path="res://resources/ProjectileMessageBus.tres" id="2_nbf3t"]
 [ext_resource type="PackedScene" uid="uid://dkafili1pv4w7" path="res://scenes/ship.tscn" id="3_cfn8y"]
-
-[sub_resource type="ProjectileMessageBus" id="ProjectileMessageBus_wwg68"]
 
 [node name="Demo" type="Node2D"]
 
@@ -21,7 +20,7 @@ visible = false
 polygon = PackedVector2Array(-227, -140, 307, -209, 293, 189, -462, 200)
 
 [node name="BulletController" type="BulletSpawnSystem" parent="."]
-bullet_event_bus = SubResource("ProjectileMessageBus_wwg68")
+bullet_event_bus = ExtResource("2_nbf3t")
 
 [node name="Ships" type="Node2D" parent="."]
 

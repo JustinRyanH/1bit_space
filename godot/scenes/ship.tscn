@@ -1,8 +1,8 @@
 [gd_scene load_steps=12 format=3 uid="uid://dkafili1pv4w7"]
 
 [ext_resource type="Texture2D" uid="uid://csfcx6wlimyg5" path="res://assets/base_ship.png" id="1_r04a7"]
+[ext_resource type="ProjectileMessageBus" uid="uid://dujxxtg7cjt8d" path="res://resources/ProjectileMessageBus.tres" id="2_1gviy"]
 [ext_resource type="MovementAttributes" uid="uid://d1ow2cp65pw78" path="res://resources/BaseShip.tres" id="2_biula"]
-[ext_resource type="ProjectileMssageBus" uid="uid://docggmrj8j1k" path="res://resources/MainProjectileBus.tres" id="3_1tbd1"]
 [ext_resource type="PackedScene" uid="uid://bw2t7ug6mlo8s" path="res://scenes/bullet.tscn" id="4_1m5sb"]
 
 [sub_resource type="Curve" id="Curve_fjayb"]
@@ -59,13 +59,13 @@ polygon = PackedVector2Array(24, 24, 0, -25, -24, 25, -1, 12)
 position = Vector2(0, -24)
 
 [node name="ShipProjectileSystem" type="ShipProjectileSystem" parent="." node_paths=PackedStringArray("ship", "start_location")]
-projectile_message_bus = ExtResource("3_1tbd1")
+projectile_message_bus = ExtResource("2_1gviy")
 ship = NodePath("..")
 start_location = NodePath("../GunLocation")
 projectile_scene = ExtResource("4_1m5sb")
 
-[node name="ShipMovementSystem" type="ShipMovementSystem" parent="." node_paths=PackedStringArray("actor")]
-actor = NodePath("..")
+[node name="ShipMovementSystem" type="ShipMovementSystem" parent="." node_paths=PackedStringArray("ship")]
+ship = NodePath("..")
 movement_attributes = ExtResource("2_biula")
 
 [node name="ShipVfxSystem" type="ShipVfxSystem" parent="." node_paths=PackedStringArray("rear_engine", "ship")]
