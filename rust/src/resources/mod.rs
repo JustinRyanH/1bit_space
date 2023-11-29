@@ -1,5 +1,3 @@
-use godot::prelude::*;
-
 pub mod movement_attributes;
 pub mod bullet_spawn_bus;
 
