@@ -6,7 +6,7 @@ use crate::prelude::*;
 #[class(base=Node2D)]
 pub struct BulletSpawnSystem {
     #[export]
-    bullet_event_bus: Gd<BulletSpawnBus>,
+    bullet_event_bus: Gd<ProjectileMessageBus>,
     #[base]
     base: Base<Node2D>,
 }
@@ -14,7 +14,7 @@ pub struct BulletSpawnSystem {
 #[godot_api]
 impl INode for BulletSpawnSystem {
     fn init(base: Base<Self::Base>) -> Self {
-        Self { base, bullet_event_bus: BulletSpawnBus::new_gd() }
+        Self { base, bullet_event_bus: ProjectileMessageBus::new_gd() }
     }
 
     fn ready(&mut self) {

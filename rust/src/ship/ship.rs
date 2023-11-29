@@ -32,6 +32,7 @@ pub struct Ship {
     rotation_direction: f64,
     #[export]
     forward_throttle: f64,
+    #[export]
     #[base]
     base: Base<CharacterBody2D>,
 }

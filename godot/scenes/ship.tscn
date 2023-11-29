@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://csfcx6wlimyg5" path="res://assets/base_ship.png" id="1_r04a7"]
 [ext_resource type="MovementAttributes" uid="uid://d1ow2cp65pw78" path="res://resources/BaseShip.tres" id="2_biula"]
-[ext_resource type="BulletSpawnBus" uid="uid://docggmrj8j1k" path="res://resources/bullet_spawn_bus.tres" id="3_1tbd1"]
+[ext_resource type="ProjectileMssageBus" uid="uid://docggmrj8j1k" path="res://resources/MainProjectileBus.tres" id="3_1tbd1"]
 [ext_resource type="PackedScene" uid="uid://bw2t7ug6mlo8s" path="res://scenes/bullet.tscn" id="4_1m5sb"]
 
 [sub_resource type="Curve" id="Curve_fjayb"]

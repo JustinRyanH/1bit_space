@@ -5,7 +5,7 @@ use crate::prelude::*;
 #[class(base=Node)]
 pub struct ShipProjectileSystem {
     #[export]
-    projectile_message_bus: Gd<BulletSpawnBus>,
+    projectile_message_bus: Gd<ProjectileMessageBus>,
     #[export]
     ship: Option<Gd<Ship>>,
     #[export]
@@ -25,7 +25,7 @@ impl INode for ShipProjectileSystem {
             ship: None,
             start_location: None,
             projectile_scene: None,
-            projectile_message_bus: BulletSpawnBus::new_gd(),
+            projectile_message_bus: ProjectileMessageBus::new_gd(),
         }
     }
 

@@ -5,13 +5,13 @@ use godot::builtin::Vector2;
 
 #[derive(GodotClass)]
 #[class(base=Resource)]
-pub struct BulletSpawnBus {
+pub struct ProjectileMessageBus {
     #[base]
     base: Base<Resource>,
 }
 
 #[godot_api]
-impl IResource for BulletSpawnBus {
+impl IResource for ProjectileMessageBus {
     fn init(base: Base<Self::Base>) -> Self {
         Self {
             base
@@ -20,7 +20,7 @@ impl IResource for BulletSpawnBus {
 }
 
 #[godot_api]
-impl BulletSpawnBus {
+impl ProjectileMessageBus {
     #[signal]
     fn spawn_bullet(scene_path: String, position: Vector2, rotation: f64) {}
 }
