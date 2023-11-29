@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://csfcx6wlimyg5" path="res://assets/base_ship.png" id="1_r04a7"]
 [ext_resource type="Script" path="res://BulletSystem.gd" id="2_3krrx"]
 [ext_resource type="MovementAttributes" uid="uid://d1ow2cp65pw78" path="res://resources/player_ship_movement.tres" id="2_biula"]
-[ext_resource type="Resource" uid="uid://docggmrj8j1k" path="res://resources/bullet_spawn_bus.tres" id="3_pm4uq"]
+[ext_resource type="BulletSpawnBus" uid="uid://docggmrj8j1k" path="res://resources/bullet_spawn_bus.tres" id="3_pm4uq"]
 [ext_resource type="PackedScene" uid="uid://bw2t7ug6mlo8s" path="res://bullet.tscn" id="4_alass"]
 
 [sub_resource type="Curve" id="Curve_fjayb"]
@@ -66,7 +66,8 @@ bullet_spawn_bus = ExtResource("3_pm4uq")
 bullet_scene = ExtResource("4_alass")
 gun_location = NodePath("../GunLocation")
 
-[node name="ShipMovement" type="ShipMovement" parent="." node_paths=PackedStringArray("actor")]
+[node name="ShipMovement" type="ShipMovement" parent="." node_paths=PackedStringArray("engine_particles", "actor")]
+engine_particles = NodePath("../RearEngineParticles")
 actor = NodePath("..")
 movement_attributes = ExtResource("2_biula")
 

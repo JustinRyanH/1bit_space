@@ -1,4 +1,4 @@
-use godot::engine::{CharacterBody2D, INode, Node};
+use godot::engine::{CharacterBody2D, GpuParticles2D, INode, Node};
 use godot::prelude::*;
 
 use crate::prelude::*;
@@ -10,6 +10,8 @@ pub struct ShipMovement {
     rotation_direction: f64,
     #[export]
     forward_throttle: f64,
+    #[export]
+    engine_particles: Option<Gd<GpuParticles2D>>,
 
     #[export]
     actor: Option<Gd<CharacterBody2D>>,
@@ -28,6 +30,7 @@ impl INode for ShipMovement {
             rotation_direction: 0.0,
             forward_throttle: 0.0,
             actor: None,
+            engine_particles: None,
             movement_attributes: MovementAttributes::new_gd(),
         }
     }
@@ -37,6 +40,12 @@ impl INode for ShipMovement {
 
         self.rotate_ship(delta, &mut actor);
         self.move_ship_forward(delta, &mut actor);
+        self.toggle_engine();
+    }
+
+    fn physics_process(&mut self, _delta: f64) {
+        let Some(mut actor) = self.actor.clone() else { return; };
+        actor.move_and_slide();
     }
 }
 
@@ -63,5 +72,13 @@ impl ShipMovement {
         let new_velocity = new_velocity.limit_length(max_velocity.into());
 
         actor.set_velocity(new_velocity);
+    }
+
+    fn toggle_engine(&mut self) {
+        let Some(mut engine_particles) = self.engine_particles.clone() else {
+            godot_error!("No Engine for Ship: {:?}", self.actor);
+            return;
+        };
+        engine_particles.set_emitting(self.forward_throttle > 0.0);
     }
 }
