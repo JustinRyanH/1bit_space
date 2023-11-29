@@ -7,7 +7,7 @@ use crate::prelude::*;
 #[class(base=Node)]
 pub struct PlayerShipInputSystem {
     #[export]
-    ship_movement: Option<Gd<ShipMovement>>,
+    ship_movement: Option<Gd<ShipMovementSystem>>,
     #[export]
     ship: Option<Gd<Ship>>,
 
