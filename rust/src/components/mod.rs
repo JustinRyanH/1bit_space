@@ -1,2 +1,2 @@
 pub mod actor_movement;
-pub use actor_movement::ActorMovement;
+pub use actor_movement::*;
