@@ -1,12 +1,12 @@
 use godot::prelude::*;
 
 mod world;
-mod movement_attributes;
 mod ship;
 mod components;
+mod resources;
 
 pub mod prelude {
-    pub(crate) use crate::movement_attributes::*;
+    pub(crate) use crate::resources::*;
     pub(crate) use crate::ship::*;
 }
 
