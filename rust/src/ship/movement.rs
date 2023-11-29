@@ -36,10 +36,8 @@ impl INode for ShipMovement {
     }
 
     fn process(&mut self, delta: f64) {
-        let Some(mut actor) = self.actor.clone() else { return; };
-
-        self.rotate_ship(delta, &mut actor);
-        self.move_ship_forward(delta, &mut actor);
+        self.rotate_ship(delta);
+        self.move_ship_forward(delta);
         self.toggle_engine();
     }
 
@@ -52,7 +50,8 @@ impl INode for ShipMovement {
 
 #[godot_api]
 impl ShipMovement {
-    fn rotate_ship(&mut self, delta: f64, actor: &mut Gd<CharacterBody2D>) {
+    fn rotate_ship(&mut self, delta: f64) {
+        let Some(mut actor) = self.actor.clone() else { return; };
         let movement_attributes = self.movement_attributes.bind();
         let turn_speed = movement_attributes.get_turn_speed();
         let rotation = actor.get_rotation();
@@ -60,7 +59,9 @@ impl ShipMovement {
         actor.set_rotation(rotation + (self.rotation_direction * delta * turn_speed) as f32);
     }
 
-    fn move_ship_forward(&mut self, delta: f64, actor: &mut Gd<CharacterBody2D>) {
+    fn move_ship_forward(&mut self, delta: f64) {
+        let Some(mut actor) = self.actor.clone() else { return; };
+
         let movement_attributes = self.movement_attributes.bind();
         let max_velocity = movement_attributes.get_max_speed() as f32;
         let impulse = movement_attributes.get_impulse();
