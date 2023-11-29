@@ -4,6 +4,7 @@ mod world;
 mod ship;
 mod components;
 mod resources;
+mod systems;
 
 pub mod prelude {
     pub(crate) use crate::resources::*;
