@@ -66,8 +66,7 @@ bullet_spawn_bus = ExtResource("3_pm4uq")
 bullet_scene = ExtResource("4_alass")
 gun_location = NodePath("../GunLocation")
 
-[node name="ShipMovement" type="ShipMovement" parent="." node_paths=PackedStringArray("engine_particles", "actor")]
-engine_particles = NodePath("../RearEngineParticles")
+[node name="ShipMovement" type="ShipMovement" parent="." node_paths=PackedStringArray("actor")]
 actor = NodePath("..")
 movement_attributes = ExtResource("2_biula")
 
