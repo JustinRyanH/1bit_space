@@ -37,18 +37,16 @@ alpha_curve = SubResource("CurveTexture_bwnqa")
 position = Vector2(0, -8)
 shape = SubResource("CapsuleShape2D_2h68a")
 
-[node name="ActorMovement" type="ActorMovement" parent="." node_paths=PackedStringArray("actor")]
-actor = NodePath("..")
-speed = 750.0
-
 [node name="TailParticles" type="GPUParticles2D" parent="."]
-amount = 100
 process_material = SubResource("ParticleProcessMaterial_y2nye")
-lifetime = 0.4
-randomness = 0.8
+lifetime = 0.2
 trail_lifetime = 1.0
 trail_sections = 4
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -8)
 texture = ExtResource("1_tgg77")
+
+[node name="ActorMovement" type="ActorMovement" parent="." node_paths=PackedStringArray("actor")]
+actor = NodePath("..")
+speed = 750.0

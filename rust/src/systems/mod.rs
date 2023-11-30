@@ -1,3 +1,5 @@
+mod projectile_system;
+
 use godot::prelude::*;
 
 use crate::prelude::*;
