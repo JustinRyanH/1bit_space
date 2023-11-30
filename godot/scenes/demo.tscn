@@ -26,4 +26,5 @@ bullet_event_bus = ExtResource("2_nbf3t")
 
 [node name="Ship" parent="Ships" instance=ExtResource("3_cfn8y")]
 
+[connection signal="area_exited" from="World/Area2D" to="World" method="on_area_exit"]
 [connection signal="body_exited" from="World/Area2D" to="World" method="on_body_exit"]

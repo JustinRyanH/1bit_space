@@ -70,6 +70,15 @@ impl World {
         body.set_position(Vector2::new(new_x, new_y));
     }
 
+    #[func]
+    fn on_area_exit(&mut self, mut area: Gd<Area2D>) {
+        let Some(world_extends) = self.get_world_extends() else { return; };
+        let area_position = area.get_position();
+        let new_x = world_extends.get_x_wrap(area_position.x);
+        let new_y = world_extends.get_y_wrap(area_position.y);
+        area.set_position(Vector2::new(new_x, new_y));
+    }
+
     fn resize_area_to_camera_view(&mut self) {
         let Some(WorldExtends { start, end }) = self.get_world_extends() else { return; };
         let Some(mut area_polygon) = self.area_polygon.clone() else { return; };
