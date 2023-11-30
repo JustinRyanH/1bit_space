@@ -1,19 +1,54 @@
-[gd_scene load_steps=3 format=3 uid="uid://bw2t7ug6mlo8s"]
+[gd_scene load_steps=8 format=3 uid="uid://bw2t7ug6mlo8s"]
 
 [ext_resource type="Texture2D" uid="uid://ykljjr6qvtpp" path="res://assets/bullet.png" id="1_tgg77"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2h68a"]
 radius = 3.0
-height = 32.0
+height = 16.0
+
+[sub_resource type="Curve" id="Curve_g0jkn"]
+_data = [Vector2(0.0463917, 0.342391), 0.0, 0.0, 0, 0, Vector2(0.340206, 0.423913), -0.260333, -0.260333, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_bwnqa"]
+curve = SubResource("Curve_g0jkn")
+
+[sub_resource type="Curve" id="Curve_2rk6v"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -1.97959, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_0u7jc"]
+curve = SubResource("Curve_2rk6v")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_y2nye"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 10.0
+direction = Vector3(2.08165e-12, 1, 2.08165e-12)
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+scale_min = 3.0
+scale_max = 5.0
+scale_curve = SubResource("CurveTexture_0u7jc")
+alpha_curve = SubResource("CurveTexture_bwnqa")
 
 [node name="Bullet" type="Area2D"]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_tgg77")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
 shape = SubResource("CapsuleShape2D_2h68a")
 
 [node name="ActorMovement" type="ActorMovement" parent="." node_paths=PackedStringArray("actor")]
 actor = NodePath("..")
 speed = 750.0
+
+[node name="TailParticles" type="GPUParticles2D" parent="."]
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_y2nye")
+lifetime = 0.4
+randomness = 0.8
+trail_lifetime = 1.0
+trail_sections = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("1_tgg77")
