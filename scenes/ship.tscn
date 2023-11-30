@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://dkd8g3c3w5l2x"]
+
+[ext_resource type="Script" path="res://actors/ship_actor.gd" id="1_5f13i"]
+[ext_resource type="Texture2D" uid="uid://ccj5ltbklvrw1" path="res://assets/base_ship.png" id="1_gvb2k"]
+[ext_resource type="Script" path="res://resources/ship_configuration.gd" id="2_7yymh"]
+[ext_resource type="Script" path="res://components/ship_player_input.gd" id="3_vfexh"]
+[ext_resource type="Script" path="res://components/ship_movement.gd" id="4_che7p"]
+
+[sub_resource type="Resource" id="Resource_3bhdd"]
+script = ExtResource("2_7yymh")
+turn_rate = 2.0
+impulse_power = 300.0
+max_speed = 1000.0
+
+[node name="Ship" type="CharacterBody2D"]
+script = ExtResource("1_5f13i")
+configuration = SubResource("Resource_3bhdd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_gvb2k")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-24, 24, 0, -24, 24, 24, 5, 13, -4, 13)
+
+[node name="ShipPlayerInput" type="Node" parent="." node_paths=PackedStringArray("ship_actor")]
+script = ExtResource("3_vfexh")
+ship_actor = NodePath("..")
+
+[node name="ShipMovement" type="Node" parent="." node_paths=PackedStringArray("ship_actor")]
+script = ExtResource("4_che7p")
+ship_actor = NodePath("..")
