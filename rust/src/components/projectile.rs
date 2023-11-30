@@ -76,7 +76,6 @@ impl ProjectileComponent {
     #[func]
     fn cleanup(&mut self) {
         let Some(mut actor) = self.actor.clone() else { return; };
-        godot_print!("End");
         actor.queue_free();
     }
 }
