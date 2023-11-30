@@ -8,7 +8,7 @@ use crate::prelude::ProjectileMessageBus;
 
 #[derive(GodotClass)]
 #[class(base=Node2D)]
-pub struct BulletSpawnSystem {
+pub struct ProjectileManager {
     #[export]
     bullet_event_bus: Gd<ProjectileMessageBus>,
     #[base]
@@ -16,7 +16,7 @@ pub struct BulletSpawnSystem {
 }
 
 #[godot_api]
-impl INode for BulletSpawnSystem {
+impl INode for ProjectileManager {
     fn init(base: Base<Self::Base>) -> Self {
         Self { base, bullet_event_bus: ProjectileMessageBus::new_gd() }
     }
@@ -28,7 +28,7 @@ impl INode for BulletSpawnSystem {
 }
 
 #[godot_api]
-impl BulletSpawnSystem {
+impl ProjectileManager {
     #[func]
     pub fn spawn_bullet(&mut self, scene_path: String, position: Vector2, rotation: f32) {
         let scene = load::<PackedScene>(&scene_path);
