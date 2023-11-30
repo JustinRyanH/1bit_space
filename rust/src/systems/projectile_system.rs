@@ -14,6 +14,6 @@ impl INode for ProjectileSystem {
         Self { base}
     }
 
-    fn process(&mut self, delta: f64) {
+    fn process(&mut self, _delta: f64) {
     }
 }
