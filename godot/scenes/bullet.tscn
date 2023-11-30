@@ -84,6 +84,7 @@ position = Vector2(0, -8)
 texture = ExtResource("1_tgg77")
 
 [node name="EndTimer" type="Timer" parent="."]
+one_shot = true
 
 [node name="ActorMovement" type="ActorMovement" parent="." node_paths=PackedStringArray("actor")]
 actor = NodePath("..")

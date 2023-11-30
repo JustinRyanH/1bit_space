@@ -51,7 +51,6 @@ impl ProjectileComponent {
         let Some(mut particles) = self.tail.clone() else { return; };
         let Some(mut movement) = self.movement.clone() else { return; };
         let Some(mut bullet_die) = self.bullet_die.clone() else { return; };
-        let Some(sprite) = self.sprite.clone() else { return; };
 
         let bullet_die_lifetime = bullet_die.get_lifetime();
         movement.bind_mut().set_speed(0.0);
@@ -61,6 +60,11 @@ impl ProjectileComponent {
         let cleanup_method = Callable::from_object_method(&self.base, "cleanup");
         bullet_die.connect("finished".into(), cleanup_method);
 
+        self.tween_out_sprite(bullet_die_lifetime);
+    }
+
+    fn tween_out_sprite(&mut self, bullet_die_lifetime: f64) {
+        let Some(sprite) = self.sprite.clone() else { return; };
         if let Some(mut tween) = self.base.create_tween() {
             let mut modulate = sprite.get_modulate();
             modulate.a = 0.0;
@@ -72,6 +76,7 @@ impl ProjectileComponent {
     #[func]
     fn cleanup(&mut self) {
         let Some(mut actor) = self.actor.clone() else { return; };
+        godot_print!("End");
         actor.queue_free();
     }
 }
