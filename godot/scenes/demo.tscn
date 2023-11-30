@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://hfurbog3gnq0"]
+[gd_scene load_steps=5 format=3 uid="uid://hfurbog3gnq0"]
 
 [ext_resource type="Script" path="res://World.gd" id="1_p5fd6"]
 [ext_resource type="ProjectileMessageBus" uid="uid://dujxxtg7cjt8d" path="res://resources/ProjectileMessageBus.tres" id="2_nbf3t"]
 [ext_resource type="PackedScene" uid="uid://dkafili1pv4w7" path="res://scenes/ship.tscn" id="3_cfn8y"]
+[ext_resource type="PackedScene" uid="uid://cu8s0153w2ldg" path="res://scenes/asteroid.tscn" id="4_5gs0w"]
 
 [node name="Demo" type="Node2D"]
 
@@ -25,6 +26,11 @@ bullet_event_bus = ExtResource("2_nbf3t")
 [node name="Ships" type="Node2D" parent="."]
 
 [node name="Ship" parent="Ships" instance=ExtResource("3_cfn8y")]
+
+[node name="WorldObjects" type="Node2D" parent="."]
+
+[node name="Asteroid" parent="WorldObjects" instance=ExtResource("4_5gs0w")]
+position = Vector2(448, -224)
 
 [connection signal="area_exited" from="World/Area2D" to="World" method="on_area_exit"]
 [connection signal="body_exited" from="World/Area2D" to="World" method="on_body_exit"]

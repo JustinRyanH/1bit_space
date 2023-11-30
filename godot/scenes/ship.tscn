@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dkafili1pv4w7"]
+[gd_scene load_steps=13 format=3 uid="uid://dkafili1pv4w7"]
 
 [ext_resource type="Texture2D" uid="uid://csfcx6wlimyg5" path="res://assets/base_ship.png" id="1_r04a7"]
 [ext_resource type="ProjectileMessageBus" uid="uid://dujxxtg7cjt8d" path="res://resources/ProjectileMessageBus.tres" id="2_1gviy"]
@@ -43,6 +43,8 @@ turbulence_influence_min = 0.175
 turbulence_influence_max = 0.38
 turbulence_influence_over_life = SubResource("CurveTexture_ofceg")
 
+[sub_resource type="Curve" id="Curve_1enoe"]
+
 [node name="Ship" type="Ship"]
 
 [node name="RearEngineParticles" type="GPUParticles2D" parent="."]
@@ -68,6 +70,7 @@ projectile_scene = ExtResource("4_1m5sb")
 [node name="ShipMovementSystem" type="ShipMovementSystem" parent="." node_paths=PackedStringArray("ship")]
 ship = NodePath("..")
 movement_attributes = ExtResource("2_biula")
+impulse_curve = SubResource("Curve_1enoe")
 
 [node name="ShipVfxSystem" type="ShipVfxSystem" parent="." node_paths=PackedStringArray("rear_engine", "ship")]
 rear_engine = NodePath("../RearEngineParticles")
