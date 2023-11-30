@@ -1,6 +1,6 @@
 use godot::engine::{Area2D, IArea2D};
 use godot::prelude::*;
-use crate::components::ActorMovement;
+use crate::components::ActorMovementComponent;
 
 use crate::prelude::*;
 
@@ -10,7 +10,7 @@ pub struct ProjectileActor {
     #[export]
     resource: Gd<ProjectileResource>,
     #[export]
-    movement_actor: Option<Gd<ActorMovement>>,
+    movement_actor: Option<Gd<ActorMovementComponent>>,
     #[base]
     base: Base<Area2D>,
 }

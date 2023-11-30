@@ -1,6 +1,6 @@
 use godot::engine::{GpuParticles2D, Sprite2D, Timer};
 use godot::prelude::*;
-use crate::components::ActorMovement;
+use crate::components::ActorMovementComponent;
 
 
 #[derive(GodotClass)]
@@ -13,7 +13,7 @@ pub struct ProjectileComponent {
     #[export]
     bullet_die: Option<Gd<GpuParticles2D>>,
     #[export]
-    movement: Option<Gd<ActorMovement>>,
+    movement: Option<Gd<ActorMovementComponent>>,
     #[export]
     sprite: Option<Gd<Sprite2D>>,
     #[export]

@@ -5,7 +5,7 @@ use godot::builtin::Vector2;
 
 #[derive(GodotClass)]
 #[class(base=Node)]
-pub struct ActorMovement {
+pub struct ActorMovementComponent {
     #[export]
     actor: Option<Gd<Node2D>>,
     #[export]
@@ -16,7 +16,7 @@ pub struct ActorMovement {
 }
 
 #[godot_api]
-impl INode for ActorMovement {
+impl INode for ActorMovementComponent {
     fn init(base: Base<Self::Base>) -> Self {
         Self {
             base,
