@@ -4,7 +4,6 @@ mod world;
 mod ship;
 mod components;
 mod resources;
-mod systems;
 mod managers;
 
 pub mod prelude {

@@ -3,13 +3,13 @@ use godot::prelude::*;
 
 #[derive(GodotClass)]
 #[class(base=Node)]
-pub struct ProjectileSystem {
+pub struct ProjectileComponent {
     #[base]
     base: Base<Node>,
 }
 
 #[godot_api]
-impl INode for ProjectileSystem {
+impl INode for ProjectileComponent {
     fn init(base: Base<Self::Base>) -> Self {
         Self { base}
     }
