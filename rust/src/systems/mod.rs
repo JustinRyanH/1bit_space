@@ -1,3 +1,3 @@
-mod projectile_system;
+mod projectile;
 
-pub use projectile_system::*;
+pub use projectile::*;
