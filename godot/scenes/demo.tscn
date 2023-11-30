@@ -19,7 +19,7 @@ zoom = Vector2(1.2, 1.2)
 visible = false
 polygon = PackedVector2Array(-227, -140, 307, -209, 293, 189, -462, 200)
 
-[node name="ProjectileManager" type="BulletSpawnSystem" parent="."]
+[node name="ProjectileManager" type="ProjectileManager" parent="."]
 bullet_event_bus = ExtResource("2_nbf3t")
 
 [node name="Ships" type="Node2D" parent="."]
