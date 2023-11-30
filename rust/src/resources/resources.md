@@ -1,0 +1,3 @@
+# Resources
+
+Godot Resource Objects.
