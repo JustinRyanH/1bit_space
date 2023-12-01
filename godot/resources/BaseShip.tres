@@ -1,5 +1,5 @@
-[gd_resource type="MovementAttributes" format=3 uid="uid://d1ow2cp65pw78"]
+[gd_resource type="MovementStats" format=3 uid="uid://d1ow2cp65pw78"]
 
 [resource]
-impulse = 150.0
-turn_speed = 8.0
+impulse = 5.0
+turn_speed = 1.2

@@ -22,7 +22,8 @@ impl ThrottleData {
     }
 
     pub fn get_new_rotation(&self, dt: f64, movement_state: &MovementState) -> f32 {
-        (self.current_rotation + self.rotation_direction * dt * movement_state.turn_speed) as f32
+        use std::f64::consts::PI;
+        (self.current_rotation + self.rotation_direction * dt * movement_state.turn_speed * 2.0f64 * PI) as f32
     }
 }
 
@@ -73,7 +74,11 @@ impl ICharacterBody2D for Ship {
         let ship_movement = self.ship_movement.clone();
         ship_movement.rotate_ship(self, delta);
         ship_movement.move_ship_forward(self, delta);
-        self.base.move_and_slide();
+        let velocity = self.base.get_velocity();
+        let collide = self.base.move_and_collide(velocity);
+        if let Some(collide) = collide {
+            self.base.set_velocity(collide.get_normal());
+        }
     }
 }
 
