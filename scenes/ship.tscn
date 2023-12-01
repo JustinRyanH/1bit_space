@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dkd8g3c3w5l2x"]
+[gd_scene load_steps=19 format=3 uid="uid://dkd8g3c3w5l2x"]
 
 [ext_resource type="Script" path="res://actors/ship_actor.gd" id="1_5f13i"]
 [ext_resource type="Texture2D" uid="uid://ccj5ltbklvrw1" path="res://assets/base_ship.png" id="1_gvb2k"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bykf5c1hextgk" path="res://scenes/projectile.tscn" id="8_5jkn3"]
 [ext_resource type="Resource" uid="uid://bpq6y2sq8cpi" path="res://resources/projectile_bus.tres" id="9_a6bpd"]
 [ext_resource type="Script" path="res://scenes/ProjectileArea.gd" id="10_unfw5"]
+[ext_resource type="Script" path="res://components/actor_velocity_component.gd" id="11_noyc6"]
 
 [sub_resource type="Resource" id="Resource_ftmr5"]
 script = ExtResource("2_7yymh")
@@ -47,8 +48,7 @@ alpha_curve = SubResource("CurveTexture_qu6hn")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6a5sy"]
 
-[node name="Ship" type="CharacterBody2D"]
-collision_layer = 2049
+[node name="Ship" type="Node2D"]
 script = ExtResource("1_5f13i")
 configuration = SubResource("Resource_ftmr5")
 
@@ -80,9 +80,14 @@ shape = SubResource("CircleShape2D_6a5sy")
 script = ExtResource("3_vfexh")
 ship_actor = NodePath("..")
 
-[node name="ShipMovement" type="Node" parent="." node_paths=PackedStringArray("ship_actor")]
+[node name="ActorVelocityComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("11_noyc6")
+actor = NodePath("..")
+
+[node name="ShipMovement" type="Node" parent="." node_paths=PackedStringArray("ship_actor", "velocity_component")]
 script = ExtResource("4_che7p")
 ship_actor = NodePath("..")
+velocity_component = NodePath("../ActorVelocityComponent")
 
 [node name="ShipVFX" type="Node" parent="." node_paths=PackedStringArray("ship_actor", "rear_engine")]
 script = ExtResource("6_rjmlq")

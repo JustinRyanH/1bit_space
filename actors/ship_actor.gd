@@ -1,5 +1,5 @@
 class_name ShipActor
-extends CharacterBody2D
+extends Node2D
 
 @export var forward_throttle: float
 @export var rotation_throttle: float
