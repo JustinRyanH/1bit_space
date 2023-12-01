@@ -1,6 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://dkafili1pv4w7"]
+[gd_scene load_steps=10 format=3 uid="uid://dkafili1pv4w7"]
 
 [ext_resource type="Texture2D" uid="uid://csfcx6wlimyg5" path="res://assets/base_ship.png" id="1_r04a7"]
+
+[sub_resource type="MovementAttributes" id="MovementAttributes_aacs5"]
 
 [sub_resource type="Curve" id="Curve_fjayb"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.625828, 0.27247), 0.0, 0.0, 0, 0, Vector2(1, 0.026286), -3.21803, 0.0, 0, 0]
@@ -41,6 +43,8 @@ turbulence_influence_max = 0.38
 turbulence_influence_over_life = SubResource("CurveTexture_ofceg")
 
 [node name="Ship" type="Ship"]
+movement_stats = SubResource("MovementAttributes_aacs5")
+motion_mode = 1
 
 [node name="RearEngineParticles" type="GPUParticles2D" parent="."]
 amount = 90

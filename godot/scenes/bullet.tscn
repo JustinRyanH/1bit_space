@@ -1,6 +1,5 @@
-[gd_scene load_steps=14 format=3 uid="uid://bw2t7ug6mlo8s"]
+[gd_scene load_steps=13 format=3 uid="uid://bw2t7ug6mlo8s"]
 
-[ext_resource type="ProjectileResource" uid="uid://cwirjvuimcipo" path="res://resources/SimpleBullet.tres" id="1_io580"]
 [ext_resource type="Texture2D" uid="uid://ykljjr6qvtpp" path="res://assets/bullet.png" id="1_tgg77"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2h68a"]
@@ -60,8 +59,7 @@ scale_max = 4.0
 scale_curve = SubResource("CurveTexture_0gjxf")
 alpha_curve = SubResource("CurveTexture_bljxc")
 
-[node name="Bullet" type="ProjectileActor"]
-resource = ExtResource("1_io580")
+[node name="Bullet" type="Node2D"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -8)

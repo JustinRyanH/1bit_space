@@ -36,19 +36,22 @@ pub struct Ship {
     #[export]
     movement_stats: Gd<MovementAttributes>,
 
-    vfx: Option<ShipVfxSystemV2>,
+    vfx: Option<ShpVFX>,
+    ship_movement: ShipMovementv2,
     #[export]
     #[base]
-    base: Base<CharacterBody2D>,
+    pub base: Base<CharacterBody2D>,
 }
 
 #[godot_api]
 impl ICharacterBody2D for Ship {
     fn init(base: Base<Self::Base>) -> Self {
+        let movement_stats = MovementAttributes::new_gd();
         Self {
             rotation_direction: 0.0,
             forward_throttle: 0.0,
-            movement_stats: MovementAttributes::new_gd(),
+            movement_stats: movement_stats.clone(),
+            ship_movement: ShipMovementv2::new(movement_stats),
             vfx: None,
             base
         }
@@ -56,15 +59,21 @@ impl ICharacterBody2D for Ship {
 
     fn ready(&mut self) {
         let Some(rear_engine) = self.base.try_get_node_as::<GpuParticles2D>("RearEngineParticles") else { return; };
-        self.vfx = Some(ShipVfxSystemV2 { rear_engine });
+        self.vfx = Some(ShpVFX { rear_engine });
+        self.ship_movement.update_movement_stats(&self.movement_stats);
     }
 
-    fn process(&mut self, _delta: f64) {
+    fn process(&mut self, delta: f64) {
         self.gather_input();
 
         if let Some(mut vfx) = self.vfx.clone() {
             vfx.update_engine(self);
         }
+
+        let ship_movement = self.ship_movement.clone();
+        ship_movement.rotate_ship(self, delta);
+        ship_movement.move_ship_forward(self, delta);
+        self.base.move_and_slide();
     }
 }
 
