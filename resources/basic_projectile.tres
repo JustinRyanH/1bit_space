@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="ProjectileStates" load_steps=2 format=3 uid="uid://bknvwgw8c0u7h"]
 
-[ext_resource type="Script" path="res://resources/projectile_stats.gd" id="1_oneo7"]
+[ext_resource type="Script" path="res://resources/projectile_stats.gd" id="1_5f60g"]
 
 [resource]
-script = ExtResource("1_oneo7")
+script = ExtResource("1_5f60g")
 speed = 1000.0
-damage = 10.0
+damage = 1.0

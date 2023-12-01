@@ -4,9 +4,11 @@ extends Node2D
 
 @onready var actor_move_component := $ActorMoveComponent as ActorMoveComponent
 @onready var destroy_component: = $DestroyComponent as DestoryComponent
+@onready var hitbox_component: = $HitboxComponent as HitboxComponent
 
 func _ready() -> void:
 	actor_move_component.speed = projectile_stats.speed
+	hitbox_component.damage = projectile_stats.damage
 
 func _on_hurtbox_component_hurt(hitbox: HitboxComponent) -> void:
 	destroy_component.destroy()
