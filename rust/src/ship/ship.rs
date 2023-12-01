@@ -60,6 +60,8 @@ impl ICharacterBody2D for Ship {
     }
 
     fn process(&mut self, _delta: f64) {
+        self.gather_input();
+
         if let Some(mut vfx) = self.vfx.clone() {
             vfx.update_engine(self);
         }
@@ -68,6 +70,11 @@ impl ICharacterBody2D for Ship {
 
 #[godot_api]
 impl Ship {
+    pub fn gather_input(&mut self) {
+        let input = Input::singleton();
+        self.forward_throttle = input.get_action_strength("Accelerate".into()) as f64;
+        self.rotation_direction = input.get_axis("Rotate Left".into(), "Rotate Right".into()) as f64;
+    }
     pub fn get_throttle_data(&self) -> ThrottleData {
         let current_velocity = self.base.get_velocity();
         let current_direction = Vector2::UP.rotated(self.base.get_rotation());
