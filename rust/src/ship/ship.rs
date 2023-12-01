@@ -1,7 +1,7 @@
 use godot::engine::{CharacterBody2D, GpuParticles2D, ICharacterBody2D};
 use godot::prelude::*;
-use crate::prelude::MovementState;
-use crate::ship::ship_vfx::ShipVfxSystemV2;
+
+use crate::prelude::*;
 
 pub struct ThrottleData {
     pub current_velocity: Vector2,
@@ -33,6 +33,8 @@ pub struct Ship {
     rotation_direction: f64,
     #[export]
     forward_throttle: f64,
+    #[export]
+    movement_stats: Gd<MovementAttributes>,
 
     vfx: Option<ShipVfxSystemV2>,
     #[export]
@@ -46,6 +48,7 @@ impl ICharacterBody2D for Ship {
         Self {
             rotation_direction: 0.0,
             forward_throttle: 0.0,
+            movement_stats: MovementAttributes::new_gd(),
             vfx: None,
             base
         }

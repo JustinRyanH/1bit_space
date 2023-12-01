@@ -8,3 +8,4 @@ mod projectiles;
 pub use movement::*;
 pub use ship::*;
 pub use player_input::*;
+pub use ship_vfx::*;
