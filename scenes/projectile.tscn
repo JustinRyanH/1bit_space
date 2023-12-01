@@ -40,9 +40,8 @@ alpha_curve = SubResource("CurveTexture_x3kns")
 [sub_resource type="CircleShape2D" id="CircleShape2D_sfrjq"]
 radius = 3.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tk5du"]
-radius = 3.0
-height = 16.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_oexp2"]
+radius = 3.16228
 
 [node name="Projectile" type="Node2D"]
 script = ExtResource("1_fc7vh")
@@ -59,10 +58,12 @@ one_shot = true
 texture = ExtResource("2_j0vs4")
 
 [node name="HurtboxComponent" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("4_1b7nr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
-position = Vector2(0, -5)
+position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_sfrjq")
 
 [node name="WrapboxComponent" type="Area2D" parent="." node_paths=PackedStringArray("actor")]
@@ -72,10 +73,11 @@ script = ExtResource("5_in8ga")
 actor = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WrapboxComponent"]
-shape = SubResource("CapsuleShape2D_tk5du")
+position = Vector2(0, 5)
+shape = SubResource("CircleShape2D_oexp2")
 
 [node name="ProjectileLifetime" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.8
 one_shot = true
 autostart = true
 

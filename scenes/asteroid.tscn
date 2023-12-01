@@ -13,14 +13,18 @@ script = ExtResource("1_dgxgr")
 texture = ExtResource("1_7j008")
 
 [node name="HurtboxComponent" type="Area2D" parent="."]
+collision_mask = 0
 script = ExtResource("2_hdpx8")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HurtboxComponent"]
 position = Vector2(2.08165e-12, 2.08165e-12)
 polygon = PackedVector2Array(-41, -28, -13, -46, 9, -36, 30, -42, 49, -13, 37, 31, 12, 48, -2, 45, -34, 47, -49, 22, -38, -6)
 
-[node name="HitboxComponet" type="Area2D" parent="."]
+[node name="HitboxComponet" type="Area2D" parent="." node_paths=PackedStringArray("actor")]
+collision_layer = 0
+collision_mask = 2
 script = ExtResource("3_bav5p")
+actor = NodePath("..")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HitboxComponet"]
 position = Vector2(2.08165e-12, 2.08165e-12)
