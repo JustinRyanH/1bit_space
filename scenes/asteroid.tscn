@@ -35,7 +35,7 @@ script = ExtResource("4_7lnq5")
 [node name="SpinComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]
 script = ExtResource("6_76701")
 actor = NodePath("..")
-speed = 1.0
-direction = -1.0
+speed = 0.3
+direction = -1
 
 [connection signal="hurt" from="HurtboxComponent" to="." method="_on_hurtbox_component_hurt"]

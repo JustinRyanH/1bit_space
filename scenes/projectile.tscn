@@ -52,7 +52,7 @@ projectile_stats = ExtResource("2_v7qmo")
 emitting = false
 amount = 50
 process_material = SubResource("ParticleProcessMaterial_qtgii")
-lifetime = 0.2
+lifetime = 0.1
 one_shot = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
