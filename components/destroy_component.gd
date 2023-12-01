@@ -6,7 +6,12 @@ extends Node
 @export var move_component: ActorMoveComponent
 @export var nodes_to_hide: Array
 
+var destroyed = false
+
 func destroy() -> void:
+	if destroyed: return
+
+	destroyed = true
 	for node_path in nodes_to_hide:
 		if node_path is NodePath:
 			var node := get_node(node_path) as Node2D

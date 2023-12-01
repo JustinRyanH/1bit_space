@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://b4kqauh2okga8"]
+
+[ext_resource type="Texture2D" uid="uid://c261keymf7u48" path="res://assets/asteroid1.png" id="1_7j008"]
+[ext_resource type="Script" path="res://actors/asteroid.gd" id="1_dgxgr"]
+[ext_resource type="Script" path="res://components/hurtbox_component.gd" id="2_hdpx8"]
+[ext_resource type="Script" path="res://components/hitbox_component.gd" id="3_bav5p"]
+[ext_resource type="Script" path="res://components/hurt_component.gd" id="4_7lnq5"]
+
+[node name="Asteroid" type="Node2D"]
+script = ExtResource("1_dgxgr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_7j008")
+
+[node name="HurtboxComponent" type="Area2D" parent="."]
+script = ExtResource("2_hdpx8")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HurtboxComponent"]
+position = Vector2(2.08165e-12, 2.08165e-12)
+polygon = PackedVector2Array(-41, -28, -13, -46, 9, -36, 30, -42, 49, -13, 37, 31, 12, 48, -2, 45, -34, 47, -49, 22, -38, -6)
+
+[node name="HitboxComponet" type="Area2D" parent="."]
+script = ExtResource("3_bav5p")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HitboxComponet"]
+position = Vector2(2.08165e-12, 2.08165e-12)
+polygon = PackedVector2Array(-41, -28, -13, -46, 9, -36, 30, -42, 49, -13, 37, 31, 12, 48, -2, 45, -34, 47, -49, 22, -38, -6)
+
+[node name="HurtComponent" type="Node" parent="."]
+script = ExtResource("4_7lnq5")
+
+[connection signal="hurt" from="HurtboxComponent" to="." method="_on_hurtbox_component_hurt"]

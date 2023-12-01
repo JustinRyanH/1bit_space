@@ -5,8 +5,8 @@
 [ext_resource type="Script" path="res://resources/ship_configuration.gd" id="2_7yymh"]
 [ext_resource type="Script" path="res://components/ship_player_input.gd" id="3_vfexh"]
 [ext_resource type="Script" path="res://components/ship_movement.gd" id="4_che7p"]
-[ext_resource type="Script" path="res://scenes/gun_fire_component.gd" id="6_2gv67"]
 [ext_resource type="Script" path="res://components/ship_vfx.gd" id="6_rjmlq"]
+[ext_resource type="Script" path="res://components/gun_fire_component.gd" id="7_gvwpi"]
 [ext_resource type="PackedScene" uid="uid://bykf5c1hextgk" path="res://scenes/projectile.tscn" id="8_5jkn3"]
 [ext_resource type="Resource" uid="uid://bpq6y2sq8cpi" path="res://resources/projectile_bus.tres" id="9_a6bpd"]
 [ext_resource type="Script" path="res://scenes/ProjectileArea.gd" id="10_unfw5"]
@@ -81,7 +81,7 @@ ship_actor = NodePath("..")
 rear_engine = NodePath("../EngineParticles")
 
 [node name="GunFireComponent" type="Node" parent="." node_paths=PackedStringArray("gun_marker")]
-script = ExtResource("6_2gv67")
+script = ExtResource("7_gvwpi")
 projectile_scene = ExtResource("8_5jkn3")
 projectile_bus = ExtResource("9_a6bpd")
 gun_marker = NodePath("../GunPosition")

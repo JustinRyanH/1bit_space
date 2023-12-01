@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://bykf5c1hextgk"]
+[gd_scene load_steps=16 format=3 uid="uid://bykf5c1hextgk"]
 
 [ext_resource type="Script" path="res://actors/projectile.gd" id="1_fc7vh"]
 [ext_resource type="Texture2D" uid="uid://c078hhpp60me4" path="res://assets/bullet.png" id="2_j0vs4"]
+[ext_resource type="Resource" uid="uid://bknvwgw8c0u7h" path="res://resources/basic_projectile.tres" id="2_v7qmo"]
+[ext_resource type="Script" path="res://components/hurtbox_component.gd" id="4_1b7nr"]
 [ext_resource type="Script" path="res://components/actor_move_component.gd" id="4_lv8jc"]
-[ext_resource type="Resource" uid="uid://bknvwgw8c0u7h" path="res://scenes/basic_projectile.tres" id="4_n2fy4"]
 [ext_resource type="Script" path="res://scenes/ProjectileArea.gd" id="5_in8ga"]
 [ext_resource type="Script" path="res://components/lifetime_component.gd" id="6_b343d"]
 [ext_resource type="Script" path="res://components/destroy_component.gd" id="7_xvgd5"]
@@ -28,7 +29,7 @@ emission_shape = 1
 emission_sphere_radius = 4.2
 direction = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
 spread = 180.0
-initial_velocity_min = 300.0
+initial_velocity_min = 400.0
 initial_velocity_max = 500.0
 gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
 scale_min = 2.0
@@ -36,23 +37,33 @@ scale_max = 4.0
 scale_curve = SubResource("CurveTexture_u18qd")
 alpha_curve = SubResource("CurveTexture_x3kns")
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_sfrjq"]
+radius = 3.0
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tk5du"]
 radius = 3.0
 height = 16.0
 
 [node name="Projectile" type="Node2D"]
 script = ExtResource("1_fc7vh")
-projectile_stats = ExtResource("4_n2fy4")
+projectile_stats = ExtResource("2_v7qmo")
 
 [node name="DestroyParticles" type="GPUParticles2D" parent="."]
 emitting = false
 amount = 50
 process_material = SubResource("ParticleProcessMaterial_qtgii")
-lifetime = 0.1
+lifetime = 0.2
 one_shot = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_j0vs4")
+
+[node name="HurtboxComponent" type="Area2D" parent="."]
+script = ExtResource("4_1b7nr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+position = Vector2(0, -5)
+shape = SubResource("CircleShape2D_sfrjq")
 
 [node name="WrapboxComponent" type="Area2D" parent="." node_paths=PackedStringArray("actor")]
 collision_layer = 2048
@@ -83,3 +94,5 @@ actor = NodePath("..")
 destroy_particles = NodePath("../DestroyParticles")
 move_component = NodePath("../ActorMoveComponent")
 nodes_to_hide = [NodePath("../Sprite2D")]
+
+[connection signal="hurt" from="HurtboxComponent" to="." method="_on_hurtbox_component_hurt"]
