@@ -84,6 +84,11 @@ impl ICharacterBody2D for Ship {
 
 #[godot_api]
 impl Ship {
+    #[func]
+    pub fn wrap_around_world(&mut self, new_location: Vector2) {
+        self.base.set_global_position(new_location);
+    }
+    
     pub fn gather_input(&mut self) {
         let input = Input::singleton();
         self.forward_throttle = input.get_action_strength("Accelerate".into()) as f64;

@@ -67,7 +67,10 @@ impl World {
         let body_position = body.get_position();
         let new_x = world_extends.get_x_wrap(body_position.x);
         let new_y = world_extends.get_y_wrap(body_position.y);
-        body.set_position(Vector2::new(new_x, new_y));
+        if body.has_method("wrap_around_world".into()) {
+            let new_position = Variant::from(Vector2::new(new_x, new_y));
+            body.call("wrap_around_world".into(), &[new_position]);
+        }
     }
 
     #[func]
