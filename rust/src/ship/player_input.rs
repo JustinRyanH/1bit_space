@@ -7,8 +7,6 @@ use crate::prelude::*;
 #[class(base=Node)]
 pub struct PlayerShipInputSystem {
     #[export]
-    ship_movement: Option<Gd<ShipMovementSystem>>,
-    #[export]
     ship: Option<Gd<Ship>>,
 
     #[base]
@@ -20,7 +18,6 @@ impl INode for PlayerShipInputSystem {
     fn init(base: Base<Self::Base>) -> Self {
         Self {
             base,
-            ship_movement: None,
             ship: None,
         }
     }
