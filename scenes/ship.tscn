@@ -1,23 +1,6 @@
-[gd_scene load_steps=20 format=3 uid="uid://dkd8g3c3w5l2x"]
+[gd_scene load_steps=7 format=3 uid="uid://dkd8g3c3w5l2x"]
 
-[ext_resource type="Script" path="res://actors/ship_actor.gd" id="1_5f13i"]
 [ext_resource type="Texture2D" uid="uid://ccj5ltbklvrw1" path="res://assets/base_ship.png" id="1_gvb2k"]
-[ext_resource type="Script" path="res://resources/ship_configuration.gd" id="2_7yymh"]
-[ext_resource type="Script" path="res://components/ship_player_input.gd" id="3_vfexh"]
-[ext_resource type="Script" path="res://components/ship_movement.gd" id="4_che7p"]
-[ext_resource type="Script" path="res://components/ship_vfx.gd" id="6_rjmlq"]
-[ext_resource type="Script" path="res://components/gun_fire_component.gd" id="7_gvwpi"]
-[ext_resource type="PackedScene" uid="uid://bykf5c1hextgk" path="res://scenes/projectile.tscn" id="8_5jkn3"]
-[ext_resource type="Resource" uid="uid://bpq6y2sq8cpi" path="res://resources/projectile_bus.tres" id="9_a6bpd"]
-[ext_resource type="Script" path="res://scenes/ProjectileArea.gd" id="10_unfw5"]
-[ext_resource type="Script" path="res://components/actor_velocity_component.gd" id="11_noyc6"]
-[ext_resource type="Script" path="res://components/actor_rotation_component.gd" id="12_hpvkw"]
-
-[sub_resource type="Resource" id="Resource_ftmr5"]
-script = ExtResource("2_7yymh")
-turn_rate = 1.0
-impulse_power = 300.0
-max_speed = 1000.0
 
 [sub_resource type="Curve" id="Curve_kw3ft"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.456954, 0.151215), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -47,11 +30,7 @@ scale_max = 12.0
 scale_curve = SubResource("CurveTexture_csier")
 alpha_curve = SubResource("CurveTexture_qu6hn")
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_6a5sy"]
-
 [node name="Ship" type="Node2D"]
-script = ExtResource("1_5f13i")
-configuration = SubResource("Resource_ftmr5")
 
 [node name="EngineParticles" type="GPUParticles2D" parent="."]
 emitting = false
@@ -67,41 +46,3 @@ polygon = PackedVector2Array(-24, 24, 0, -24, 24, 24, 5, 13, -4, 13)
 
 [node name="GunPosition" type="Marker2D" parent="."]
 position = Vector2(0, -23)
-
-[node name="WrapboxComponent" type="Area2D" parent="." node_paths=PackedStringArray("actor")]
-collision_layer = 2048
-collision_mask = 0
-script = ExtResource("10_unfw5")
-actor = NodePath("..")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="WrapboxComponent"]
-shape = SubResource("CircleShape2D_6a5sy")
-
-[node name="ShipPlayerInput" type="Node" parent="." node_paths=PackedStringArray("ship_actor")]
-script = ExtResource("3_vfexh")
-ship_actor = NodePath("..")
-
-[node name="ActorVelocityComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]
-script = ExtResource("11_noyc6")
-actor = NodePath("..")
-
-[node name="ActorRotationComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]
-script = ExtResource("12_hpvkw")
-actor = NodePath("..")
-
-[node name="ShipMovement" type="Node" parent="." node_paths=PackedStringArray("ship_actor", "velocity_component", "rotation_component")]
-script = ExtResource("4_che7p")
-ship_actor = NodePath("..")
-velocity_component = NodePath("../ActorVelocityComponent")
-rotation_component = NodePath("../ActorRotationComponent")
-
-[node name="ShipVFX" type="Node" parent="." node_paths=PackedStringArray("ship_actor", "rear_engine")]
-script = ExtResource("6_rjmlq")
-ship_actor = NodePath("..")
-rear_engine = NodePath("../EngineParticles")
-
-[node name="GunFireComponent" type="Node" parent="." node_paths=PackedStringArray("gun_marker")]
-script = ExtResource("7_gvwpi")
-projectile_scene = ExtResource("8_5jkn3")
-projectile_bus = ExtResource("9_a6bpd")
-gun_marker = NodePath("../GunPosition")
