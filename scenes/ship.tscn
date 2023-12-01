@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://dkd8g3c3w5l2x"]
+[gd_scene load_steps=13 format=3 uid="uid://dkd8g3c3w5l2x"]
 
 [ext_resource type="Script" path="res://actors/ship_actor.gd" id="1_5f13i"]
 [ext_resource type="Texture2D" uid="uid://ccj5ltbklvrw1" path="res://assets/base_ship.png" id="1_gvb2k"]
 [ext_resource type="Script" path="res://resources/ship_configuration.gd" id="2_7yymh"]
 [ext_resource type="Script" path="res://components/ship_player_input.gd" id="3_vfexh"]
 [ext_resource type="Script" path="res://components/ship_movement.gd" id="4_che7p"]
+[ext_resource type="Script" path="res://components/ship_vfx.gd" id="6_rjmlq"]
 
 [sub_resource type="Resource" id="Resource_3bhdd"]
 script = ExtResource("2_7yymh")
@@ -12,9 +13,43 @@ turn_rate = 2.0
 impulse_power = 300.0
 max_speed = 1000.0
 
+[sub_resource type="Curve" id="Curve_kw3ft"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.456954, 0.151215), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_qu6hn"]
+curve = SubResource("Curve_kw3ft")
+
+[sub_resource type="Curve" id="Curve_2iooi"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -1.58242, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_csier"]
+curve = SubResource("Curve_2iooi")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_s4y78"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 4.0
+direction = Vector3(2.08165e-12, 1, 2.08165e-12)
+spread = 25.0
+initial_velocity_min = 500.0
+initial_velocity_max = 750.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+scale_min = 8.0
+scale_max = 12.0
+scale_curve = SubResource("CurveTexture_csier")
+alpha_curve = SubResource("CurveTexture_qu6hn")
+
 [node name="Ship" type="CharacterBody2D"]
 script = ExtResource("1_5f13i")
 configuration = SubResource("Resource_3bhdd")
+
+[node name="EngineParticles" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 90
+process_material = SubResource("ParticleProcessMaterial_s4y78")
+lifetime = 0.5
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_gvb2k")
@@ -29,3 +64,8 @@ ship_actor = NodePath("..")
 [node name="ShipMovement" type="Node" parent="." node_paths=PackedStringArray("ship_actor")]
 script = ExtResource("4_che7p")
 ship_actor = NodePath("..")
+
+[node name="ShipVFX" type="Node" parent="." node_paths=PackedStringArray("ship_actor", "rear_engine")]
+script = ExtResource("6_rjmlq")
+ship_actor = NodePath("..")
+rear_engine = NodePath("../EngineParticles")

@@ -1,0 +1,48 @@
+class_name WorldWrap
+extends Node2D
+
+@export var camera: Camera2D
+@export var bounds: CollisionShape2D
+
+var start: Vector2
+var end: Vector2
+
+
+func _ready():
+	_setup_bounds_to_be_camera()
+	
+func _setup_bounds_to_be_camera():
+	var camera_transform = camera.get_canvas_transform()
+	var origin = camera.get_screen_center_position()
+	var camera_size = camera.get_viewport_rect().size / camera.scale
+	var transform_invert = camera_transform.affine_inverse()
+	
+	start = transform_invert * Vector2(0, 0)
+	end = transform_invert * camera_size
+	
+	var shape = RectangleShape2D.new()
+	shape.size = end * 2.0
+	bounds.shape = shape
+
+
+func _on_world_boundaries_body_exited(body):
+	if body.has_method("wrap_to"):
+		var body_position = body.global_position
+		var new_x = wrap_x(body_position.x)
+		var new_y = wrap_y(body_position.y)
+		body.wrap_to(Vector2(new_x, new_y))
+
+
+func wrap_x(x: float):
+	if x < start.x:
+		return end.x
+	if x > end.x:
+		return start.x
+	return x
+
+func wrap_y(y: float):
+	if y < start.y:
+		return end.y
+	if y > end.y:
+		return start.y
+	return y

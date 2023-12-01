@@ -1,6 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://chxlq200i23oc"]
+[gd_scene load_steps=6 format=3 uid="uid://chxlq200i23oc"]
 
 [ext_resource type="PackedScene" uid="uid://dkd8g3c3w5l2x" path="res://scenes/ship.tscn" id="1_fdexu"]
+[ext_resource type="Script" path="res://systems/world_wrap.gd" id="2_6lyyr"]
+[ext_resource type="Script" path="res://systems/ProjectileManager.gd" id="2_61gvv"]
+[ext_resource type="Resource" uid="uid://bpq6y2sq8cpi" path="res://resources/projectile_bus.tres" id="3_coy3l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_16c3m"]
 
@@ -9,11 +12,20 @@
 [node name="Ship" parent="." instance=ExtResource("1_fdexu")]
 position = Vector2(2.08165e-12, 2.08165e-12)
 
-[node name="World" type="Node2D" parent="."]
+[node name="ProjectileManager" type="Node2D" parent="."]
+script = ExtResource("2_61gvv")
+projectile_bus = ExtResource("3_coy3l")
 
-[node name="Camera2D" type="Camera2D" parent="World"]
+[node name="WorldWrap" type="Node2D" parent="." node_paths=PackedStringArray("camera", "bounds")]
+script = ExtResource("2_6lyyr")
+camera = NodePath("Camera2D")
+bounds = NodePath("WorldBoundaries/CollisionShape2D")
 
-[node name="WorldBoundaries" type="Area2D" parent="World"]
+[node name="Camera2D" type="Camera2D" parent="WorldWrap"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="World/WorldBoundaries"]
+[node name="WorldBoundaries" type="Area2D" parent="WorldWrap"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldWrap/WorldBoundaries"]
 shape = SubResource("RectangleShape2D_16c3m")
+
+[connection signal="body_exited" from="WorldWrap/WorldBoundaries" to="WorldWrap" method="_on_world_boundaries_body_exited"]
