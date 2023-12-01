@@ -34,7 +34,7 @@ pub struct Ship {
     #[export]
     forward_throttle: f64,
     #[export]
-    movement_stats: Gd<MovementAttributes>,
+    movement_stats: Gd<MovementStats>,
 
     vfx: Option<ShpVFX>,
     ship_movement: Movement,
@@ -46,7 +46,7 @@ pub struct Ship {
 #[godot_api]
 impl ICharacterBody2D for Ship {
     fn init(base: Base<Self::Base>) -> Self {
-        let movement_stats = MovementAttributes::new_gd();
+        let movement_stats = MovementStats::new_gd();
         Self {
             rotation_direction: 0.0,
             forward_throttle: 0.0,

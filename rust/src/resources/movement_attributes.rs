@@ -9,7 +9,7 @@ pub struct MovementState {
 
 #[derive(GodotClass)]
 #[class(base=Resource)]
-pub struct MovementAttributes {
+pub struct MovementStats {
     #[export]
     impulse: f64,
     #[export]
@@ -22,7 +22,7 @@ pub struct MovementAttributes {
 }
 
 #[godot_api]
-impl IResource for MovementAttributes {
+impl IResource for MovementStats {
     fn init(base: Base<Self::Base>) -> Self {
         Self {
             impulse: 30.0,
@@ -34,7 +34,7 @@ impl IResource for MovementAttributes {
 }
 
 #[godot_api]
-impl MovementAttributes {
+impl MovementStats {
     pub fn get_movement_state(&self) -> MovementState {
         MovementState {
             impulse: self.impulse,

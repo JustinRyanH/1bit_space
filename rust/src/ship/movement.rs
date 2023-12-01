@@ -4,16 +4,16 @@ use crate::prelude::*;
 
 #[derive(Clone)]
 pub struct Movement {
-    movement_stats: Gd<MovementAttributes>,
+    movement_stats: Gd<MovementStats>,
 }
 
 impl Movement {
-    pub fn new(movement_stats: Gd<MovementAttributes>) -> Self {
+    pub fn new(movement_stats: Gd<MovementStats>) -> Self {
         return Self { movement_stats: movement_stats };
 
     }
 
-    pub fn update_movement_stats(&mut self, movement_stats: &Gd<MovementAttributes>) {
+    pub fn update_movement_stats(&mut self, movement_stats: &Gd<MovementStats>) {
         self.movement_stats = movement_stats.clone();
     }
 
