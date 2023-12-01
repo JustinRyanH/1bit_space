@@ -4,10 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://c078hhpp60me4" path="res://assets/bullet.png" id="2_j0vs4"]
 [ext_resource type="Resource" uid="uid://bknvwgw8c0u7h" path="res://resources/basic_projectile.tres" id="2_v7qmo"]
 [ext_resource type="Script" path="res://components/hurtbox_component.gd" id="4_1b7nr"]
-[ext_resource type="Script" path="res://components/actor_move_component.gd" id="4_lv8jc"]
 [ext_resource type="Script" path="res://components/hitbox_component.gd" id="5_23v4k"]
 [ext_resource type="Script" path="res://scenes/ProjectileArea.gd" id="5_in8ga"]
 [ext_resource type="Script" path="res://components/lifetime_component.gd" id="6_b343d"]
+[ext_resource type="Script" path="res://components/actor_velocity_component.gd" id="7_kc40s"]
 [ext_resource type="Script" path="res://components/destroy_component.gd" id="7_xvgd5"]
 
 [sub_resource type="Curve" id="Curve_fvayh"]
@@ -89,8 +89,8 @@ wait_time = 0.8
 one_shot = true
 autostart = true
 
-[node name="ActorMoveComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]
-script = ExtResource("4_lv8jc")
+[node name="ActorVelocityComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("7_kc40s")
 actor = NodePath("..")
 
 [node name="LifetimeComponent" type="Node" parent="." node_paths=PackedStringArray("timer", "destroy_component")]
@@ -102,7 +102,7 @@ destroy_component = NodePath("../DestroyComponent")
 script = ExtResource("7_xvgd5")
 actor = NodePath("..")
 destroy_particles = NodePath("../DestroyParticles")
-move_component = NodePath("../ActorMoveComponent")
+move_component = NodePath("../ActorVelocityComponent")
 nodes_to_hide = [NodePath("../Sprite2D")]
 
 [connection signal="hurt" from="HurtboxComponent" to="." method="_on_hurtbox_component_hurt"]
