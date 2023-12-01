@@ -6,6 +6,5 @@ extends Node
 
 @onready var actor_velocity_component: ActorVelocityComponent = $ActorVelocityComponent
 
-
 func _process(delta: float) -> void:
-	actor.translate(velocity)
+	actor.translate(velocity * delta)

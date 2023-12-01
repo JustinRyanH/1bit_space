@@ -67,6 +67,15 @@ polygon = PackedVector2Array(-24, 24, 0, -24, 24, 24, 5, 13, -4, 13)
 [node name="GunPosition" type="Marker2D" parent="."]
 position = Vector2(0, -23)
 
+[node name="WrapboxComponent" type="Area2D" parent="." node_paths=PackedStringArray("actor")]
+collision_layer = 2048
+collision_mask = 0
+script = ExtResource("10_unfw5")
+actor = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WrapboxComponent"]
+shape = SubResource("CircleShape2D_6a5sy")
+
 [node name="ShipPlayerInput" type="Node" parent="." node_paths=PackedStringArray("ship_actor")]
 script = ExtResource("3_vfexh")
 ship_actor = NodePath("..")
@@ -85,12 +94,3 @@ script = ExtResource("7_gvwpi")
 projectile_scene = ExtResource("8_5jkn3")
 projectile_bus = ExtResource("9_a6bpd")
 gun_marker = NodePath("../GunPosition")
-
-[node name="WrapboxComponent" type="Area2D" parent="." node_paths=PackedStringArray("actor")]
-collision_layer = 2048
-collision_mask = 0
-script = ExtResource("10_unfw5")
-actor = NodePath("..")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="WrapboxComponent"]
-shape = SubResource("CircleShape2D_6a5sy")

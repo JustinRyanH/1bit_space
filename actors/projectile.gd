@@ -9,12 +9,9 @@ extends Node2D
 
 func _ready() -> void:
 	hitbox_component.damage = projectile_stats.damage
-	
-func _process(delta: float) -> void:
 	var speed: float = projectile_stats.speed
-	var velocity = Vector2.UP.rotated(rotation) * delta * speed
+	var velocity = Vector2.UP.rotated(rotation) * speed
 	actor_move_component.velocity = velocity
-	
 
 func _on_hurtbox_component_hurt(hitbox: HitboxComponent) -> void:
 	destroy_component.destroy()

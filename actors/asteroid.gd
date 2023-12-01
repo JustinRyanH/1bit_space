@@ -1,5 +1,7 @@
 extends Node2D
 
+@export var speed_low: float = 10.0
+@export var speed_high: float = 200.0
 @export var health: float = 1:
 	set(value):
 		health = value
@@ -13,7 +15,7 @@ extends Node2D
 
 func _ready() -> void:
 	var initial_direction = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
-	var random_speed = randf_range(0.5, 2)
+	var random_speed = randf_range(speed_low, speed_high)
 	actor_velocity_component.velocity = initial_direction * random_speed
 
 func destroy() -> void:
