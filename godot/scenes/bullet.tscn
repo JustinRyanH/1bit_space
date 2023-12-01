@@ -87,15 +87,3 @@ texture = ExtResource("1_tgg77")
 
 [node name="EndTimer" type="Timer" parent="."]
 one_shot = true
-
-[node name="ActorMovement" type="ActorMovement" parent="." node_paths=PackedStringArray("actor")]
-actor = NodePath("..")
-speed = 750.0
-
-[node name="ProjectileComponent" type="ProjectileComponent" parent="." node_paths=PackedStringArray("lifetime_timer", "tail", "bullet_die", "movement", "sprite", "actor")]
-lifetime_timer = NodePath("../EndTimer")
-tail = NodePath("../TailParticles")
-bullet_die = NodePath("../BulletDie")
-movement = NodePath("../ActorMovement")
-sprite = NodePath("../Sprite2D")
-actor = NodePath("..")

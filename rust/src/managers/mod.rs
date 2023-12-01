@@ -1,1 +1,3 @@
-pub mod projectile_manager;
+mod projectile_manager;
+
+pub use projectile_manager::*;
