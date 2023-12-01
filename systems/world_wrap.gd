@@ -25,13 +25,19 @@ func _setup_bounds_to_be_camera():
 	bounds.shape = shape
 
 
-func _on_world_boundaries_body_exited(body):
-	if body.has_method("wrap_to"):
-		var body_position = body.global_position
-		var new_x = wrap_x(body_position.x)
-		var new_y = wrap_y(body_position.y)
-		body.wrap_to(Vector2(new_x, new_y))
+func _on_world_boundaries_body_exited(body: Node2D) -> void:
+	wrap_actor(body)
+		
 
+func _on_world_boundaries_area_exited(area: Area2D) -> void:
+	wrap_actor(area)
+
+func wrap_actor(actor: Node2D) -> void:
+	if actor.has_method("wrap_to"):
+		var node_position = actor.global_position
+		var new_x = wrap_x(node_position.x)
+		var new_y = wrap_y(node_position.y)
+		actor.wrap_to(Vector2(new_x, new_y))
 
 func wrap_x(x: float):
 	if x < start.x:

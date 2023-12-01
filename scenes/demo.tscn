@@ -9,12 +9,12 @@
 
 [node name="Demo" type="Node2D"]
 
-[node name="Ship" parent="." instance=ExtResource("1_fdexu")]
-position = Vector2(2.08165e-12, 2.08165e-12)
-
 [node name="ProjectileManager" type="Node2D" parent="."]
 script = ExtResource("2_61gvv")
 projectile_bus = ExtResource("3_coy3l")
+
+[node name="Ship" parent="." instance=ExtResource("1_fdexu")]
+position = Vector2(2.08165e-12, 2.08165e-12)
 
 [node name="WorldWrap" type="Node2D" parent="." node_paths=PackedStringArray("camera", "bounds")]
 script = ExtResource("2_6lyyr")
@@ -28,4 +28,5 @@ bounds = NodePath("WorldBoundaries/CollisionShape2D")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldWrap/WorldBoundaries"]
 shape = SubResource("RectangleShape2D_16c3m")
 
+[connection signal="area_exited" from="WorldWrap/WorldBoundaries" to="WorldWrap" method="_on_world_boundaries_area_exited"]
 [connection signal="body_exited" from="WorldWrap/WorldBoundaries" to="WorldWrap" method="_on_world_boundaries_body_exited"]

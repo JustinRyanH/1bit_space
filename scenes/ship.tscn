@@ -1,13 +1,16 @@
-[gd_scene load_steps=13 format=3 uid="uid://dkd8g3c3w5l2x"]
+[gd_scene load_steps=16 format=3 uid="uid://dkd8g3c3w5l2x"]
 
 [ext_resource type="Script" path="res://actors/ship_actor.gd" id="1_5f13i"]
 [ext_resource type="Texture2D" uid="uid://ccj5ltbklvrw1" path="res://assets/base_ship.png" id="1_gvb2k"]
 [ext_resource type="Script" path="res://resources/ship_configuration.gd" id="2_7yymh"]
 [ext_resource type="Script" path="res://components/ship_player_input.gd" id="3_vfexh"]
 [ext_resource type="Script" path="res://components/ship_movement.gd" id="4_che7p"]
+[ext_resource type="Script" path="res://scenes/gun_fire_component.gd" id="6_2gv67"]
 [ext_resource type="Script" path="res://components/ship_vfx.gd" id="6_rjmlq"]
+[ext_resource type="PackedScene" uid="uid://bykf5c1hextgk" path="res://scenes/projectile.tscn" id="8_5jkn3"]
+[ext_resource type="Resource" uid="uid://bpq6y2sq8cpi" path="res://resources/projectile_bus.tres" id="9_a6bpd"]
 
-[sub_resource type="Resource" id="Resource_3bhdd"]
+[sub_resource type="Resource" id="Resource_ftmr5"]
 script = ExtResource("2_7yymh")
 turn_rate = 2.0
 impulse_power = 300.0
@@ -43,7 +46,7 @@ alpha_curve = SubResource("CurveTexture_qu6hn")
 
 [node name="Ship" type="CharacterBody2D"]
 script = ExtResource("1_5f13i")
-configuration = SubResource("Resource_3bhdd")
+configuration = SubResource("Resource_ftmr5")
 
 [node name="EngineParticles" type="GPUParticles2D" parent="."]
 emitting = false
@@ -57,6 +60,9 @@ texture = ExtResource("1_gvb2k")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-24, 24, 0, -24, 24, 24, 5, 13, -4, 13)
 
+[node name="GunPosition" type="Marker2D" parent="."]
+position = Vector2(0, -23)
+
 [node name="ShipPlayerInput" type="Node" parent="." node_paths=PackedStringArray("ship_actor")]
 script = ExtResource("3_vfexh")
 ship_actor = NodePath("..")
@@ -69,3 +75,9 @@ ship_actor = NodePath("..")
 script = ExtResource("6_rjmlq")
 ship_actor = NodePath("..")
 rear_engine = NodePath("../EngineParticles")
+
+[node name="GunFireComponent" type="Node" parent="." node_paths=PackedStringArray("gun_marker")]
+script = ExtResource("6_2gv67")
+projectile_scene = ExtResource("8_5jkn3")
+projectile_bus = ExtResource("9_a6bpd")
+gun_marker = NodePath("../GunPosition")

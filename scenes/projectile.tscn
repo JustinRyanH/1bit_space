@@ -1,0 +1,82 @@
+[gd_scene load_steps=14 format=3 uid="uid://bykf5c1hextgk"]
+
+[ext_resource type="Script" path="res://actors/projectile.gd" id="1_fc7vh"]
+[ext_resource type="Texture2D" uid="uid://c078hhpp60me4" path="res://assets/bullet.png" id="2_j0vs4"]
+[ext_resource type="Script" path="res://components/ProjectileMoveComponent.gd" id="3_dsoo3"]
+[ext_resource type="Resource" uid="uid://bknvwgw8c0u7h" path="res://scenes/basic_projectile.tres" id="4_n2fy4"]
+[ext_resource type="Script" path="res://scenes/ProjectileArea.gd" id="5_in8ga"]
+[ext_resource type="Script" path="res://components/lifetime_component.gd" id="6_b343d"]
+[ext_resource type="Script" path="res://components/destroy_component.gd" id="7_xvgd5"]
+
+[sub_resource type="Curve" id="Curve_fvayh"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.84106, 0.570096), -1.36938, -1.36938, 0, 0, Vector2(1, 0), -2.722, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_x3kns"]
+curve = SubResource("Curve_fvayh")
+
+[sub_resource type="Curve" id="Curve_y6fm7"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.562914, 0.63991), -1.27716, -1.27716, 0, 0, Vector2(1, 0.000565171), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_u18qd"]
+curve = SubResource("Curve_y6fm7")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qtgii"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 4.2
+direction = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+spread = 180.0
+initial_velocity_min = 500.0
+initial_velocity_max = 500.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+scale_min = 2.0
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_u18qd")
+alpha_curve = SubResource("CurveTexture_x3kns")
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tk5du"]
+radius = 3.0
+height = 16.0
+
+[node name="Projectile" type="Node2D"]
+script = ExtResource("1_fc7vh")
+
+[node name="DestroyParticles" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 400
+process_material = SubResource("ParticleProcessMaterial_qtgii")
+lifetime = 0.1
+one_shot = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_j0vs4")
+
+[node name="ProjectileArea" type="Area2D" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("5_in8ga")
+actor = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ProjectileArea"]
+shape = SubResource("CapsuleShape2D_tk5du")
+
+[node name="ProjectileLifetime" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+autostart = true
+
+[node name="ProjectileMove" type="Node" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("3_dsoo3")
+actor = NodePath("..")
+projectile_stats = ExtResource("4_n2fy4")
+
+[node name="LifetimeComponent" type="Node" parent="." node_paths=PackedStringArray("timer", "destroy_component")]
+script = ExtResource("6_b343d")
+timer = NodePath("../ProjectileLifetime")
+destroy_component = NodePath("../DestroyComponent")
+
+[node name="DestroyComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "destroy_particles")]
+script = ExtResource("7_xvgd5")
+actor = NodePath("..")
+destroy_particles = NodePath("../DestroyParticles")
+nodes_to_hide = [NodePath("../Sprite2D")]
