@@ -37,7 +37,7 @@ pub struct Ship {
     movement_stats: Gd<MovementAttributes>,
 
     vfx: Option<ShpVFX>,
-    ship_movement: ShipMovementv2,
+    ship_movement: Movement,
     #[export]
     #[base]
     pub base: Base<CharacterBody2D>,
@@ -51,7 +51,7 @@ impl ICharacterBody2D for Ship {
             rotation_direction: 0.0,
             forward_throttle: 0.0,
             movement_stats: movement_stats.clone(),
-            ship_movement: ShipMovementv2::new(movement_stats),
+            ship_movement: Movement::new(movement_stats),
             vfx: None,
             base
         }

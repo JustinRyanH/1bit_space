@@ -3,11 +3,11 @@ use godot::prelude::*;
 use crate::prelude::*;
 
 #[derive(Clone)]
-pub struct ShipMovementv2 {
+pub struct Movement {
     movement_stats: Gd<MovementAttributes>,
 }
 
-impl ShipMovementv2 {
+impl Movement {
     pub fn new(movement_stats: Gd<MovementAttributes>) -> Self {
         return Self { movement_stats: movement_stats };
 
