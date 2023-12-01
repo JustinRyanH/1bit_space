@@ -3,15 +3,16 @@ extends Node
 
 @export var ship_actor: ShipActor
 @export var velocity_component: ActorVelocityComponent
+@export var rotation_component: ActorRotationComponent
 
 func _process(delta: float) -> void:
 	ship_rotate(delta)
 	ship_accelerate(delta)
 
 func ship_rotate(delta: float) -> void:
-	pass
-	#var configuration: ShipConfiguration = ship_actor.configuration
-	#ship_actor.rotation += (ship_actor.rotation_throttle * delta * configuration.turn_rate)
+	var configuration: ShipConfiguration = ship_actor.configuration
+	rotation_component.direction = ship_actor.rotation_throttle
+	rotation_component.speed = configuration.turn_rate
 	
 func ship_accelerate(delta: float) -> void:
 	var configuration: ShipConfiguration = ship_actor.configuration
