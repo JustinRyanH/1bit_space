@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://dkd8g3c3w5l2x"]
+[gd_scene load_steps=8 format=3 uid="uid://dkd8g3c3w5l2x"]
 
-[ext_resource type="Texture2D" uid="uid://ccj5ltbklvrw1" path="res://assets/base_ship.png" id="1_gvb2k"]
+[ext_resource type="Script" path="res://scenes/ship/ship.gd" id="1_7se4s"]
+[ext_resource type="Texture2D" uid="uid://ccj5ltbklvrw1" path="res://assets/base_ship.png" id="1_bty33"]
 
 [sub_resource type="Curve" id="Curve_kw3ft"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.456954, 0.151215), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -30,7 +31,10 @@ scale_max = 12.0
 scale_curve = SubResource("CurveTexture_csier")
 alpha_curve = SubResource("CurveTexture_qu6hn")
 
-[node name="Ship" type="Node2D"]
+[node name="Ship" type="RigidBody2D"]
+angular_damp = 1.2
+script = ExtResource("1_7se4s")
+impulse_power = 300.0
 
 [node name="EngineParticles" type="GPUParticles2D" parent="."]
 emitting = false
@@ -39,7 +43,7 @@ process_material = SubResource("ParticleProcessMaterial_s4y78")
 lifetime = 0.5
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_gvb2k")
+texture = ExtResource("1_bty33")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-24, 24, 0, -24, 24, 24, 5, 13, -4, 13)
