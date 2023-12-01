@@ -1,3 +1,4 @@
+class_name WrapboxComponent
 extends Area2D
 
 @export var actor: Node2D

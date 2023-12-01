@@ -25,10 +25,6 @@ func _setup_bounds_to_be_camera():
 	bounds.shape = shape
 
 
-func _on_world_boundaries_body_exited(body: Node2D) -> void:
-	wrap_actor(body)
-		
-
 func _on_world_boundaries_area_exited(area: Area2D) -> void:
 	wrap_actor(area)
 

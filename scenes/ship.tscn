@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dkd8g3c3w5l2x"]
+[gd_scene load_steps=18 format=3 uid="uid://dkd8g3c3w5l2x"]
 
 [ext_resource type="Script" path="res://actors/ship_actor.gd" id="1_5f13i"]
 [ext_resource type="Texture2D" uid="uid://ccj5ltbklvrw1" path="res://assets/base_ship.png" id="1_gvb2k"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://components/ship_vfx.gd" id="6_rjmlq"]
 [ext_resource type="PackedScene" uid="uid://bykf5c1hextgk" path="res://scenes/projectile.tscn" id="8_5jkn3"]
 [ext_resource type="Resource" uid="uid://bpq6y2sq8cpi" path="res://resources/projectile_bus.tres" id="9_a6bpd"]
+[ext_resource type="Script" path="res://scenes/ProjectileArea.gd" id="10_unfw5"]
 
 [sub_resource type="Resource" id="Resource_ftmr5"]
 script = ExtResource("2_7yymh")
@@ -44,7 +45,10 @@ scale_max = 12.0
 scale_curve = SubResource("CurveTexture_csier")
 alpha_curve = SubResource("CurveTexture_qu6hn")
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_6a5sy"]
+
 [node name="Ship" type="CharacterBody2D"]
+collision_layer = 2049
 script = ExtResource("1_5f13i")
 configuration = SubResource("Resource_ftmr5")
 
@@ -81,3 +85,12 @@ script = ExtResource("6_2gv67")
 projectile_scene = ExtResource("8_5jkn3")
 projectile_bus = ExtResource("9_a6bpd")
 gun_marker = NodePath("../GunPosition")
+
+[node name="WrapboxComponent" type="Area2D" parent="." node_paths=PackedStringArray("actor")]
+collision_layer = 2048
+collision_mask = 0
+script = ExtResource("10_unfw5")
+actor = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WrapboxComponent"]
+shape = SubResource("CircleShape2D_6a5sy")

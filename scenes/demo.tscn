@@ -17,6 +17,7 @@ projectile_bus = ExtResource("3_coy3l")
 position = Vector2(2.08165e-12, 2.08165e-12)
 
 [node name="WorldWrap" type="Node2D" parent="." node_paths=PackedStringArray("camera", "bounds")]
+visible = false
 script = ExtResource("2_6lyyr")
 camera = NodePath("Camera2D")
 bounds = NodePath("WorldBoundaries/CollisionShape2D")
@@ -24,9 +25,10 @@ bounds = NodePath("WorldBoundaries/CollisionShape2D")
 [node name="Camera2D" type="Camera2D" parent="WorldWrap"]
 
 [node name="WorldBoundaries" type="Area2D" parent="WorldWrap"]
+collision_layer = 0
+collision_mask = 2048
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldWrap/WorldBoundaries"]
 shape = SubResource("RectangleShape2D_16c3m")
 
 [connection signal="area_exited" from="WorldWrap/WorldBoundaries" to="WorldWrap" method="_on_world_boundaries_area_exited"]
-[connection signal="body_exited" from="WorldWrap/WorldBoundaries" to="WorldWrap" method="_on_world_boundaries_body_exited"]

@@ -54,11 +54,13 @@ one_shot = true
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_j0vs4")
 
-[node name="ProjectileArea" type="Area2D" parent="." node_paths=PackedStringArray("actor")]
+[node name="WrapboxComponent" type="Area2D" parent="." node_paths=PackedStringArray("actor")]
+collision_layer = 2048
+collision_mask = 0
 script = ExtResource("5_in8ga")
 actor = NodePath("..")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ProjectileArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WrapboxComponent"]
 shape = SubResource("CapsuleShape2D_tk5du")
 
 [node name="ProjectileLifetime" type="Timer" parent="."]
