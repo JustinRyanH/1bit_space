@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://bykf5c1hextgk"]
+[gd_scene load_steps=17 format=3 uid="uid://bykf5c1hextgk"]
 
 [ext_resource type="Script" path="res://actors/projectile.gd" id="1_fc7vh"]
 [ext_resource type="Texture2D" uid="uid://c078hhpp60me4" path="res://assets/bullet.png" id="2_j0vs4"]
 [ext_resource type="Resource" uid="uid://bknvwgw8c0u7h" path="res://resources/basic_projectile.tres" id="2_v7qmo"]
 [ext_resource type="Script" path="res://components/hurtbox_component.gd" id="4_1b7nr"]
 [ext_resource type="Script" path="res://components/actor_move_component.gd" id="4_lv8jc"]
+[ext_resource type="Script" path="res://components/hitbox_component.gd" id="5_23v4k"]
 [ext_resource type="Script" path="res://scenes/ProjectileArea.gd" id="5_in8ga"]
 [ext_resource type="Script" path="res://components/lifetime_component.gd" id="6_b343d"]
 [ext_resource type="Script" path="res://components/destroy_component.gd" id="7_xvgd5"]
@@ -58,11 +59,18 @@ one_shot = true
 texture = ExtResource("2_j0vs4")
 
 [node name="HurtboxComponent" type="Area2D" parent="."]
-collision_layer = 3
-collision_mask = 3
+collision_mask = 0
 script = ExtResource("4_1b7nr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+position = Vector2(0, -6)
+shape = SubResource("CircleShape2D_sfrjq")
+
+[node name="HitboxComponent" type="Area2D" parent="."]
+collision_layer = 0
+script = ExtResource("5_23v4k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_sfrjq")
 
