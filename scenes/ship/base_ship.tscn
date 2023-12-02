@@ -1,7 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://dkd8g3c3w5l2x"]
+[gd_scene load_steps=10 format=3 uid="uid://dkd8g3c3w5l2x"]
 
 [ext_resource type="Script" path="res://scenes/ship/ship.gd" id="1_7se4s"]
 [ext_resource type="Texture2D" uid="uid://ccj5ltbklvrw1" path="res://assets/base_ship.png" id="1_bty33"]
+[ext_resource type="Script" path="res://components/Hurtbox.gd" id="3_d0xmq"]
+[ext_resource type="Script" path="res://components/Hitbox.gd" id="4_xqgyg"]
 
 [sub_resource type="Curve" id="Curve_kw3ft"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.456954, 0.151215), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -46,7 +48,22 @@ lifetime = 0.5
 texture = ExtResource("1_bty33")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
 polygon = PackedVector2Array(-24, 24, 0, -24, 24, 24, 5, 13, -4, 13)
 
 [node name="GunPosition" type="Marker2D" parent="."]
 position = Vector2(0, -23)
+
+[node name="Hurtbox" type="Area2D" parent="."]
+visible = false
+script = ExtResource("3_d0xmq")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hurtbox"]
+polygon = PackedVector2Array(-24, 24, 0, -24, 24, 24, 5, 13, -4, 13)
+
+[node name="Hitbox" type="Area2D" parent="."]
+script = ExtResource("4_xqgyg")
+damage = 1
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hitbox"]
+polygon = PackedVector2Array(-27, 27, 0, -28, 26, 27, 5, 14, -4, 14)

@@ -35,4 +35,6 @@ func check_for_death() -> void:
 func destroy_asteroid() -> void:
 	if next_size:
 		asteroid_spawn_bus.spawn_asteroid.emit(next_size, position, linear_velocity * 2, 4)
+	else:
+		asteroid_spawn_bus.completely_destroyed.emit()
 	queue_free()

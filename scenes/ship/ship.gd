@@ -29,3 +29,6 @@ func move_ship(delta: float) -> void:
 	angular_velocity += throttle_rotation * delta * rotation_power
 	linear_velocity += direction * foward_throttle * delta * impulse_power
 	linear_velocity = linear_velocity.limit_length(max_speed)
+	
+func take_damage(damage: int) -> void:
+	print("Damage(", name, "): ", damage)
