@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="AsteroidSpawnBus" load_steps=2 format=3 uid="uid://d2s8748m0hk3m"]
+
+[ext_resource type="Script" path="res://resources/asteroid_spawn_bus.gd" id="1_50sy2"]
+
+[resource]
+script = ExtResource("1_50sy2")

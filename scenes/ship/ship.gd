@@ -4,6 +4,9 @@ extends RigidBody2D
 @export var rotation_power: float = 20
 @export var max_speed: float = 5000
 
+@onready var engine_particles: = $EngineParticles as GPUParticles2D
+
+
 var warp_location
 var foward_throttle: float = 0.0
 var throttle_rotation: float = 0.0
@@ -14,6 +17,7 @@ func _process(delta: float) -> void:
 	
 func _physics_process(delta: float) -> void:
 	move_ship(delta)
+	engine_particles.emitting = foward_throttle > 0.0
 
 func wrap_to(location: Vector2) -> void:
 	global_position = location

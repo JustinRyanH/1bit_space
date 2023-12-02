@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://cubax3i1jnaxf"]
+
+[ext_resource type="PackedScene" uid="uid://b4kqauh2okga8" path="res://scenes/asteroid/asteroid.tscn" id="1_r8rnn"]
+[ext_resource type="Texture2D" uid="uid://dqswhw6wxofp3" path="res://assets/asteroid_small1.png" id="2_6ih80"]
+
+[node name="SmallAsteroid" instance=ExtResource("1_r8rnn")]
+health = 1
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_6ih80")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="1"]
+visible = false
+polygon = PackedVector2Array(-21, -10, -6, -21, 4, -21, 8, -13, 14, -10, 19, -4, 19, 8, 16, 11, 15, 16, 10, 20, -12, 21, -21, 10, -19, -2)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hurtbox" index="0"]
+visible = false
+polygon = PackedVector2Array(-21, -10, -6, -21, 4, -21, 8, -13, 14, -10, 19, -4, 19, 8, 16, 11, 15, 16, 10, 20, -12, 21, -21, 10, -19, -2)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hitbox" index="0"]
+polygon = PackedVector2Array(-23, -12, -7, -23, 7, -22, 10, -14, 17, -10, 22, -4, 20, 9, 17, 16, 10, 22, -14, 23, -23, 8)

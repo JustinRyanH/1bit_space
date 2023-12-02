@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://b4kqauh2okga8"]
+
+[ext_resource type="Script" path="res://scenes/asteroid/asteroid.gd" id="1_qkyu3"]
+[ext_resource type="Resource" uid="uid://d2s8748m0hk3m" path="res://scenes/asteroid/asteroid_spawn_bus.tres" id="2_3e5r3"]
+[ext_resource type="Script" path="res://components/Hurtbox.gd" id="3_hl0l7"]
+[ext_resource type="Script" path="res://components/Hitbox.gd" id="4_keu5v"]
+
+[node name="Asteroid" type="RigidBody2D"]
+collision_layer = 2049
+mass = 15.0
+angular_damp_mode = 1
+script = ExtResource("1_qkyu3")
+asteroid_spawn_bus = ExtResource("2_3e5r3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("3_hl0l7")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("4_keu5v")
+damage = 3
+
+[node name="DeathTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true

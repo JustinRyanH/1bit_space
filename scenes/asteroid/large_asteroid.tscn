@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bkd2qs5sx4twg"]
+
+[ext_resource type="PackedScene" uid="uid://b4kqauh2okga8" path="res://scenes/asteroid/asteroid.tscn" id="1_gtsgu"]
+[ext_resource type="PackedScene" uid="uid://cubax3i1jnaxf" path="res://scenes/asteroid/small_asteroid.tscn" id="2_4aynr"]
+[ext_resource type="Texture2D" uid="uid://c261keymf7u48" path="res://assets/asteroid1.png" id="2_okblt"]
+
+[node name="LargeAsteroid" instance=ExtResource("1_gtsgu")]
+next_size = ExtResource("2_4aynr")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_okblt")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="1"]
+visible = false
+polygon = PackedVector2Array(-44, -27, -15, -47, 10, -36, 25, -42, 36, -40, 50, -9, 38, 32, 10, 49, -4, 45, -34, 48, -50, 20, -38, -5)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hurtbox" index="0"]
+visible = false
+polygon = PackedVector2Array(-44, -27, -15, -47, 10, -36, 25, -42, 36, -40, 50, -9, 38, 32, 10, 49, -4, 45, -34, 48, -50, 20, -37, -4)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hitbox" index="0"]
+polygon = PackedVector2Array(-48, -29, -15, -51, 9, -40, 37, -45, 50, -27, 53, -7, 43, 33, 10, 53, -4, 51, -40, 51, -54, 21, -43, -5)

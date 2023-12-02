@@ -29,6 +29,7 @@ func _on_world_boundaries_area_exited(area: Area2D) -> void:
 	wrap_actor(area)
 
 func _on_world_boundaries_body_exited(body: Node2D) -> void:
+	print("wrap")
 	wrap_actor(body)
 
 func wrap_actor(actor: Node2D) -> void:
