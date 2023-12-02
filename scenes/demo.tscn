@@ -19,6 +19,8 @@ projectile_bus = ExtResource("3_coy3l")
 [node name="AsteroidManager" type="Node2D" parent="."]
 script = ExtResource("3_u0c30")
 asteroid_spawn_bus = ExtResource("4_68duc")
+spawn_scene = ExtResource("3_106lf")
+max_asteroid_count = 12
 
 [node name="LargeAsteroid2" parent="AsteroidManager" instance=ExtResource("3_106lf")]
 position = Vector2(-695, -437)
@@ -29,11 +31,11 @@ position = Vector2(680, 255)
 rotation = 0.165485
 
 [node name="LargeAsteroid4" parent="AsteroidManager" instance=ExtResource("3_106lf")]
-position = Vector2(-65, 493)
+position = Vector2(-653, 371)
 rotation = 0.165485
 
 [node name="LargeAsteroid5" parent="AsteroidManager" instance=ExtResource("3_106lf")]
-position = Vector2(-740, 192)
+position = Vector2(-949, 41.9999)
 rotation = 0.165485
 
 [node name="LargeAsteroid6" parent="AsteroidManager" instance=ExtResource("3_106lf")]
@@ -45,6 +47,7 @@ position = Vector2(2.08165e-12, 2.08165e-12)
 collision_layer = 2049
 
 [node name="WorldWrap" type="Node2D" parent="." node_paths=PackedStringArray("camera", "bounds")]
+unique_name_in_owner = true
 script = ExtResource("2_6lyyr")
 camera = NodePath("Camera2D")
 bounds = NodePath("WorldBoundaries/CollisionShape2D")

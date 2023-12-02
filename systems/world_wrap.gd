@@ -7,7 +7,6 @@ extends Node2D
 var start: Vector2
 var end: Vector2
 
-
 func _ready():
 	_setup_bounds_to_be_camera()
 	
@@ -30,6 +29,9 @@ func _on_world_boundaries_area_exited(area: Area2D) -> void:
 
 func _on_world_boundaries_body_exited(body: Node2D) -> void:
 	wrap_actor(body)
+	
+func get_bounds() -> Rect2:
+	return Rect2(start, end * 2.0)
 
 func wrap_actor(actor: Node2D) -> void:
 	if actor.has_method("wrap_to"):
