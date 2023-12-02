@@ -20,15 +20,25 @@ projectile_bus = ExtResource("3_coy3l")
 script = ExtResource("3_u0c30")
 asteroid_spawn_bus = ExtResource("4_68duc")
 
-[node name="LargeAsteroid" parent="AsteroidManager" instance=ExtResource("3_106lf")]
-position = Vector2(-167, -142)
-rotation = -1.31948
-linear_velocity = Vector2(300, 2.08165e-12)
-
 [node name="LargeAsteroid2" parent="AsteroidManager" instance=ExtResource("3_106lf")]
-position = Vector2(-416, -150)
+position = Vector2(-695, -437)
 rotation = 0.165485
-linear_velocity = Vector2(-5, 2.08165e-12)
+
+[node name="LargeAsteroid3" parent="AsteroidManager" instance=ExtResource("3_106lf")]
+position = Vector2(680, 255)
+rotation = 0.165485
+
+[node name="LargeAsteroid4" parent="AsteroidManager" instance=ExtResource("3_106lf")]
+position = Vector2(-65, 493)
+rotation = 0.165485
+
+[node name="LargeAsteroid5" parent="AsteroidManager" instance=ExtResource("3_106lf")]
+position = Vector2(-740, 192)
+rotation = 0.165485
+
+[node name="LargeAsteroid6" parent="AsteroidManager" instance=ExtResource("3_106lf")]
+position = Vector2(629, -358)
+rotation = 0.165485
 
 [node name="Ship" parent="." instance=ExtResource("1_fdexu")]
 position = Vector2(2.08165e-12, 2.08165e-12)
