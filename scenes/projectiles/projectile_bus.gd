@@ -7,3 +7,4 @@ signal create_projectile(
 	 direction: float,
 	 base_speed: float
 )
+signal add_projectile_to_world(projectile: Node2D);

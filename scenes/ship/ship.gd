@@ -41,3 +41,11 @@ func move_ship(delta: float) -> void:
 
 func take_damage(damage: int) -> void:
 	print("Damage(", name, "): ", damage)
+
+func build_projectile() -> void:
+	var new_projectile := projectile.instantiate() as Projectile
+	if not new_projectile:
+		printerr("New scene is not a Projecitle")
+		return
+	new_projectile.setup(self.linear_velocity, Vector2.UP.rotated(rotation))
+	projectile_bus.add_projectile_to_world.emit(new_projectile)

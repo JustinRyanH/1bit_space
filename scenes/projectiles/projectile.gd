@@ -9,8 +9,9 @@ extends Node2D
 func _ready() -> void:
 	hitbox.damage = projectile_stats.damage
 	
-func simple_setup(speed: float) -> void:
-	velocity = Vector2.UP.rotated(rotation) * projectile_stats.speed
+func setup(initial_velocity: Vector2, direction: Vector2) -> void:
+	pass
+	
 
 func _process(delta: float) -> void:
 	translate(velocity * delta)

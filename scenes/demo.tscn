@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://chxlq200i23oc"]
+[gd_scene load_steps=9 format=3 uid="uid://chxlq200i23oc"]
 
 [ext_resource type="Script" path="res://systems/world_wrap.gd" id="2_6lyyr"]
 [ext_resource type="Script" path="res://systems/projectile_manager.gd" id="2_61gvv"]
+[ext_resource type="Resource" uid="uid://c2hvjhfpjf7gs" path="res://resources/projectile_bus.tres" id="2_xawq3"]
 [ext_resource type="PackedScene" uid="uid://bkd2qs5sx4twg" path="res://scenes/asteroid/large_asteroid.tscn" id="3_106lf"]
 [ext_resource type="Script" path="res://systems/asteroid_manager.gd" id="3_u0c30"]
 [ext_resource type="Resource" uid="uid://d2s8748m0hk3m" path="res://scenes/asteroid/asteroid_spawn_bus.tres" id="4_68duc"]
@@ -13,6 +14,7 @@
 
 [node name="ProjectileManager" type="Node2D" parent="."]
 script = ExtResource("2_61gvv")
+projectile_bus = ExtResource("2_xawq3")
 
 [node name="AsteroidManager" type="Node2D" parent="."]
 script = ExtResource("3_u0c30")
