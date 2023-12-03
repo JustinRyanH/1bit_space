@@ -12,3 +12,7 @@ func _process(delta: float) -> void:
 
 func take_damage(damage: int) -> void:
 	queue_free()
+
+
+func _on_projectile_life_timer_timeout() -> void:
+	queue_free()

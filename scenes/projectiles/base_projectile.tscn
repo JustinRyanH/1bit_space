@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://bykf5c1hextgk"]
+[gd_scene load_steps=9 format=3 uid="uid://bykf5c1hextgk"]
 
 [ext_resource type="Script" path="res://scenes/projectiles/projectile.gd" id="1_e71bx"]
+[ext_resource type="Script" path="res://components/Hurtbox.gd" id="3_s40gw"]
 [ext_resource type="Script" path="res://components/Hitbox.gd" id="4_2fq7u"]
 
 [sub_resource type="Curve" id="Curve_fvayh"]
@@ -45,3 +46,8 @@ one_shot = true
 
 [node name="Hitbox" type="Area2D" parent="."]
 script = ExtResource("4_2fq7u")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+script = ExtResource("3_s40gw")
+
+[node name="ProjectileLifeTimer" type="Timer" parent="."]

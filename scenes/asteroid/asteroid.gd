@@ -48,7 +48,6 @@ func destroy_asteroid() -> void:
 			var next_position = point.global_position
 			var next_rotation = point.rotation
 			var new_direction = normalized_velocity.rotated(next_rotation)
-			print("new direction: ", new_direction)
 			asteroid_spawn_bus.spawn_asteroids.emit(next_size, next_position, new_direction * speed)
 	else:
 		asteroid_spawn_bus.completely_destroyed.emit()

@@ -1,9 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://dkrjts77gfxp"]
+[gd_scene load_steps=10 format=3 uid="uid://dkrjts77gfxp"]
 
 [ext_resource type="Script" path="res://scenes/ship/ship.gd" id="1_7se4s"]
 [ext_resource type="Resource" uid="uid://c2hvjhfpjf7gs" path="res://resources/projectile_bus.tres" id="2_ekgdc"]
 [ext_resource type="Script" path="res://components/Hurtbox.gd" id="3_d0xmq"]
-[ext_resource type="PackedScene" uid="uid://bykf5c1hextgk" path="res://scenes/projectiles/base_projectile.tscn" id="3_i8eea"]
 [ext_resource type="Script" path="res://components/Hitbox.gd" id="4_xqgyg"]
 
 [sub_resource type="Curve" id="Curve_kw3ft"]
@@ -40,9 +39,6 @@ angular_damp = 1.2
 script = ExtResource("1_7se4s")
 projectile_bus = ExtResource("2_ekgdc")
 impulse_power = 300.0
-rotation_power = null
-max_speed = null
-projectile = ExtResource("3_i8eea")
 
 [node name="EngineParticles" type="GPUParticles2D" parent="."]
 emitting = false
@@ -52,9 +48,7 @@ lifetime = 0.5
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-visible = false
-polygon = PackedVector2Array(-24, 24, 0, -24, 24, 24, 5, 13, -4, 13)
+[node name="GunPosition" type="Node2D" parent="."]
 
 [node name="Hurtbox" type="Area2D" parent="."]
 visible = false

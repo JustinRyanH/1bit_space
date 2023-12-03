@@ -5,6 +5,7 @@ extends RigidBody2D
 @export var rotation_power: float = 20
 @export var max_speed: float = 5000
 @export var projectile: PackedScene
+@onready var gun_position: Node2D = $GunPosition
 
 @onready var engine_particles: = $EngineParticles as GPUParticles2D
 

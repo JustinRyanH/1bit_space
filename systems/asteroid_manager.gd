@@ -84,5 +84,4 @@ func create_a_asteroid(new_position: Vector2) -> void:
 	var direction = (Vector2.ZERO - node.position).normalized().rotated(random_angle())
 	
 	node.linear_velocity = direction * random_speed
-	node.modulate.r = 0
 	add_child(node)
