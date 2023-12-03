@@ -19,24 +19,15 @@ enum Side {
 
 
 func _ready() -> void:
-	asteroid_spawn_bus.spawn_asteroid.connect(spawn_sub_asteroid)
+	asteroid_spawn_bus.spawn_asteroids.connect(spawn_sub_asteroid)
 	asteroid_spawn_bus.completely_destroyed.connect(spawn_new_asteroid)
 	randmize_asteroid_directions()
 
-func spawn_sub_asteroid(scene: PackedScene, location: Vector2, velocity: Vector2, count: int) -> void:
-	var start = -(count / 2) 
-	var angle = (PI / 8)
-	var length = velocity.length()
-	var initial_direction = velocity.normalized();
-	for i in range(start, (count / 2) + 1):
-		if i == 0: continue
-		var new_direction = initial_direction.rotated(i * angle)
-		var new_velocity = new_direction * length
-		
-		var node = scene.instantiate() as Asteroid
-		node.position = location
-		node.linear_velocity = new_velocity
-		add_child(node)
+func spawn_sub_asteroid(scene: PackedScene, location: Vector2, velocity: Vector2) -> void:
+	var node = scene.instantiate() as Asteroid
+	node.position = location
+	node.linear_velocity = velocity
+	add_child(node)
 		
 func spawn_new_asteroid() -> void:
 	var total_children = get_child_count()
