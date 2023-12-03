@@ -2,12 +2,13 @@ class_name AsteroidManager
 extends Node2D
 
 const EDGE_OFFSET = 25
+const EDGE_OUTBOUND = 200
 
 enum Side {
-	Top = 0,
-	Right = 1,
-	Bottom = 2,
-	Left = 3,
+	TOP = 0,
+	RIGHT = 1,
+	BOTTOM = 2,
+	LEFT = 3,
 }
 
 @export var asteroid_spawn_bus: AsteroidSpawnBus
@@ -22,17 +23,18 @@ func _ready() -> void:
 	asteroid_spawn_bus.completely_destroyed.connect(spawn_new_asteroid)
 	randmize_asteroid_directions()
 
-
 func spawn_sub_asteroid(scene: PackedScene, location: Vector2, velocity: Vector2, count: int) -> void:
 	var start = -(count / 2) 
-	var angle = (PI / 4)
+	var angle = (PI / 8)
 	var length = velocity.length()
 	var initial_direction = velocity.normalized();
-	for i in range(start, count):
+	for i in range(start, (count / 2) + 1):
 		if i == 0: continue
-		var new_velocity = initial_direction.rotated(i * angle) * length * 2
+		var new_direction = initial_direction.rotated(i * angle)
+		var new_velocity = new_direction * length
+		
 		var node = scene.instantiate() as Asteroid
-		node.position = location + new_velocity * 0.5
+		node.position = location
 		node.linear_velocity = new_velocity
 		add_child(node)
 		
@@ -40,8 +42,9 @@ func spawn_new_asteroid() -> void:
 	var total_children = get_child_count()
 	if total_children >= max_asteroid_count: return
 	var random_side: Side = randi_range(0, 3)
-
-	spawn_random_bottom()
+	
+	var new_position = get_random_position_from_direction(random_side)
+	create_a_asteroid(new_position)
 
 func randmize_asteroid_directions() -> void:
 	for child in get_children():
@@ -50,27 +53,28 @@ func randmize_asteroid_directions() -> void:
 		var random_direction = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
 		var random_speed = randi_range(25, 200)
 		asteroid.linear_velocity = random_speed * random_direction
-		
-func spawn_random_top() -> void:
+
+func get_random_position_from_direction(direction: Side) -> Vector2:
 	var bounds = world_wrap.get_bounds()
 	
-	var random_speed = randf_range(50, 200)
-	var y = bounds.position.y - 50
-	var x = random_x(bounds)
-	var node = spawn_scene.instantiate() as Asteroid
-	node.linear_velocity = Vector2.DOWN.rotated(random_angle()) * random_speed
-	node.position = Vector2(x, y)
-	add_child(node)
-	
-func spawn_random_bottom() -> void:
-	var bounds = world_wrap.get_bounds()
-	
-	var y = bounds.size.y * 0.5 + 200
-	var x = random_x(bounds)
-	var new_position = Vector2(x, y)
-
-	create_a_asteroid(new_position)
-
+	match direction:
+		Side.TOP:
+			var y = bounds.position.y - EDGE_OUTBOUND
+			var x = random_x(bounds)
+			return Vector2(x, y)
+		Side.LEFT:
+			var y = random_y(bounds)
+			var x = bounds.position.x - EDGE_OUTBOUND
+			return Vector2(x, y)
+		Side.RIGHT:
+			var y = random_y(bounds)
+			var x = bounds.size.x * 0.5 + EDGE_OUTBOUND
+			return Vector2(x, y)
+		Side.BOTTOM:
+			var y = bounds.size.y * 0.5 + EDGE_OUTBOUND
+			var x = random_x(bounds)
+			return Vector2(x, y)
+	return Vector2.ZERO
 
 func random_angle() -> float:
 	return randf_range(-PI / 8, PI / 8)
@@ -80,7 +84,6 @@ func random_x(bounds: Rect2) -> float:
 	
 func random_y(bounds: Rect2) -> float:
 	return randf_range(EDGE_OFFSET + bounds.position.y, (bounds.size.y / 2) - EDGE_OFFSET)
-
 
 func create_a_asteroid(new_position: Vector2) -> void:
 	var random_speed = randf_range(100, 300)

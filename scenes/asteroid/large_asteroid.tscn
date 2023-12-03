@@ -6,6 +6,7 @@
 
 [node name="LargeAsteroid" instance=ExtResource("1_gtsgu")]
 input_pickable = true
+mass = 20.0
 next_size = ExtResource("2_4aynr")
 
 [node name="Sprite2D" parent="." index="0"]

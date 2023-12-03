@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://chxlq200i23oc"]
+[gd_scene load_steps=8 format=3 uid="uid://chxlq200i23oc"]
 
 [ext_resource type="Script" path="res://systems/world_wrap.gd" id="2_6lyyr"]
 [ext_resource type="Script" path="res://systems/ProjectileManager.gd" id="2_61gvv"]
@@ -6,7 +6,6 @@
 [ext_resource type="Resource" uid="uid://bpq6y2sq8cpi" path="res://scenes/projectiles/projectile_bus.tres" id="3_coy3l"]
 [ext_resource type="Script" path="res://systems/asteroid_manager.gd" id="3_u0c30"]
 [ext_resource type="Resource" uid="uid://d2s8748m0hk3m" path="res://scenes/asteroid/asteroid_spawn_bus.tres" id="4_68duc"]
-[ext_resource type="PackedScene" uid="uid://bdqty4whx7pna" path="res://scenes/ship/simple_ship.tscn" id="6_c4rmr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_16c3m"]
 
@@ -42,8 +41,6 @@ position = Vector2(629, -358)
 rotation = 0.165485
 
 [node name="ShipManager" type="Node2D" parent="."]
-
-[node name="Ship" parent="ShipManager" instance=ExtResource("6_c4rmr")]
 
 [node name="WorldWrap" type="Node2D" parent="." node_paths=PackedStringArray("camera", "bounds")]
 unique_name_in_owner = true
