@@ -21,6 +21,12 @@ script = ExtResource("3_u0c30")
 asteroid_spawn_bus = ExtResource("4_68duc")
 spawn_scene = ExtResource("3_106lf")
 
+[node name="LargeAsteroid" parent="AsteroidManager" instance=ExtResource("3_106lf")]
+position = Vector2(-187, -170)
+
+[node name="LargeAsteroid2" parent="AsteroidManager" instance=ExtResource("3_106lf")]
+position = Vector2(147, -155)
+
 [node name="ShipManager" type="Node2D" parent="."]
 
 [node name="Ship" parent="ShipManager" instance=ExtResource("6_ig8hl")]

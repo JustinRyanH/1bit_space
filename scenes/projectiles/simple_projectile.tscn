@@ -52,4 +52,7 @@ script = SubResource("GDScript_keukc")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WrapArea" index="0"]
 shape = SubResource("CircleShape2D_saaks")
 
+[node name="IgnoreTimer" parent="." index="6"]
+wait_time = 0.05
+
 [connection signal="timeout" from="ProjectileLifeTimer" to="." method="_on_projectile_life_timer_timeout"]
