@@ -17,13 +17,8 @@ func _process(delta: float) -> void:
 	throttle_rotation = Input.get_axis("Rotate Left", "Rotate Right")
 	foward_throttle = Input.get_action_strength("Accelerate")
 	if Input.is_action_just_pressed("Fire"):
-		var base_speed := linear_velocity.length()
-		projectile_bus.create_projectile.emit(
-			projectile, 
-			gun_position.global_position, 
-			global_rotation,
-			base_speed,
-		)
+		var new_projectile = build_projectile()
+		projectile_bus.add_projectile_to_world.emit(new_projectile)
 
 func _physics_process(delta: float) -> void:
 	move_ship(delta)
@@ -42,10 +37,12 @@ func move_ship(delta: float) -> void:
 func take_damage(damage: int) -> void:
 	print("Damage(", name, "): ", damage)
 
-func build_projectile() -> void:
+func build_projectile() -> Projectile:
 	var new_projectile := projectile.instantiate() as Projectile
 	if not new_projectile:
 		printerr("New scene is not a Projecitle")
 		return
 	new_projectile.setup(self.linear_velocity, Vector2.UP.rotated(rotation))
-	projectile_bus.add_projectile_to_world.emit(new_projectile)
+	new_projectile.global_position = gun_position.global_position
+	new_projectile.global_rotation = gun_position.global_rotation
+	return new_projectile
