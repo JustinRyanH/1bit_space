@@ -6,6 +6,7 @@ extends Node2D
 @export var velocity: Vector2 = Vector2.ZERO
 
 @export var timed_death_particles: PackedScene
+@export var hit_death_particles: PackedScene
 
 @onready var hitbox := $Hitbox as Hitbox
 @onready var hurtbox := $Hurtbox as Hurtbox
@@ -28,10 +29,17 @@ func add_ignore_targets(target: Node2D) -> void:
 	ignore_targets.append(target)
 
 func take_damage(_damage: int) -> void:
+	var death_vfx := hit_death_particles.instantiate() as Node2D
+	if death_vfx:
+		death_vfx.global_position = global_position
+		var new_rotation = global_rotation + PI
+		death_vfx.global_rotation = new_rotation
+		vfx_bus.spawn_particle_gpu.emit(death_vfx)
+
 	queue_free()
 
 func _on_projectile_life_timer_timeout() -> void:
-	var death_vfx := timed_death_particles.instantiate() as GPUParticles2D
+	var death_vfx := timed_death_particles.instantiate() as Node2D
 	if death_vfx:
 		death_vfx.global_position = global_position
 		vfx_bus.spawn_particle_gpu.emit(death_vfx)

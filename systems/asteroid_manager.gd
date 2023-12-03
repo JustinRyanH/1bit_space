@@ -21,7 +21,7 @@ enum Side {
 func _ready() -> void:
 	asteroid_spawn_bus.spawn_asteroids.connect(spawn_sub_asteroid)
 	asteroid_spawn_bus.completely_destroyed.connect(spawn_new_asteroid)
-	randmize_asteroid_directions()
+	# randmize_asteroid_directions()
 
 func spawn_sub_asteroid(scene: PackedScene, location: Vector2, velocity: Vector2) -> void:
 	var node = scene.instantiate() as Asteroid
@@ -32,7 +32,7 @@ func spawn_sub_asteroid(scene: PackedScene, location: Vector2, velocity: Vector2
 func spawn_new_asteroid() -> void:
 	var total_children = get_child_count()
 	if total_children >= max_asteroid_count: return
-	var random_side: Side = randi_range(0, 3)
+	var random_side := randi_range(0, 3) as Side
 	
 	var new_position = get_random_position_from_direction(random_side)
 	create_a_asteroid(new_position)

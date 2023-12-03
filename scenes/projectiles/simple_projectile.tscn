@@ -1,14 +1,15 @@
-[gd_scene load_steps=11 format=3 uid="uid://dgfmnioihpgfe"]
+[gd_scene load_steps=12 format=3 uid="uid://dgfmnioihpgfe"]
 
 [ext_resource type="PackedScene" uid="uid://bykf5c1hextgk" path="res://scenes/projectiles/base_projectile.tscn" id="1_yjgrx"]
 [ext_resource type="Resource" uid="uid://c4ow5hitd1jhk" path="res://resources/main_vfx_bus.tres" id="2_ctwbc"]
 [ext_resource type="Script" path="res://scenes/projectiles/projectile_stats.gd" id="2_yma2x"]
 [ext_resource type="Texture2D" uid="uid://c078hhpp60me4" path="res://assets/bullet.png" id="3_gbxmr"]
 [ext_resource type="PackedScene" uid="uid://ca0tf0qqr08gq" path="res://vfx/all_direction_explosion.tscn" id="4_jrmuf"]
+[ext_resource type="PackedScene" uid="uid://b60nglgrstxr2" path="res://vfx/directional_explosion.tscn" id="5_8if8f"]
 
 [sub_resource type="Resource" id="Resource_mgtx2"]
 script = ExtResource("2_yma2x")
-speed = 2000.0
+speed = 1000.0
 damage = 1
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4ukf2"]
@@ -33,6 +34,7 @@ radius = 2.0
 vfx_bus = ExtResource("2_ctwbc")
 projectile_stats = SubResource("Resource_mgtx2")
 timed_death_particles = ExtResource("4_jrmuf")
+hit_death_particles = ExtResource("5_8if8f")
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("3_gbxmr")

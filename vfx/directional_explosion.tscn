@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://b60nglgrstxr2"]
+
+[sub_resource type="Curve" id="Curve_g82ca"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.68232, 0.835134), -0.742308, -0.742308, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_t6h4y"]
+curve = SubResource("Curve_g82ca")
+
+[sub_resource type="Curve" id="Curve_an8o8"]
+max_value = 100.0
+_data = [Vector2(0, 100), 0.0, 0.0, 0, 0, Vector2(1, 1), -145.423, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_pc6t0"]
+curve = SubResource("Curve_an8o8")
+
+[sub_resource type="Curve" id="Curve_mjf7d"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.607735, 0.572569), -1.18863, -1.18863, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_e6eem"]
+curve = SubResource("Curve_mjf7d")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_q41pp"]
+particle_flag_disable_z = true
+direction = Vector3(2.08165e-12, -1, 2.08165e-12)
+spread = 75.0
+initial_velocity_min = 200.0
+initial_velocity_max = 500.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+damping_min = 15.0
+damping_max = 15.0
+damping_curve = SubResource("CurveTexture_pc6t0")
+scale_min = 6.0
+scale_max = 8.0
+scale_curve = SubResource("CurveTexture_e6eem")
+alpha_curve = SubResource("CurveTexture_t6h4y")
+
+[node name="DirectionalExplosion" type="GPUParticles2D"]
+emitting = false
+amount = 15
+process_material = SubResource("ParticleProcessMaterial_q41pp")
+lifetime = 0.2
+one_shot = true
+explosiveness = 0.9
