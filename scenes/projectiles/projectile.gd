@@ -5,15 +5,13 @@ extends Node2D
 @export var projectile_stats: ProjectileStates
 @export var velocity: Vector2 = Vector2.ZERO
 
+@export var timed_death_particles: PackedScene
+
 @onready var hitbox := $Hitbox as Hitbox
 @onready var hurtbox := $Hurtbox as Hurtbox
 
 var ignore_targets := []
 var should_ignore_targets: bool = true
-
-func _init() -> void:
-	vfx_bus = VfxBus.new()
-	projectile_stats = ProjectileStates.new()
 
 func _ready() -> void:
 	hitbox.damage = projectile_stats.damage
@@ -33,6 +31,10 @@ func take_damage(_damage: int) -> void:
 	queue_free()
 
 func _on_projectile_life_timer_timeout() -> void:
+	var death_vfx := timed_death_particles.instantiate() as GPUParticles2D
+	if death_vfx:
+		death_vfx.global_position = global_position
+		vfx_bus.spawn_particle_gpu.emit(death_vfx)
 	queue_free()
 
 func _on_ignore_timer_timeout() -> void:

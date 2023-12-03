@@ -13,7 +13,7 @@ var warp_location
 var foward_throttle: float = 0.0
 var throttle_rotation: float = 0.0
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	throttle_rotation = Input.get_axis("Rotate Left", "Rotate Right")
 	foward_throttle = Input.get_action_strength("Accelerate")
 	if Input.is_action_just_pressed("Fire"):
@@ -42,7 +42,7 @@ func build_projectile() -> Projectile:
 	if not new_projectile:
 		printerr("New scene is not a Projecitle")
 		return
-	new_projectile.setup(self.linear_velocity, Vector2.UP.rotated(rotation))
+	new_projectile.setup(Vector2.ZERO, Vector2.UP.rotated(rotation))
 	new_projectile.global_position = gun_position.global_position
 	new_projectile.global_rotation = gun_position.global_rotation
 	new_projectile.add_ignore_targets(self)

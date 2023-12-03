@@ -1,14 +1,15 @@
-[gd_scene load_steps=10 format=3 uid="uid://dgfmnioihpgfe"]
+[gd_scene load_steps=11 format=3 uid="uid://dgfmnioihpgfe"]
 
 [ext_resource type="PackedScene" uid="uid://bykf5c1hextgk" path="res://scenes/projectiles/base_projectile.tscn" id="1_yjgrx"]
 [ext_resource type="Resource" uid="uid://c4ow5hitd1jhk" path="res://resources/main_vfx_bus.tres" id="2_ctwbc"]
 [ext_resource type="Script" path="res://scenes/projectiles/projectile_stats.gd" id="2_yma2x"]
 [ext_resource type="Texture2D" uid="uid://c078hhpp60me4" path="res://assets/bullet.png" id="3_gbxmr"]
+[ext_resource type="PackedScene" uid="uid://ca0tf0qqr08gq" path="res://vfx/all_direction_explosion.tscn" id="4_jrmuf"]
 
-[sub_resource type="Resource" id="Resource_72rg1"]
+[sub_resource type="Resource" id="Resource_mgtx2"]
 script = ExtResource("2_yma2x")
-speed = 800.0
-damage = 10
+speed = 2000.0
+damage = 1
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4ukf2"]
 radius = 4.0
@@ -30,10 +31,10 @@ radius = 2.0
 
 [node name="Projectile" instance=ExtResource("1_yjgrx")]
 vfx_bus = ExtResource("2_ctwbc")
-projectile_stats = SubResource("Resource_72rg1")
+projectile_stats = SubResource("Resource_mgtx2")
+timed_death_particles = ExtResource("4_jrmuf")
 
 [node name="Sprite2D" parent="." index="0"]
-visible = false
 texture = ExtResource("3_gbxmr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" index="0"]
@@ -45,7 +46,7 @@ position = Vector2(0, -5)
 shape = SubResource("CapsuleShape2D_3ca77")
 
 [node name="ProjectileLifeTimer" parent="." index="3"]
-wait_time = 1.25
+wait_time = 0.5
 one_shot = true
 autostart = true
 
