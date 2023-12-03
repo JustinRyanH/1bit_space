@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dgfmnioihpgfe" path="res://scenes/projectiles/simple_projectile.tscn" id="2_tyf2d"]
 
 [node name="Ship" instance=ExtResource("1_m8s60")]
+rotation_power = 25.0
 max_speed = 1500.0
 projectile = ExtResource("2_tyf2d")
 
