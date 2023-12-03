@@ -1,2 +1,4 @@
 # TODO
-- [ ] Handle Asteroids that never make to the screen
+- [ ] Projectiles should also have the velocity of the ship
+- [ ] Create a temporary invincibility for projectile
+- [ ] Menu Screen

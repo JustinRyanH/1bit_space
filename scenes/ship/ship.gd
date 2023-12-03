@@ -17,10 +17,12 @@ func _process(delta: float) -> void:
 	throttle_rotation = Input.get_axis("Rotate Left", "Rotate Right")
 	foward_throttle = Input.get_action_strength("Accelerate")
 	if Input.is_action_just_pressed("Fire"):
+		var base_speed := linear_velocity.length()
 		projectile_bus.create_projectile.emit(
 			projectile, 
 			gun_position.global_position, 
-			global_rotation
+			global_rotation,
+			base_speed,
 		)
 
 func _physics_process(delta: float) -> void:
