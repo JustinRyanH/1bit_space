@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://ca0tf0qqr08gq"]
+
+[ext_resource type="Script" path="res://vfx/one_time_effect.gd" id="1_jy3qi"]
+
+[sub_resource type="Curve" id="Curve_an8o8"]
+max_value = 100.0
+_data = [Vector2(0, 100), 0.0, 0.0, 0, 0, Vector2(1, 1), -145.423, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_pc6t0"]
+curve = SubResource("Curve_an8o8")
+
+[sub_resource type="Curve" id="Curve_mjf7d"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.607735, 0.572569), -1.18863, -1.18863, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_e6eem"]
+curve = SubResource("Curve_mjf7d")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_b7ot7"]
+particle_flag_disable_z = true
+direction = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+spread = 180.0
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+damping_min = 10.0
+damping_max = 10.0
+damping_curve = SubResource("CurveTexture_pc6t0")
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_e6eem")
+
+[node name="AllDirectionExplosion" type="GPUParticles2D"]
+emitting = false
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_b7ot7")
+lifetime = 0.2
+one_shot = true
+script = ExtResource("1_jy3qi")
+
+[connection signal="finished" from="." to="." method="_on_finished"]
