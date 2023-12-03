@@ -34,7 +34,7 @@ func move_ship(delta: float) -> void:
 	linear_velocity += direction * foward_throttle * delta * impulse_power
 	linear_velocity = linear_velocity.limit_length(max_speed)
 
-func take_damage(damage: int) -> void:
+func take_damage(damage: int, _bdy: Node2D) -> void:
 	print("Damage(", name, "): ", damage)
 
 func build_projectile() -> Projectile:
