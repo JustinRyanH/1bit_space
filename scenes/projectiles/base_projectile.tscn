@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bykf5c1hextgk"]
+[gd_scene load_steps=8 format=3 uid="uid://bykf5c1hextgk"]
 
-[ext_resource type="Texture2D" uid="uid://c078hhpp60me4" path="res://assets/bullet.png" id="2_j0vs4"]
+[ext_resource type="Script" path="res://scenes/projectiles/projectile.gd" id="1_e71bx"]
+[ext_resource type="Script" path="res://components/Hitbox.gd" id="4_2fq7u"]
 
 [sub_resource type="Curve" id="Curve_fvayh"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.437086, 0.316563), -0.446573, -0.446573, 0, 0, Vector2(1, 0), -0.521878, 0.0, 0, 0]
@@ -31,6 +32,7 @@ scale_curve = SubResource("CurveTexture_u18qd")
 alpha_curve = SubResource("CurveTexture_x3kns")
 
 [node name="Projectile" type="Node2D"]
+script = ExtResource("1_e71bx")
 
 [node name="DestroyParticles" type="GPUParticles2D" parent="."]
 emitting = false
@@ -40,4 +42,6 @@ lifetime = 0.1
 one_shot = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_j0vs4")
+
+[node name="Hitbox" type="Area2D" parent="."]
+script = ExtResource("4_2fq7u")

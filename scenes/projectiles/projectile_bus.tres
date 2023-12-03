@@ -1,6 +1,0 @@
-[gd_resource type="Resource" script_class="ProjectileBus" load_steps=2 format=3 uid="uid://bpq6y2sq8cpi"]
-
-[ext_resource type="Script" path="res://scenes/projectiles/projectile_bus.gd" id="1_hfnp2"]
-
-[resource]
-script = ExtResource("1_hfnp2")
