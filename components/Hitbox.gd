@@ -1,6 +1,8 @@
 class_name Hitbox
 extends Area2D
 
+var ignore_targets: Array = []
+
 @export var damage: int
 var disabled := false
 
