@@ -37,7 +37,6 @@ func spawn_sub_asteroid(scene: PackedScene, location: Vector2, velocity: Vector2
 		add_child(node)
 		
 func spawn_new_asteroid() -> void:
-	print("spawn new asteroid")
 	var total_children = get_child_count()
 	if total_children >= max_asteroid_count: return
 	var random_side: Side = randi_range(0, 3)
@@ -66,18 +65,13 @@ func spawn_random_top() -> void:
 func spawn_random_bottom() -> void:
 	var bounds = world_wrap.get_bounds()
 	
-	var random_speed = randf_range(100, 300)
 	var y = bounds.size.y * 0.5 + 200
 	var x = random_x(bounds)
-	var node = spawn_scene.instantiate() as Asteroid
-	
-	node.position = Vector2(x, y)
-	node.look_at(Vector2.ZERO)
-	var direction = Vector2.UP
-	
-	node.linear_velocity = direction * random_speed
-	add_child(node)
-	
+	var new_position = Vector2(x, y)
+
+	create_a_asteroid(new_position)
+
+
 func random_angle() -> float:
 	return randf_range(-PI / 8, PI / 8)
 
@@ -86,3 +80,15 @@ func random_x(bounds: Rect2) -> float:
 	
 func random_y(bounds: Rect2) -> float:
 	return randf_range(EDGE_OFFSET + bounds.position.y, (bounds.size.y / 2) - EDGE_OFFSET)
+
+
+func create_a_asteroid(new_position: Vector2) -> void:
+	var random_speed = randf_range(100, 300)
+	var node = spawn_scene.instantiate() as Asteroid
+	
+	node.position = new_position
+	var direction = (Vector2.ZERO - node.position).normalized().rotated(random_angle())
+	
+	node.linear_velocity = direction * random_speed
+	node.modulate.r = 0
+	add_child(node)

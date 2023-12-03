@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdqty4whx7pna"]
+
+[ext_resource type="PackedScene" uid="uid://dkd8g3c3w5l2x" path="res://scenes/ship/base_ship.tscn" id="1_t44gd"]
+
+[node name="Ship" instance=ExtResource("1_t44gd")]

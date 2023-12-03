@@ -1,12 +1,12 @@
 [gd_scene load_steps=9 format=3 uid="uid://chxlq200i23oc"]
 
-[ext_resource type="PackedScene" uid="uid://dkd8g3c3w5l2x" path="res://scenes/ship/base_ship.tscn" id="1_fdexu"]
 [ext_resource type="Script" path="res://systems/world_wrap.gd" id="2_6lyyr"]
 [ext_resource type="Script" path="res://systems/ProjectileManager.gd" id="2_61gvv"]
 [ext_resource type="PackedScene" uid="uid://bkd2qs5sx4twg" path="res://scenes/asteroid/large_asteroid.tscn" id="3_106lf"]
 [ext_resource type="Resource" uid="uid://bpq6y2sq8cpi" path="res://scenes/projectiles/projectile_bus.tres" id="3_coy3l"]
 [ext_resource type="Script" path="res://systems/asteroid_manager.gd" id="3_u0c30"]
 [ext_resource type="Resource" uid="uid://d2s8748m0hk3m" path="res://scenes/asteroid/asteroid_spawn_bus.tres" id="4_68duc"]
+[ext_resource type="PackedScene" uid="uid://bdqty4whx7pna" path="res://scenes/ship/simple_ship.tscn" id="6_c4rmr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_16c3m"]
 
@@ -20,10 +20,9 @@ projectile_bus = ExtResource("3_coy3l")
 script = ExtResource("3_u0c30")
 asteroid_spawn_bus = ExtResource("4_68duc")
 spawn_scene = ExtResource("3_106lf")
-max_asteroid_count = 12
 
 [node name="LargeAsteroid2" parent="AsteroidManager" instance=ExtResource("3_106lf")]
-position = Vector2(-695, -437)
+position = Vector2(-723, -424)
 rotation = 0.165485
 
 [node name="LargeAsteroid3" parent="AsteroidManager" instance=ExtResource("3_106lf")]
@@ -42,9 +41,9 @@ rotation = 0.165485
 position = Vector2(629, -358)
 rotation = 0.165485
 
-[node name="Ship" parent="." instance=ExtResource("1_fdexu")]
-position = Vector2(2.08165e-12, 2.08165e-12)
-collision_layer = 2049
+[node name="ShipManager" type="Node2D" parent="."]
+
+[node name="Ship" parent="ShipManager" instance=ExtResource("6_c4rmr")]
 
 [node name="WorldWrap" type="Node2D" parent="." node_paths=PackedStringArray("camera", "bounds")]
 unique_name_in_owner = true

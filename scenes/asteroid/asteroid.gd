@@ -12,6 +12,7 @@ extends RigidBody2D
 
 @onready var death_timer := $DeathTimer as Timer
 @onready var incincible_timer: Timer = $IncincibleTimer
+@onready var visual_despawner: Timer = $VisualDespawner
 
 var is_invincible := true
 
@@ -40,7 +41,7 @@ func check_for_death() -> void:
 
 func destroy_asteroid() -> void:
 	if next_size:
-		asteroid_spawn_bus.spawn_asteroid.emit(next_size, position, linear_velocity * 2, 4)
+		asteroid_spawn_bus.spawn_asteroid.emit(next_size, position, linear_velocity * 2, 2)
 	else:
 		asteroid_spawn_bus.completely_destroyed.emit()
 	queue_free()
@@ -53,4 +54,10 @@ func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 			health = 0
 
 
-func _on_visible_on_screen_enabler_2d_screen_entered() -> void:
+func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
+	visual_despawner.stop()
+
+
+func _on_visual_despawner_timeout() -> void:
+	asteroid_spawn_bus.completely_destroyed.emit()
+	queue_free()
