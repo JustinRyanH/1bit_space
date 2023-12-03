@@ -13,6 +13,7 @@ extends RigidBody2D
 @onready var death_timer := $DeathTimer as Timer
 @onready var incincible_timer: Timer = $IncincibleTimer
 @onready var visual_despawner: Timer = $VisualDespawner
+@onready var spawn_positions: Node2D = $SpawnPositions
 
 var is_invincible := true
 
@@ -41,7 +42,14 @@ func check_for_death() -> void:
 
 func destroy_asteroid() -> void:
 	if next_size:
-		asteroid_spawn_bus.spawn_asteroids.emit(next_size, position, linear_velocity)
+		var normalized_velocity := linear_velocity.normalized()
+		var speed := linear_velocity.length() * 1.5;
+		for point in spawn_positions.get_children():
+			var next_position = point.global_position
+			var next_rotation = point.rotation
+			var new_direction = normalized_velocity.rotated(next_rotation)
+			print("new direction: ", new_direction)
+			asteroid_spawn_bus.spawn_asteroids.emit(next_size, next_position, new_direction * speed)
 	else:
 		asteroid_spawn_bus.completely_destroyed.emit()
 	queue_free()

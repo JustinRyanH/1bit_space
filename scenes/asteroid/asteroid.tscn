@@ -12,6 +12,8 @@ angular_damp_mode = 1
 script = ExtResource("1_qkyu3")
 asteroid_spawn_bus = ExtResource("2_3e5r3")
 
+[node name="SpawnPositions" type="Node2D" parent="."]
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
 [node name="Hurtbox" type="Area2D" parent="."]

@@ -5,22 +5,33 @@
 [ext_resource type="Texture2D" uid="uid://c261keymf7u48" path="res://assets/asteroid1.png" id="2_okblt"]
 
 [node name="LargeAsteroid" instance=ExtResource("1_gtsgu")]
-input_pickable = true
 mass = 20.0
 next_size = ExtResource("2_4aynr")
 
-[node name="Sprite2D" parent="." index="0"]
-texture = ExtResource("2_okblt")
+[node name="Point1" type="Marker2D" parent="SpawnPositions" index="0"]
+position = Vector2(24, -18)
+rotation = -0.523599
+
+[node name="Point2" type="Marker2D" parent="SpawnPositions" index="1"]
+position = Vector2(-24, 22)
+rotation = 0.523599
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="1"]
 visible = false
 polygon = PackedVector2Array(-44, -27, -15, -47, 10, -36, 25, -42, 36, -40, 50, -9, 38, 32, 10, 49, -4, 45, -34, 48, -50, 20, -38, -5)
 
+[node name="Sprite2D" parent="." index="2"]
+texture = ExtResource("2_okblt")
+
+[node name="Hurtbox" parent="." index="3"]
+visible = false
+
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hurtbox" index="0"]
 visible = false
 polygon = PackedVector2Array(-44, -27, -15, -47, 10, -36, 25, -42, 36, -40, 50, -9, 38, 32, 10, 49, -4, 45, -34, 48, -50, 20, -37, -4)
 
-[node name="Hitbox" parent="." index="3"]
+[node name="Hitbox" parent="." index="4"]
+visible = false
 damage = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hitbox" index="0"]
