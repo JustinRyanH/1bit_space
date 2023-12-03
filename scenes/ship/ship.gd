@@ -45,4 +45,5 @@ func build_projectile() -> Projectile:
 	new_projectile.setup(self.linear_velocity, Vector2.UP.rotated(rotation))
 	new_projectile.global_position = gun_position.global_position
 	new_projectile.global_rotation = gun_position.global_rotation
+	new_projectile.add_ignore_targets(self)
 	return new_projectile
