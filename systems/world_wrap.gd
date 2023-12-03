@@ -23,7 +23,6 @@ func _setup_bounds_to_be_camera():
 	shape.size = end * 2.0
 	bounds.shape = shape
 
-
 func _on_world_boundaries_area_exited(area: Area2D) -> void:
 	wrap_actor(area)
 
