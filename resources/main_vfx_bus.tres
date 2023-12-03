@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="VfxBus" load_steps=2 format=3 uid="uid://c4ow5hitd1jhk"]
+
+[ext_resource type="Script" path="res://resources/vfx_bus.gd" id="1_y0kbq"]
+
+[resource]
+script = ExtResource("1_y0kbq")

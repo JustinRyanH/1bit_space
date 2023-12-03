@@ -1,6 +1,7 @@
 class_name Projectile
 extends Node2D
 
+@export var vfx_bus: VfxBus
 @export var projectile_stats: ProjectileStates
 @export var velocity: Vector2 = Vector2.ZERO
 
@@ -9,6 +10,10 @@ extends Node2D
 
 var ignore_targets := []
 var should_ignore_targets: bool = true
+
+func _init() -> void:
+	vfx_bus = VfxBus.new()
+	projectile_stats = ProjectileStates.new()
 
 func _ready() -> void:
 	hitbox.damage = projectile_stats.damage

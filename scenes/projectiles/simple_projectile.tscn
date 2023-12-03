@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://dgfmnioihpgfe"]
+[gd_scene load_steps=10 format=3 uid="uid://dgfmnioihpgfe"]
 
 [ext_resource type="PackedScene" uid="uid://bykf5c1hextgk" path="res://scenes/projectiles/base_projectile.tscn" id="1_yjgrx"]
+[ext_resource type="Resource" uid="uid://c4ow5hitd1jhk" path="res://resources/main_vfx_bus.tres" id="2_ctwbc"]
 [ext_resource type="Script" path="res://scenes/projectiles/projectile_stats.gd" id="2_yma2x"]
 [ext_resource type="Texture2D" uid="uid://c078hhpp60me4" path="res://assets/bullet.png" id="3_gbxmr"]
 
@@ -8,34 +9,6 @@
 script = ExtResource("2_yma2x")
 speed = 800.0
 damage = 10
-
-[sub_resource type="Curve" id="Curve_an8o8"]
-max_value = 100.0
-_data = [Vector2(0, 100), 0.0, 0.0, 0, 0, Vector2(1, 1), -145.423, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_pc6t0"]
-curve = SubResource("Curve_an8o8")
-
-[sub_resource type="Curve" id="Curve_mjf7d"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.607735, 0.572569), -1.18863, -1.18863, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_e6eem"]
-curve = SubResource("Curve_mjf7d")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jsr00"]
-particle_flag_disable_z = true
-direction = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
-spread = 180.0
-initial_velocity_min = 100.0
-initial_velocity_max = 200.0
-gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
-damping_min = 10.0
-damping_max = 10.0
-damping_curve = SubResource("CurveTexture_pc6t0")
-scale_max = 2.0
-scale_curve = SubResource("CurveTexture_e6eem")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4ukf2"]
 radius = 4.0
@@ -56,15 +29,10 @@ func wrap_to(position: Vector2) -> void:
 radius = 2.0
 
 [node name="Projectile" instance=ExtResource("1_yjgrx")]
+vfx_bus = ExtResource("2_ctwbc")
 projectile_stats = SubResource("Resource_72rg1")
 
-[node name="DestroyParticles" parent="." index="0"]
-process_material = SubResource("ParticleProcessMaterial_jsr00")
-lifetime = 0.2
-one_shot = false
-explosiveness = 0.85
-
-[node name="Sprite2D" parent="." index="1"]
+[node name="Sprite2D" parent="." index="0"]
 visible = false
 texture = ExtResource("3_gbxmr")
 
@@ -76,7 +44,7 @@ shape = SubResource("CircleShape2D_4ukf2")
 position = Vector2(0, -5)
 shape = SubResource("CapsuleShape2D_3ca77")
 
-[node name="ProjectileLifeTimer" parent="." index="4"]
+[node name="ProjectileLifeTimer" parent="." index="3"]
 wait_time = 1.25
 one_shot = true
 autostart = true
