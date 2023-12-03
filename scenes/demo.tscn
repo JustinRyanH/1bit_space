@@ -26,6 +26,7 @@ projectile_bus = ExtResource("2_xawq3")
 script = ExtResource("3_u0c30")
 asteroid_spawn_bus = ExtResource("4_68duc")
 spawn_scene = ExtResource("3_106lf")
+max_asteroid_count = 12
 
 [node name="LargeAsteroid" parent="AsteroidManager" instance=ExtResource("3_106lf")]
 position = Vector2(288, 416)
