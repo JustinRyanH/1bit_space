@@ -28,7 +28,7 @@ func _process(delta: float) -> void:
 func add_ignore_targets(target: Node2D) -> void:
 	ignore_targets.append(target)
 
-func take_damage(_impact_damage: ImpactDamage) -> void:
+func take_damage(_impact_damage: BasicDamage) -> void:
 	var death_vfx := hit_death_particles.instantiate() as Node2D
 	if death_vfx:
 		death_vfx.global_position = global_position

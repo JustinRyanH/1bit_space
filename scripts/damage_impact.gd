@@ -1,4 +1,4 @@
-class_name  ImpactDamage
+class_name  BasicDamage
 extends Object
 
 var damage: int
