@@ -28,7 +28,7 @@ func _ready() -> void:
 func wrap_to(location: Vector2) -> void:
 	global_position = location
 
-func take_damage_v2(impact_damage: ImpactDamage) -> void:
+func take_damage(impact_damage: ImpactDamage) -> void:
 	if is_invincible: return
 	health -= impact_damage.damage
 

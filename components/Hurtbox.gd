@@ -19,6 +19,6 @@ func _on_area_entered(hitbox: Hitbox) -> void:
 	if ignore_targets.has(hitbox.owner): return
 	if hitbox.disabled: return
 	
-	if owner.has_method("take_damage_v2"):
+	if owner.has_method("take_damage"):
 		var impact_damage = ImpactDamage.new(hitbox.damage, hitbox.owner)
-		owner.take_damage_v2(impact_damage)
+		owner.take_damage(impact_damage)
