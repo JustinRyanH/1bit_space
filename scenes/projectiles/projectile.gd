@@ -27,6 +27,13 @@ func _process(delta: float) -> void:
 
 func add_ignore_targets(target: Node2D) -> void:
 	ignore_targets.append(target)
+	
+func get_damage() -> BasicDamage:
+	var basic_damage := BasicDamage.new(projectile_stats.damage, self)
+	basic_damage.position = global_position
+	basic_damage.normal = Vector2.UP.rotated(global_rotation) * -1
+	return basic_damage
+
 
 func take_damage(_impact_damage: BasicDamage) -> void:
 	var death_vfx := hit_death_particles.instantiate() as Node2D

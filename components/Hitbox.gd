@@ -15,4 +15,6 @@ func get_damage() -> BasicDamage:
 	if owner.has_method("get_damage"):
 		return owner.get_damage()
 	else:
-		return BasicDamage.new(damage, owner)
+		var basic_damage := BasicDamage.new(damage, owner)
+		basic_damage.position = global_position
+		return basic_damage
