@@ -37,6 +37,9 @@ func move_ship(delta: float) -> void:
 func take_damage(damage: int, _bdy: Node2D) -> void:
 	print("Damage(", name, "): ", damage)
 
+func take_damage_v2(impact_damage: ImpactDamage) -> void:
+	take_damage(impact_damage.damage, impact_damage.from)
+
 func build_projectile() -> Projectile:
 	var new_projectile := projectile.instantiate() as Projectile
 	if not new_projectile:

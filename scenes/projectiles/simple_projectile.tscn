@@ -31,6 +31,7 @@ func wrap_to(position: Vector2) -> void:
 radius = 2.0
 
 [node name="Projectile" instance=ExtResource("1_yjgrx")]
+position = Vector2(0, -1)
 vfx_bus = ExtResource("2_ctwbc")
 projectile_stats = SubResource("Resource_mgtx2")
 timed_death_particles = ExtResource("4_jrmuf")

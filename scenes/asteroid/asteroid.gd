@@ -33,6 +33,9 @@ func take_damage(damage: int, _by: Node2D) -> void:
 	
 	health -= damage
 
+func take_damage_v2(impact_damage: ImpactDamage) -> void:
+	take_damage(impact_damage.damage, impact_damage.from)
+
 func check_for_death() -> void:
 	if dying: return
 	if health <= 0:
