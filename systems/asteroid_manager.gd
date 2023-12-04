@@ -21,7 +21,7 @@ enum Side {
 func _ready() -> void:
 	asteroid_spawn_bus.spawn_asteroids.connect(spawn_sub_asteroid)
 	asteroid_spawn_bus.completely_destroyed.connect(spawn_new_asteroid)
-	randmize_asteroid_directions()
+	#randmize_asteroid_directions()
 
 func spawn_sub_asteroid(scene: PackedScene, location: Vector2, velocity: Vector2) -> void:
 	var node = scene.instantiate() as Asteroid

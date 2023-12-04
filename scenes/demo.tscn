@@ -29,13 +29,13 @@ spawn_scene = ExtResource("3_106lf")
 max_asteroid_count = 12
 
 [node name="LargeAsteroid" parent="AsteroidManager" instance=ExtResource("3_106lf")]
-position = Vector2(288, 416)
+position = Vector2(648, 1)
 
 [node name="LargeAsteroid2" parent="AsteroidManager" instance=ExtResource("3_106lf")]
-position = Vector2(-806, -425)
+position = Vector2(-835, -3)
 
 [node name="LargeAsteroid3" parent="AsteroidManager" instance=ExtResource("3_106lf")]
-position = Vector2(472, -375)
+position = Vector2(11, -449)
 rotation = 1.65725
 
 [node name="ShipManager" type="Node2D" parent="."]

@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://b4kqauh2okga8" path="res://scenes/asteroid/asteroid.tscn" id="1_gtsgu"]
 [ext_resource type="PackedScene" uid="uid://cubax3i1jnaxf" path="res://scenes/asteroid/small_asteroid.tscn" id="2_4aynr"]
 [ext_resource type="Texture2D" uid="uid://c261keymf7u48" path="res://assets/asteroid1.png" id="2_okblt"]
+[ext_resource type="PackedScene" uid="uid://qgoum1c4oltd" path="res://vfx/big_hit_particles.tscn" id="3_w8p5s"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w5uxd"]
 radius = 31.5998
@@ -12,11 +13,10 @@ height = 109.993
 radius = 31.5998
 height = 105.6
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_5u3qm"]
-
 [node name="LargeAsteroid" instance=ExtResource("1_gtsgu")]
 mass = 20.0
 next_size = ExtResource("2_4aynr")
+hit_explosion_particles = ExtResource("3_w8p5s")
 
 [node name="Point1" type="Marker2D" parent="SpawnPositions" index="0"]
 position = Vector2(24, -18)
@@ -43,11 +43,7 @@ rotation = 2.49795
 shape = SubResource("CapsuleShape2D_csh28")
 
 [node name="Hitbox" parent="." index="4"]
-visible = false
 damage = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hitbox" index="0"]
 polygon = PackedVector2Array(-48, -29, -15, -51, 9, -40, 37, -45, 50, -27, 53, -7, 43, 33, 10, 53, -4, 51, -40, 51, -54, 21, -43, -5)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="VisibleOnScreenNotifier2D" index="0"]
-shape = SubResource("CircleShape2D_5u3qm")

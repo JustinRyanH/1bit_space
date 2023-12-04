@@ -1,6 +1,11 @@
 class_name Asteroid
 extends RigidBody2D
 
+@export_group("Signal Buses")
+@export var asteroid_spawn_bus: AsteroidSpawnBus
+@export var vfx_bus: VfxBus
+
+@export_group("Essential Configuration")
 @export var health: int = 3:
 	get:
 		return health
@@ -8,7 +13,9 @@ extends RigidBody2D
 		health = value
 		check_for_death()
 @export var next_size: PackedScene
-@export var asteroid_spawn_bus: AsteroidSpawnBus
+
+@export_group("Optional Effects")
+@export var hit_explosion_particles: PackedScene
 
 @onready var death_timer := $DeathTimer as Timer
 @onready var incincible_timer: Timer = $IncincibleTimer
@@ -29,6 +36,7 @@ func wrap_to(location: Vector2) -> void:
 	global_position = location
 
 func take_damage(impact_damage: BasicDamage) -> void:
+	spawn_hit_effect(impact_damage)
 	if is_invincible: return
 	health -= impact_damage.damage
 
@@ -52,6 +60,16 @@ func destroy_asteroid() -> void:
 		asteroid_spawn_bus.completely_destroyed.emit()
 	queue_free()
 
+func spawn_hit_effect(impact_damage: BasicDamage) -> void:
+	if not hit_explosion_particles: return
+	if not vfx_bus: return
+	if impact_damage.direction == Vector2.ZERO: return
+	var particles := hit_explosion_particles.instantiate() as GPUParticles2D
+	particles.global_position = impact_damage.position
+	particles.global_rotation = impact_damage.direction.angle() - PI
+	print("Original Rotation(", rad_to_deg(impact_damage.direction.angle()), ")", "Inverse Rotation(", rad_to_deg(particles.global_rotation),  ")")
+	
+	vfx_bus.spawn_particle_gpu.emit(particles)
 
 func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton:
