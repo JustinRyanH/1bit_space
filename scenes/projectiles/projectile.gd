@@ -30,9 +30,7 @@ func add_ignore_targets(target: Node2D) -> void:
 	
 func get_damage() -> BasicDamage:
 	var basic_damage := BasicDamage.new(projectile_stats.damage, self)
-	basic_damage.position = global_position
-	basic_damage.direction = Vector2(cos(global_rotation), sin(global_rotation))
-	print("Vector(", basic_damage.direction,")")
+	basic_damage.source_position = global_position
 	return basic_damage
 
 func take_damage(_impact_damage: BasicDamage) -> void:

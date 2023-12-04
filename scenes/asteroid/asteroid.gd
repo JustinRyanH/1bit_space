@@ -63,11 +63,12 @@ func destroy_asteroid() -> void:
 func spawn_hit_effect(impact_damage: BasicDamage) -> void:
 	if not hit_explosion_particles: return
 	if not vfx_bus: return
-	if impact_damage.direction == Vector2.ZERO: return
 	var particles := hit_explosion_particles.instantiate() as GPUParticles2D
-	particles.global_position = impact_damage.position
-	particles.global_rotation = impact_damage.direction.angle() - PI
-	print("Original Rotation(", rad_to_deg(impact_damage.direction.angle()), ")", "Inverse Rotation(", rad_to_deg(particles.global_rotation),  ")")
+	particles.global_position = global_position
+	var target_vector = (impact_damage.source_position - global_position).normalized()
+	var rotate_to_target = Vector2.RIGHT.angle_to(target_vector)
+
+	particles.global_rotation = rotate_to_target
 	
 	vfx_bus.spawn_particle_gpu.emit(particles)
 

@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://b4kqauh2okga8" path="res://scenes/asteroid/asteroid.tscn" id="1_gtsgu"]
 [ext_resource type="PackedScene" uid="uid://cubax3i1jnaxf" path="res://scenes/asteroid/small_asteroid.tscn" id="2_4aynr"]
 [ext_resource type="Texture2D" uid="uid://c261keymf7u48" path="res://assets/asteroid1.png" id="2_okblt"]
-[ext_resource type="PackedScene" uid="uid://qgoum1c4oltd" path="res://vfx/big_hit_particles.tscn" id="3_w8p5s"]
+[ext_resource type="PackedScene" uid="uid://qgoum1c4oltd" path="res://vfx/big_directional_hit_particles.tscn" id="3_w8p5s"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w5uxd"]
 radius = 31.5998

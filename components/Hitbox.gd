@@ -16,5 +16,5 @@ func get_damage() -> BasicDamage:
 		return owner.get_damage()
 	else:
 		var basic_damage := BasicDamage.new(damage, owner)
-		basic_damage.position = global_position
+		basic_damage.source_position = global_position
 		return basic_damage

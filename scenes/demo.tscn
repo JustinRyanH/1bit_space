@@ -34,6 +34,9 @@ position = Vector2(648, 1)
 [node name="LargeAsteroid2" parent="AsteroidManager" instance=ExtResource("3_106lf")]
 position = Vector2(-835, -3)
 
+[node name="LargeAsteroid4" parent="AsteroidManager" instance=ExtResource("3_106lf")]
+position = Vector2(7, 402)
+
 [node name="LargeAsteroid3" parent="AsteroidManager" instance=ExtResource("3_106lf")]
 position = Vector2(11, -449)
 rotation = 1.65725
