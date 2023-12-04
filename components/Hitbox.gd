@@ -11,8 +11,8 @@ func _init() -> void:
 	collision_mask = 0
 
 
-func get_impact_damage() -> BasicDamage:
-	if owner.has_method("get_impact_damage"):
-		return owner.get_impact_damage()
+func get_damage() -> BasicDamage:
+	if owner.has_method("get_damage"):
+		return owner.get_damage()
 	else:
 		return BasicDamage.new(damage, owner)
