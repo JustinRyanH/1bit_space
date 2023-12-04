@@ -28,7 +28,7 @@ func _process(delta: float) -> void:
 func add_ignore_targets(target: Node2D) -> void:
 	ignore_targets.append(target)
 
-func take_damage(_damage: int, _by: Node2D) -> void:
+func take_damage_v2(_impact_damage: ImpactDamage) -> void:
 	var death_vfx := hit_death_particles.instantiate() as Node2D
 	if death_vfx:
 		death_vfx.global_position = global_position
@@ -37,9 +37,6 @@ func take_damage(_damage: int, _by: Node2D) -> void:
 		vfx_bus.spawn_particle_gpu.emit(death_vfx)
 
 	queue_free()
-
-func take_damage_v2(impact_damage: ImpactDamage) -> void:
-	take_damage(impact_damage.damage, impact_damage.from)
 
 func _on_projectile_life_timer_timeout() -> void:
 	var death_vfx := timed_death_particles.instantiate() as Node2D

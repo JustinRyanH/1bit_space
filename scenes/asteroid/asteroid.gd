@@ -28,13 +28,9 @@ func _ready() -> void:
 func wrap_to(location: Vector2) -> void:
 	global_position = location
 
-func take_damage(damage: int, _by: Node2D) -> void:
-	if is_invincible: return
-	
-	health -= damage
-
 func take_damage_v2(impact_damage: ImpactDamage) -> void:
-	take_damage(impact_damage.damage, impact_damage.from)
+	if is_invincible: return
+	health -= impact_damage.damage
 
 func check_for_death() -> void:
 	if dying: return
