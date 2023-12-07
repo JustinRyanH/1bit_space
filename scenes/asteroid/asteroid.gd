@@ -64,13 +64,21 @@ func spawn_hit_effect(impact_damage: BasicDamage) -> void:
 	if not hit_explosion_particles: return
 	if not vfx_bus: return
 	var particles := hit_explosion_particles.instantiate() as GPUParticles2D
-	particles.global_position = global_position
-	var target_vector = (impact_damage.source_position - global_position).normalized()
-	var rotate_to_target = Vector2.RIGHT.angle_to(target_vector)
 
-	particles.global_rotation = rotate_to_target
 	
+	var space_state = get_world_2d().direct_space_state
+	var query = PhysicsRayQueryParameters2D.create(global_position, impact_damage.source_position)
+	query.collision_mask = 1
+	var result = space_state.intersect_ray(query)
+	if result:
+		particles.global_position = result["position"]
+		particles.global_rotation = Vector2.RIGHT.angle_to(-result["normal"])
+	else:
+		particles.global_position = global_position
+		var hit_direction = Vector2.RIGHT.angle_to((impact_damage.source_position - global_position).normalized())
+		particles.global_rotation = hit_direction
 	vfx_bus.spawn_particle_gpu.emit(particles)
+
 
 func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton:
